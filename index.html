@@ -26,6 +26,7 @@
   }
 
   * { box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
   html, body { margin: 0; padding: 0; }
   body {
     background: var(--bg);
@@ -38,6 +39,7 @@
     line-height: 1.5;
   }
   a { color: inherit; text-decoration: none; }
+  a[id] { scroll-margin-top: 96px; }
   a.ext-link {
     color: var(--accent);
     border-bottom: 1px solid color-mix(in oklch, var(--accent) 35%, transparent);
@@ -51,7 +53,7 @@
     font-size: 11.5px;
     line-height: 1.55;
     color: var(--ink-3);
-    margin-top: 6px;
+    margin-top: 10px;
     padding-left: 14px;
     position: relative;
   }
@@ -143,6 +145,13 @@
     max-width: 64ch;
   }
   .mh-summary b { color: var(--ink); font-weight: 600; }
+  .mh-chips {
+    display: none;
+    gap: 6px;
+    flex-wrap: wrap;
+    margin-top: 14px;
+    max-width: 760px;
+  }
   .mh-eyebrow .pulse {
     width: 6px; height: 6px; border-radius: 50%;
     background: #2c8a55;
@@ -207,68 +216,10 @@
     .brand-meta { display: none; }
   }
 
-  /* ── Hero (legacy / unused) ─────────────────────────────── */
-  .hero { padding: 96px 0 64px; border-bottom: 1px solid var(--rule-2); }
-  .hero-grid {
-    display: grid; grid-template-columns: 1.4fr 1fr; gap: 64px; align-items: end;
-  }
-  .hero h1 {
-    font-family: var(--sans);
-    font-weight: 500;
-    font-size: clamp(48px, 6.2vw, 92px);
-    letter-spacing: -0.035em;
-    line-height: 0.96;
-    margin: 18px 0 28px;
-  }
-  .hero h1 em { font-family: var(--serif); font-style: italic; font-weight: 400; }
-  .hero-lede {
-    font-size: 18px; line-height: 1.5; color: var(--ink-2);
-    max-width: 48ch;
-  }
-  .meta-row {
-    display: flex; gap: 18px; flex-wrap: wrap;
-    margin-top: 28px;
-    font-family: var(--mono); font-size: 12px; color: var(--ink-3);
-  }
-  .meta-row a:hover { color: var(--ink); }
-  .meta-row .dot { color: var(--rule); }
-  .hero-side {
-    border-left: 1px solid var(--rule);
-    padding-left: 32px;
-    display: grid; gap: 18px;
-  }
-  .role-card {
-    display: grid; gap: 4px;
-    font-family: var(--mono); font-size: 12px; color: var(--ink-3);
-  }
-  .role-card b { color: var(--ink); font-weight: 500; }
-
-  /* ── Hero stats ─────────────────────────────────────────── */
-  .stats {
-    display: grid; grid-template-columns: repeat(4, 1fr);
-    border-top: 1px solid var(--rule-2);
-    border-bottom: 1px solid var(--rule-2);
-  }
-  .stat {
-    padding: 36px 28px;
-    border-right: 1px solid var(--rule-2);
-    display: grid; gap: 8px; align-content: start;
-  }
-  .stat:last-child { border-right: 0; }
-  .stat-n {
-    font-family: var(--sans);
-    font-weight: 500;
-    font-size: 56px;
-    letter-spacing: -0.04em;
-    line-height: 1;
-  }
-  .stat-l { font-family: var(--mono); font-size: 11.5px; color: var(--ink-3); line-height: 1.45; max-width: 28ch; text-transform: uppercase; letter-spacing: 0.04em;}
-  .stat .accent { color: var(--accent); }
-
   /* ── Section header ─────────────────────────────────────── */
   section.block { padding: 64px 0 80px; border-bottom: 1px solid var(--rule-2); }
   .sec-head {
-    display: grid; grid-template-columns: 220px 1fr; gap: 64px;
+    display: grid; grid-template-columns: 200px 1fr; gap: 64px;
     margin-bottom: 36px;
   }
   .sec-num {
@@ -298,7 +249,7 @@
   .filters {
     display: flex; gap: 8px; flex-wrap: wrap;
     margin: 0 0 24px;
-    padding-left: 284px;
+    padding-left: 264px;
   }
   .chip {
     font-family: var(--mono); font-size: 11px; text-transform: uppercase;
@@ -316,19 +267,19 @@
   /* ── Timeline (rail layout) ─────────────────────────────── */
   .timeline {
     position: relative;
-    padding-left: 220px;
+    padding-left: 140px;
   }
   .timeline::before {
     content: "";
     position: absolute;
-    left: 313px; top: 6px; bottom: 0;
+    left: 233px; top: 6px; bottom: 0;
     width: 1px; background: var(--rule);
   }
   .entry {
     position: relative;
     display: grid; grid-template-columns: 60px 1fr; gap: 64px;
     padding: 28px 0 28px 0;
-    border-bottom: 1px dashed var(--rule-2);
+    border-bottom: 1px solid var(--rule-2);
     transition: opacity .25s ease;
   }
   .entry:last-child { border-bottom: 0; }
@@ -394,33 +345,163 @@
   }
   .im-l { font-family: var(--mono); font-size: 10.5px; text-transform: uppercase; letter-spacing: 0.04em; color: var(--ink-3); }
 
-  /* Expand */
-  .expander {
-    display: inline-flex; align-items: center; gap: 8px;
-    font-family: var(--mono); font-size: 11px; text-transform: uppercase;
-    letter-spacing: 0.06em;
-    color: var(--ink-3); cursor: pointer;
-    border: 0; background: transparent; padding: 8px 0 0;
+  /* Visual evidence */
+  .impact-viz {
+    display: none;
   }
-  .expander:hover { color: var(--ink); }
-  .expander .caret {
-    display: inline-block; width: 10px; height: 10px;
-    border-right: 1.5px solid currentColor; border-bottom: 1.5px solid currentColor;
-    transform: rotate(45deg) translate(-2px, -2px);
-    transition: transform .25s ease;
+  body[data-layout="summary"] .impact-viz {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 10px;
+    max-width: 920px;
   }
-  .entry.open .expander .caret { transform: rotate(-135deg) translate(-1px, -1px); }
+  body[data-layout="summary"] .impact-viz--2col {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+  .scope-grid--inline {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+  .viz-card {
+    min-height: 126px;
+    padding: 14px;
+    border: 1px solid var(--rule-2);
+    background: color-mix(in oklch, var(--bg-2) 70%, var(--bg));
+    display: grid;
+    gap: 10px;
+    align-content: start;
+  }
+  .viz-kicker {
+    font-family: var(--mono);
+    font-size: 10px;
+    color: var(--ink-3);
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+  }
+  .viz-title {
+    font-size: 15px;
+    line-height: 1.25;
+    color: var(--ink);
+    font-weight: 500;
+  }
+  .viz-note {
+    font-family: var(--mono);
+    font-size: 10.5px;
+    line-height: 1.45;
+    color: var(--ink-3);
+  }
+  .change-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 8px;
+  }
+  .change-item {
+    display: grid;
+    gap: 5px;
+    min-height: 54px;
+    padding: 8px;
+    border: 1px solid var(--rule-2);
+    background: var(--bg);
+    border-left: 3px solid var(--change);
+  }
+  .change-item b {
+    font-size: 17px;
+    line-height: 1;
+    color: var(--change);
+    font-weight: 500;
+    letter-spacing: -0.02em;
+  }
+  .change-item span {
+    font-family: var(--mono);
+    font-size: 9.8px;
+    line-height: 1.25;
+    color: var(--ink-3);
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+  }
+  .change-item small {
+    font-family: var(--mono);
+    font-size: 9.5px;
+    line-height: 1.25;
+    color: var(--ink-3);
+  }
+  .change-item--lift { --change: #2f7d57; }
+  .change-item--reduce { --change: #2a7a5a; }
+  .change-item--speed { --change: #3b668f; }
+  .change-item--scope { --change: #8a6f2a; }
+  .scope-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 8px;
+  }
+  .scope-item {
+    min-height: 48px;
+    padding: 8px;
+    border: 1px solid var(--rule-2);
+    background: var(--bg);
+  }
+  .scope-item b {
+    display: block;
+    font-size: 15px;
+    line-height: 1.15;
+    font-weight: 500;
+    color: var(--accent);
+    letter-spacing: -0.02em;
+    overflow-wrap: anywhere;
+  }
+  .scope-item span {
+    display: block;
+    margin-top: 5px;
+    font-family: var(--mono);
+    font-size: 9.8px;
+    line-height: 1.25;
+    color: var(--ink-3);
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+  }
+  .pipeline {
+    display: grid;
+    gap: 7px;
+  }
+  .pipe-step {
+    display: grid;
+    grid-template-columns: 9px 1fr;
+    gap: 8px;
+    align-items: center;
+    font-family: var(--mono);
+    font-size: 10.5px;
+    color: var(--ink-2);
+  }
+  .pipe-step::before {
+    content: "";
+    width: 9px;
+    height: 9px;
+    border-radius: 50%;
+    background: var(--accent);
+  }
+  body[data-layout="summary"] .featured .inline-metrics {
+    display: none;
+  }
   .details {
     display: grid;
-    grid-template-rows: 0fr;
-    transition: grid-template-rows .35s ease;
-    margin-top: 0;
-  }
-  .entry.open .details {
-    grid-template-rows: 1fr;
     margin-top: 8px;
   }
-  .details > div { overflow: hidden; }
+  .entry-snap {
+    margin: 0; padding: 0;
+    list-style: none;
+    display: grid; gap: 5px;
+  }
+  .entry-snap li {
+    font-size: 14px; line-height: 1.45;
+    color: var(--ink-2);
+    padding-left: 14px;
+    position: relative;
+  }
+  .entry-snap li::before {
+    content: "–";
+    position: absolute; left: 0;
+    color: var(--ink-3);
+  }
+  .entry-snap li b { color: var(--ink); font-weight: 600; }
   .details ul {
     list-style: none; padding: 0; margin: 8px 0 0;
     display: grid; gap: 10px;
@@ -443,74 +524,215 @@
     border-top: 1px dashed var(--rule-2);
   }
 
-  /* ── Spine layout overrides ─────────────────────────────── */
-  body[data-layout="spine"] .timeline {
-    padding-left: 0;
+  /* ── Summary view ───────────────────────────────────────── */
+  body[data-layout="summary"] .entry {
+    padding: 36px 0;
   }
-  body[data-layout="spine"] .filters { padding-left: 0; }
-  body[data-layout="spine"] .sec-head { grid-template-columns: 1fr; gap: 14px; max-width: 760px; margin-left: auto; margin-right: auto; text-align: center; }
-  body[data-layout="spine"] .timeline::before {
-    left: 50%; top: 0;
-    transform: translateX(-0.5px);
+  body[data-layout="summary"] .entry h3 {
+    font-size: 18px;
   }
-  body[data-layout="spine"] .entry {
-    grid-template-columns: 1fr 80px 1fr;
-    gap: 0;
-    align-items: start;
-    border-bottom: 0;
-    padding: 32px 0;
+  body[data-layout="summary"] .entry .body {
+    gap: 10px;
   }
-  body[data-layout="spine"] .entry .year {
-    grid-column: 2;
-    justify-self: center;
-    padding-top: 0;
+  body[data-layout="summary"] .entry .details {
+    display: none;
   }
-  body[data-layout="spine"] .entry .year::after {
-    right: auto; left: 50%; top: -2px;
-    transform: translateX(-50%);
+  body[data-layout="summary"] .entry .inline-metrics {
+    display: none;
   }
-  body[data-layout="spine"] .entry .body {
-    grid-column: 3;
-    padding-left: 40px;
-    border-left: 1px dashed transparent;
+  body[data-layout="summary"] .entry .tagrow {
+    display: none;
   }
-  body[data-layout="spine"] .entry:nth-child(even) .body {
-    grid-column: 1; grid-row: 1;
-    padding-left: 0;
-    padding-right: 40px;
-    text-align: right;
+  body[data-layout="summary"] .masthead {
+    padding: 18px 0 16px;
   }
-  body[data-layout="spine"] .entry:nth-child(even) .year { grid-row: 1; }
-  body[data-layout="spine"] .entry:nth-child(even) .where { justify-content: flex-end; }
-  body[data-layout="spine"] .entry:nth-child(even) .tagrow { justify-content: flex-end; }
-  body[data-layout="spine"] .entry:nth-child(even) .inline-metrics { justify-content: flex-end; border-left: 0; border-right: 2px solid var(--accent); }
-  body[data-layout="spine"] .entry:nth-child(even) .details ul { padding-right: 0; }
-  body[data-layout="spine"] .entry:nth-child(even) .details li {
-    padding-left: 0; padding-right: 22px; text-align: right;
+  body[data-layout="summary"] .mh-line {
+    font-size: clamp(24px, 2.6vw, 32px);
   }
-  body[data-layout="spine"] .entry:nth-child(even) .details li::before {
-    left: auto; right: 0;
+  body[data-layout="summary"] .mh-eyebrow {
+    margin-top: 10px;
   }
-  body[data-layout="spine"] .entry:nth-child(even) .expander {
-    justify-self: flex-end;
-    flex-direction: row-reverse;
+  body[data-layout="summary"] .mh-summary {
+    display: none;
+  }
+  body[data-layout="summary"] .mh-chips {
+    display: flex;
+  }
+  body[data-layout="summary"] section.block {
+    padding: 48px 0 52px;
+  }
+  body[data-layout="summary"] .sec-head {
+    margin-bottom: 18px;
+  }
+  body[data-layout="summary"] .sec-num .n {
+    font-size: 22px;
+  }
+  body[data-layout="summary"] .sec-title {
+    font-size: 17px;
+    margin-bottom: 0;
+  }
+  body[data-layout="summary"] .filters {
+    margin-bottom: 10px;
+  }
+  body[data-layout="summary"] .chip {
+    padding: 5px 9px;
+    font-size: 10px;
+  }
+  body[data-layout="summary"] .entry .where {
+    display: none;
+  }
+  body[data-layout="summary"] .entry:not(.featured) .impact-viz {
+    display: none;
+  }
+  body[data-layout="summary"] .viz-card {
+    min-height: 0;
+    padding: 10px;
+    gap: 8px;
+  }
+  body[data-layout="summary"] .viz-kicker {
+    font-size: 9px;
+  }
+  body[data-layout="summary"] .scope-grid {
+    gap: 6px;
+  }
+  body[data-layout="summary"] .scope-item {
+    min-height: 38px;
+    padding: 6px;
+  }
+  body[data-layout="summary"] .scope-item b {
+    font-size: 13px;
+  }
+  body[data-layout="summary"] .scope-item span {
+    margin-top: 3px;
+    font-size: 8.5px;
+  }
+  body[data-layout="summary"] .change-grid {
+    gap: 6px;
+  }
+  body[data-layout="summary"] .change-item {
+    min-height: 42px;
+    padding: 6px;
+    gap: 3px;
+  }
+  body[data-layout="summary"] .change-item b {
+    font-size: 14px;
+  }
+  body[data-layout="summary"] .change-item span,
+  body[data-layout="summary"] .change-item small {
+    font-size: 8.5px;
+  }
+  body[data-layout="summary"] .pipeline {
+    gap: 5px;
+  }
+  body[data-layout="summary"] .pipe-step {
+    grid-template-columns: 7px 1fr;
+    gap: 7px;
+    font-size: 9.5px;
+  }
+  body[data-layout="summary"] .pipe-step::before {
+    width: 7px;
+    height: 7px;
+  }
+  body[data-layout="summary"] .entry .summary {
+    display: none;
+  }
+  body[data-layout="summary"] .sec-lede {
+    display: none;
+  }
+  body[data-layout="summary"] .recog-list .row,
+  body[data-layout="summary"] .grid-2 .row {
+    padding: 9px 0;
+    gap: 12px;
+  }
+  body[data-layout="summary"] .row .ttl {
+    font-size: 14px;
+    line-height: 1.25;
+  }
+  body[data-layout="summary"] .row .ttl small {
+    display: -webkit-box;
+    margin-top: 2px;
+    overflow: hidden;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 1;
+  }
+  body[data-layout="summary"] .row .badge {
+    display: none;
+  }
+  body[data-layout="summary"] .recog-list::before,
+  body[data-layout="summary"] .recog-list .row::after {
+    display: none;
+  }
+  body[data-layout="summary"] .pub-feat-wrap {
+    margin-bottom: 22px;
+  }
+  body[data-layout="summary"] .pub-feat {
+    gap: 16px;
+    padding: 12px 0;
+  }
+  body[data-layout="summary"] .pub-feat .pub-citation {
+    display: -webkit-box;
+    margin-top: 4px;
+    font-size: 13.5px;
+    line-height: 1.45;
+    overflow: hidden;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 2;
+  }
+  body[data-layout="summary"] .pub-type {
+    font-size: 9.5px;
+    padding: 2px 6px;
+  }
+  body[data-layout="summary"] .pub-feat .pub-cites .n {
+    font-size: 18px;
+  }
+  body[data-layout="summary"] .pub-feat .pub-cites .l {
+    font-size: 9px;
+  }
+  body[data-layout="summary"] .grid-2 {
+    gap: 24px;
+  }
+  body[data-layout="summary"] .col {
+    padding: 0 18px;
+  }
+  body[data-layout="summary"] .col h4 {
+    margin-bottom: 4px;
+  }
+  body[data-layout="summary"] .review-row {
+    margin-top: 3px;
+    font-size: 10px;
+    line-height: 1.35;
+  }
+  body[data-layout="summary"] .skills-wrap {
+    gap: 14px;
+  }
+  body[data-layout="summary"] .skill-block {
+    grid-template-columns: 180px 1fr;
+    gap: 18px;
+    padding-bottom: 12px;
+  }
+  body[data-layout="summary"] .skill-block h5 {
+    font-size: 15px;
+  }
+  body[data-layout="summary"] .skill-chips {
+    gap: 6px;
+  }
+  body[data-layout="summary"] .skill-chips span {
+    font-size: 11px;
+    padding: 5px 10px;
   }
 
   /* ── Lists / cards (recognition, talks etc) ─────────────── */
-  .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 0; padding-left: 220px; }
-  body[data-layout="spine"] .grid-2 { padding-left: 0; max-width: 960px; margin-left: auto; margin-right: auto; }
+  .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 0 48px; padding-left: 140px; }
   .recog-list {
     position: relative;
-    padding-left: 220px;
+    padding-left: 140px;
   }
   .recog-list::before {
     content: "";
     position: absolute;
-    left: 313px; top: 6px; bottom: 0;
+    left: 233px; top: 6px; bottom: 0;
     width: 1px; background: var(--rule);
   }
-  body[data-layout="spine"] .recog-list { padding-left: 0; max-width: 960px; margin-left: auto; margin-right: auto; }
-  body[data-layout="spine"] .recog-list::before { display: none; }
   .recog-list .row {
     position: relative;
     grid-template-columns: 80px 1fr;
@@ -555,26 +777,26 @@
   }
 
   .col {
-    padding: 0 32px;
-    border-left: 1px solid var(--rule-2);
+    padding: 0;
   }
-  .col:first-child { border-left: 0; padding-left: 0; }
+  .col:first-child { border-left: 0; }
   .col h4 {
     font-family: var(--mono); font-size: 11px; text-transform: uppercase;
     letter-spacing: 0.08em; color: var(--ink-3);
-    margin: 0 0 12px;
+    margin: 0 0 16px;
+    padding-bottom: 12px;
+    border-bottom: 1px solid var(--rule-2);
   }
   .col .row { grid-template-columns: 56px 1fr; }
   .col .row .badge { display: none; }
 
   /* ── Featured publications ───────────────────────────────── */
   .pub-feat-wrap {
-    padding-left: 220px;
+    padding-left: 140px;
     display: grid; gap: 0;
     margin-bottom: 40px;
     border-top: 1px solid var(--rule);
   }
-  body[data-layout="spine"] .pub-feat-wrap { padding-left: 0; max-width: 960px; margin-left: auto; margin-right: auto; }
   .pub-feat {
     display: grid;
     grid-template-columns: 80px 1fr auto;
@@ -649,8 +871,7 @@
   }
 
   /* ── Skills ──────────────────────────────────────────────── */
-  .skills-wrap { padding-left: 220px; display: grid; gap: 36px; }
-  body[data-layout="spine"] .skills-wrap { padding-left: 0; max-width: 880px; margin-left: auto; margin-right: auto; }
+  .skills-wrap { padding-left: 140px; display: grid; gap: 36px; }
   .skill-block { display: grid; grid-template-columns: 200px 1fr; gap: 40px; padding-bottom: 28px; border-bottom: 1px solid var(--rule-2); }
   .skill-block:last-child { border-bottom: 0; }
   .skill-block h5 {
@@ -663,23 +884,24 @@
     text-transform: uppercase; letter-spacing: 0.08em;
     margin-bottom: 4px; display: block;
   }
-  .skill-chips { display: flex; flex-wrap: wrap; gap: 6px; }
+  .skill-chips { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; }
   .skill-chips span {
     font-family: var(--mono); font-size: 12px;
-    padding: 5px 10px; border-radius: 4px;
+    padding: 6px 14px; border-radius: 4px;
     background: var(--tag-bg); color: var(--ink-2);
+    border: 1px solid var(--rule-2);
+    line-height: 1.3;
   }
 
   /* ── Open source grid ───────────────────────────────────── */
   .oss-grid {
-    padding-left: 220px;
+    padding-left: 140px;
     display: grid;
     grid-template-columns: repeat(2, 1fr);
     gap: 0;
     border-top: 1px solid var(--rule-2);
     border-left: 1px solid var(--rule-2);
   }
-  body[data-layout="spine"] .oss-grid { padding-left: 0; max-width: 1100px; margin: 0 auto; }
   .oss-card {
     display: grid; gap: 12px;
     padding: 24px 24px 26px;
@@ -702,36 +924,6 @@
   @media (max-width: 900px) {
     .oss-grid { grid-template-columns: 1fr; padding-left: 0; }
   }
-
-  /* ── Pullquote ──────────────────────────────────────────── */
-  .pullquote {
-    padding: 96px 0;
-    border-bottom: 1px solid var(--rule-2);
-    background: var(--bg-2);
-  }
-  .pullquote blockquote {
-    margin: 0 auto;
-    max-width: 920px;
-    font-family: var(--serif);
-    font-size: clamp(28px, 3vw, 40px);
-    line-height: 1.25;
-    letter-spacing: -0.015em;
-    color: var(--ink);
-    text-wrap: pretty;
-  }
-  .pullquote .openq {
-    font-family: var(--serif);
-    font-size: 80px; line-height: 0;
-    color: var(--accent);
-    vertical-align: -16px;
-    margin-right: 6px;
-  }
-  .pullquote cite {
-    display: block; margin-top: 28px;
-    font-family: var(--mono); font-size: 12px; color: var(--ink-3);
-    font-style: normal; letter-spacing: 0.03em;
-  }
-  .pullquote cite b { color: var(--ink); font-weight: 500; }
 
   /* ── Footer ─────────────────────────────────────────────── */
   footer {
@@ -759,17 +951,12 @@
     .entry { grid-template-columns: 1fr; gap: 8px; }
     .entry .year::after { display: none; }
     .timeline::before { display: none; }
+    .impact-viz { grid-template-columns: 1fr; }
+    body[data-layout="summary"] .entry { grid-template-columns: 1fr; gap: 6px; }
+    body[data-layout="summary"] .timeline::before { display: none; }
     .skill-block { grid-template-columns: 1fr; gap: 14px; }
     .grid-2 { grid-template-columns: 1fr; }
     .col { padding-left: 0; border-left: 0; }
-    body[data-layout="spine"] .entry { grid-template-columns: 1fr; }
-    body[data-layout="spine"] .entry .body { grid-column: 1 !important; grid-row: auto !important; padding: 0 !important; text-align: left !important; }
-    body[data-layout="spine"] .entry:nth-child(even) .where,
-    body[data-layout="spine"] .entry:nth-child(even) .tagrow,
-    body[data-layout="spine"] .entry:nth-child(even) .inline-metrics,
-    body[data-layout="spine"] .entry:nth-child(even) .details li { text-align: left !important; justify-content: flex-start !important; padding-left: 22px !important; padding-right: 0 !important; border-left: 2px solid var(--accent); border-right: 0; }
-    body[data-layout="spine"] .entry:nth-child(even) .details li::before { left: 0 !important; right: auto !important; }
-    body[data-layout="spine"] .timeline::before { display: none; }
   }
 
   /* ── Tablet refinements (layered over the base 900px rules) ─ */
@@ -896,7 +1083,7 @@
   }
 </style>
 </head>
-<body data-layout="rail" style="background-color: rgb(250, 250, 250);">
+<body data-layout="summary" style="background-color: rgb(250, 250, 250);">
 
 <div class="topbar">
   <div class="topbar-inner">
@@ -910,10 +1097,11 @@
       <a href="#oss">Open Source</a>
       <a href="#publications">Publications</a>
       <a href="#skills">Skills</a>
+      <a href="#education">Education</a>
     </nav>
-    <div class="layout-toggle" role="tablist" aria-label="Layout">
-      <button class="on" data-layout-set="rail">Rail</button>
-      <button data-layout-set="spine">Spine</button>
+    <div class="layout-toggle" role="tablist" aria-label="Portfolio view">
+      <button class="on" data-layout-set="summary">Detail</button>
+      <button data-layout-set="detail" style="display:none;">Raw</button>
     </div>
   </div>
 </div>
@@ -925,6 +1113,15 @@
       <h1 class="mh-line">Souranil&nbsp;Sen</h1>
       <div class="mh-eyebrow"><span class="pulse"></span><span>Senior ML Engineer · Meta Reality Labs · Burlingame, California</span></div>
       <p class="mh-summary">Building foundational <b>generative AI</b>, <b>computer vision</b>, and <b>3D</b> systems for platform-scale consumer products — facial perception, synthetic data infrastructure, and text-to-3D animation.</p>
+      <div class="mh-chips" aria-label="Profile snapshot">
+        <span class="tag accent">Generative AI</span>
+        <span class="tag">Computer Vision</span>
+        <span class="tag">3D / Graphics</span>
+        <span class="tag">Synthetic Data</span>
+        <span class="tag">Production ML</span>
+        <span class="tag">Billion-user systems</span>
+        <span class="tag">Meta Reality Labs</span>
+      </div>
     </div>
   </div>
 </header>
@@ -950,10 +1147,10 @@
       <button class="chip" data-filter="research">Research</button>
     </div>
 
-    <div class="timeline" id="timeline">
+    <div class="timeline" id="timeline-list">
 
       <!-- META — current -->
-      <article class="entry now open" data-tags="ml cv graphics prod">
+      <article class="entry now featured" data-tags="ml cv graphics prod">
         <div class="year">2022 — Now</div>
         <div class="body">
           <h3><span class="org">Meta</span><span class="sep">/</span><span class="role">Senior Machine Learning Engineer · Reality Labs</span></h3>
@@ -976,10 +1173,43 @@
           <p class="summary">Engineering lead on foundational <b>generative AI</b> and <b>computer vision</b> systems deployed at consumer scale — including a production multi-frame facial perception model, a Unity-based synthetic data generation infrastructure, and a diffusion-based model for generating 3D character animations from natural language. Systems deployed to <b>1.6 billion+ users</b> across Facebook, Instagram, WhatsApp, and Horizon.</p>
 
           <div class="inline-metrics">
-            <div class="im"><div class="im-n">1.6B+</div><div class="im-l">Users · 4 platforms</div></div>
+            <div class="im"><div class="im-n">1.6B+</div><div class="im-l">Facebook · Instagram · WhatsApp · Horizon</div></div>
             <div class="im"><div class="im-n">+33%</div><div class="im-l">L1 on multi-pose set</div></div>
             <div class="im"><div class="im-n">−4%</div><div class="im-l">Pipeline rejections</div></div>
             <div class="im"><div class="im-n">12×</div><div class="im-l">Real-time inference speedup</div></div>
+          </div>
+
+          <ul class="entry-snap">
+            <li><b>Tech lead</b> on diffusion model generating 3D character animations from natural language — owned eval framework, training infra, and end-to-end pipeline.</li>
+            <li><b>Shipped production multi-frame facial perception model</b> outperforming prior system on all 92 blendshapes — +33% L1, +1.3% global completion, 1.5M+ additional successful generations/yr.</li>
+            <li><b>12× inference speedup</b> on facial expression model serving 1.5B+ users — 10.0s → 0.8s for a 300-frame sequence.</li>
+            <li><b>Built Unity synthetic data pipeline</b> — 15M+ labeled images; reused as foundational training infrastructure across downstream generative models.</li>
+            <li><b>Primary oncall at billion-user scale</b> across 2023–2025; led incident review for outage affecting 23,000 user requests.</li>
+          </ul>
+
+          <div class="impact-viz impact-viz--2col" aria-label="Meta impact visualization">
+            <div class="viz-card">
+              <div class="viz-kicker">Platform · Delivery</div>
+              <div class="scope-grid scope-grid--inline">
+                <div class="scope-item"><b>1.6B+</b><span>Consumer users</span></div>
+                <div class="scope-item"><b>4 apps</b><span>Facebook · Instagram · WhatsApp · Horizon</span></div>
+              </div>
+              <div class="pipeline">
+                <div class="pipe-step">Synthetic data infrastructure</div>
+                <div class="pipe-step">DECA feature extraction</div>
+                <div class="pipe-step">Multi-frame aggregation</div>
+                <div class="pipe-step">Production release + telemetry</div>
+              </div>
+            </div>
+            <div class="viz-card">
+              <div class="viz-kicker">Model changes</div>
+              <div class="change-grid">
+                <div class="change-item change-item--lift"><b>+33%</b><span>Accuracy lift</span><small>@ Multi-pose L1</small></div>
+                <div class="change-item change-item--lift"><b>+1.3%</b><span>Global completion</span><small>+1.5M generations/yr · at 1.6B scale</small></div>
+                <div class="change-item change-item--reduce"><b>−4%</b><span>Failure reduction</span><small>@ Pipeline rejections</small></div>
+                <div class="change-item change-item--speed"><b>12×</b><span>Inference speedup</span><small>10.0s → 0.8s</small></div>
+              </div>
+            </div>
           </div>
 
           <div class="details">
@@ -1001,7 +1231,7 @@
       </article>
 
       <!-- UNITY -->
-      <article class="entry open" data-tags="ml cv graphics research">
+      <article class="entry featured" data-tags="ml cv graphics research">
         <div class="year">2018 — 2022</div>
         <div class="body">
           <h3><span class="org">Unity Technologies</span><span class="sep">/</span><span class="role">Machine Learning Engineer · AI Computer Vision</span></h3>
@@ -1026,6 +1256,43 @@
             <div class="im"><div class="im-n">IROS</div><div class="im-l">2021 · peer-reviewed</div></div>
             <div class="im"><div class="im-n">Summit</div><div class="im-l">Unity AI · keynote 2021</div></div>
             <div class="im"><div class="im-n">SDK</div><div class="im-l">unity-vision · shipped</div></div>
+          </div>
+
+          <ul class="entry-snap">
+            <li><b>Designed & shipped unity-vision SDK</b> bridging Unity-generated synthetic datasets with ML training pipelines — used internally and by robotics / AV customers.</li>
+            <li><b>Established sim-to-real transfer result</b> for object detection — validated the synthetic-data thesis at production scale; became Unity's external anchor for data-centric AI positioning.</li>
+            <li><b>IROS 2021</b> co-author (drone pose estimation); delivered invited keynote at Unity AI Summit 2021; featured author on Unity engineering blog.</li>
+            <li><b>Built cloud simulation services</b> for running Unity scenes at scale with hyperparameter tuning; collaborated with a major game studio on automated playtesting.</li>
+          </ul>
+
+          <div class="impact-viz" aria-label="Unity impact visualization">
+            <div class="viz-card">
+              <div class="viz-kicker">Research output</div>
+              <div class="scope-grid">
+                <div class="scope-item"><b>IROS</b><span>Peer-reviewed</span></div>
+                <div class="scope-item"><b>Summit</b><span>Unity AI keynote</span></div>
+                <div class="scope-item"><b>SDK</b><span>Shipped tooling</span></div>
+                <div class="scope-item"><b>Blog</b><span>Featured author</span></div>
+              </div>
+            </div>
+            <div class="viz-card">
+              <div class="viz-kicker">Sim-to-real stack</div>
+              <div class="pipeline">
+                <div class="pipe-step">Unity simulation scenes</div>
+                <div class="pipe-step">Synthetic labels + variation</div>
+                <div class="pipe-step">Detectron2 training pipeline</div>
+                <div class="pipe-step">Benchmark transfer results</div>
+              </div>
+            </div>
+            <div class="viz-card">
+              <div class="viz-kicker">Applied domains</div>
+              <div class="scope-grid">
+                <div class="scope-item"><b>Robotics</b><span>Pose estimation</span></div>
+                <div class="scope-item"><b>AV</b><span>Autonomous vehicles</span></div>
+                <div class="scope-item"><b>Gaming</b><span>Playtesting</span></div>
+                <div class="scope-item"><b>Cloud</b><span>Simulation scale</span></div>
+              </div>
+            </div>
           </div>
 
           <div class="details">
@@ -1058,18 +1325,23 @@
           </div>
           <div class="tagrow"><span class="tag">Mentorship</span><span class="tag">GenAI</span></div>
           <p class="summary">Technical mentor for the AI Generated Media graduate course at the MIT Media Lab — provided guidance to a cohort of ~20 graduate students on deep-fakes, generative AI, and content authenticity, including project-level review of student work on generative-media systems.</p>
+
+          <ul class="entry-snap">
+            <li><b>Technical mentor</b> for ~20 graduate students on deep-fakes, generative AI, and content authenticity.</li>
+            <li><b>Project-level review</b> of student work on generative-media systems.</li>
+          </ul>
         </div>
       </article>
 
       <!-- Stony Brook -->
-      <article class="entry open" data-tags="research cv">
+      <article class="entry" data-tags="research cv">
         <div class="year">2017 — 2018</div>
         <div class="body">
           <h3><span class="org">Stony Brook University</span><span class="sep">/</span><span class="role">Graduate Research Assistant · M.S. Computer Science</span></h3>
           <div class="where">
             <span>Stony Brook, NY</span>
             <span>·</span>
-            <span>GPA 3.88</span>
+            <span>GPA 3.73</span>
             <span>·</span>
             <span>Human Interaction Lab</span>
           </div>
@@ -1080,10 +1352,23 @@
           </div>
           <p class="summary">Graduate research under Prof. Roy Shilkrot on dark-pattern detection in user interfaces using computer vision; parallel work under Prof. Rong Zhao on a VR application and ML-assisted clustering framework for schizophrenia patient research. Designed and deployed the multi-tenant NYSTAR conference app (React Native) to Google Play and the App Store with full CI/CD.</p>
 
+          <ul class="entry-snap">
+            <li><b>CV research</b> on detecting dark patterns in user-facing interfaces (Prof. Roy Shilkrot).</li>
+            <li><b>VR + ML clustering</b> for schizophrenia clinical research — VR app paired with unsupervised clustering framework (Prof. Rong Zhao).</li>
+            <li><b>Shipped NYSTAR conference app</b> (React Native) to Google Play and App Store with full CI/CD; multi-tenant architecture.</li>
+          </ul>
+
+          <div class="inline-metrics">
+            <div class="im"><div class="im-n">3.73</div><div class="im-l">M.S. CS GPA</div></div>
+            <div class="im"><div class="im-n">CV</div><div class="im-l">Dark-pattern research</div></div>
+            <div class="im"><div class="im-n">VR</div><div class="im-l">Clinical research app</div></div>
+            <div class="im"><div class="im-n">App</div><div class="im-l">NYSTAR shipped</div></div>
+          </div>
+
           <div class="details">
             <div>
               <ul>
-                <li><b>Computer-vision research</b> on detecting dark patterns in user-facing UI surfaces — foundation for the later applied-CV trajectory.</li>
+                <li><b>Computer-vision research</b> on detecting dark patterns in user-facing UI surfaces (Prof. Roy Shilkrot).</li>
                 <li><b>VR + ML clustering for schizophrenia research</b> — VR application paired with a clustering framework supporting clinical analysis (Prof. Rong Zhao).</li>
                 <li><b>NYSTAR conference application</b> — multi-tenant React Native app deployed to Google Play and App Store with CI/CD automation.</li>
                 <li><b>Hack@CEWIT 2017 — Most Original</b>. Workout-detection armband with 3D-printed enclosure, gyroscope, and DTW-based motion-quality classification.</li>
@@ -1095,16 +1380,41 @@
 
       <!-- Quintype -->
       <article class="entry" data-tags="prod">
-        <div class="year">2016</div>
+        <div class="year">2016 — 2017</div>
         <div class="body">
-          <h3><span class="org">Quintype</span><span class="sep">/</span><span class="role">Senior Software Engineer</span></h3>
+          <h3><span class="org">Quintype Inc.</span><span class="sep">/</span><span class="role">Full Stack Engineer</span></h3>
           <div class="where">
             <span>Bangalore, India</span>
             <span>·</span>
-            <span>May 2016 — Dec 2016</span>
+            <span>Mar 2016 — Jan 2017</span>
+            <span>·</span>
+            <span>Publishing platform · real-time data</span>
           </div>
-          <div class="tagrow"><span class="tag">Clojure</span><span class="tag">Real-time</span><span class="tag">Platform</span></div>
-          <p class="summary">Led backend platform engineering for Bloomberg Quint India — architecting the real-time stock-data streaming infrastructure that powered the launch product.</p>
+          <div class="tagrow"><span class="tag">Clojure</span><span class="tag">Microservices</span><span class="tag">Node.js</span><span class="tag">RxJS</span><span class="tag">WebSockets</span><span class="tag">RSS Imports</span><span class="tag">Oncall</span></div>
+          <p class="summary">Full-stack platform engineer on Quintype's publishing stack — helped redesign a monolith into Clojure microservices, built RSS import workflows, and developed a real-time stock-data streaming service handling <b>1M+ QPS</b> using RxJS, WebSockets, and Node.js.</p>
+
+          <ul class="entry-snap">
+            <li><b>Microservices migration</b> — helped decompose the publishing platform monolith into Clojure microservices.</li>
+            <li><b>RSS import workflows</b> — built ingestion pipelines for importing feed content into the publishing platform.</li>
+            <li><b>Real-time stock streaming at 1M+ QPS</b> — built a high-throughput streaming service using RxJS, WebSockets, and Node.js.</li>
+          </ul>
+
+          <div class="inline-metrics">
+            <div class="im"><div class="im-n">1M+</div><div class="im-l">QPS · stock streaming</div></div>
+            <div class="im"><div class="im-n">Clojure</div><div class="im-l">Monolith → microservices</div></div>
+            <div class="im"><div class="im-n">RSS</div><div class="im-l">Content ingestion pipelines</div></div>
+          </div>
+
+          <div class="details">
+            <div>
+              <ul>
+                <li><b>Product architecture redesign</b> — worked on decomposing the publishing platform from a monolith into Clojure microservices.</li>
+                <li><b>Data-team backend development</b> — built ingestion workflows for importing RSS feeds into the publishing platform.</li>
+                <li><b>Real-time stock streaming at 1M+ QPS</b> — built a high-throughput streaming service using RxJS, WebSockets, Node.js, and the observer pattern.</li>
+                <li><b>Production leadership</b> — received appreciation for effectively mitigating production issues on call and leading a team through operational incidents.</li>
+              </ul>
+            </div>
+          </div>
         </div>
       </article>
 
@@ -1112,16 +1422,39 @@
       <article class="entry" data-tags="prod">
         <div class="year">2014 — 2015</div>
         <div class="body">
-          <h3><span class="org">ThoughtWorks</span><span class="sep">/</span><span class="role">Senior Software Engineer</span></h3>
+          <h3><span class="org">ThoughtWorks</span><span class="sep">/</span><span class="role">Software Consultant</span></h3>
           <div class="where">
             <span>Bangalore, India</span>
             <span>·</span>
             <span>Aug 2014 — Jun 2015</span>
             <span>·</span>
-            <span>Enterprise data + DevOps</span>
+            <span>Enterprise data services · DevOps</span>
           </div>
-          <div class="tagrow"><span class="tag">Java</span><span class="tag">CI/CD</span><span class="tag">Enterprise</span></div>
-          <p class="summary">Built enterprise data-driven solutions and automated deployment pipelines for external clients — an early grounding in the production-systems discipline that later supported oncall ownership at Meta-scale.</p>
+          <div class="tagrow"><span class="tag">Ruby</span><span class="tag">PostgreSQL</span><span class="tag">State Machines</span><span class="tag">D3.js</span><span class="tag">AWS OpsWorks</span><span class="tag">Dashboards</span></div>
+          <p class="summary">Software consultant on RedE, an enterprise data-driven application — built backend services, refactored transition logic with state machines, developed live D3.js dashboards, and migrated deployment automation to AWS OpsWorks.</p>
+
+          <ul class="entry-snap">
+            <li><b>Backend services for RedE</b> — data-driven enterprise application using Ruby and PostgreSQL.</li>
+            <li><b>State-machine refactor</b> — reworked core workflow transition logic for modularity.</li>
+            <li><b>Live D3.js dashboards</b> for operational data visibility; migrated deployments to AWS OpsWorks.</li>
+          </ul>
+
+          <div class="inline-metrics">
+            <div class="im"><div class="im-n">RedE</div><div class="im-l">Enterprise app</div></div>
+            <div class="im"><div class="im-n">D3.js</div><div class="im-l">Live dashboards</div></div>
+            <div class="im"><div class="im-n">AWS</div><div class="im-l">OpsWorks deploys</div></div>
+          </div>
+
+          <div class="details">
+            <div>
+              <ul>
+                <li><b>Backend services for RedE</b> — developed data-driven enterprise services using Ruby and PostgreSQL.</li>
+                <li><b>State-machine refactor</b> — reworked core transition logic to make workflow behavior more modular and easier to change.</li>
+                <li><b>Live visualization dashboards</b> — built D3.js dashboards for operational data visibility.</li>
+                <li><b>Deployment automation</b> — migrated and automated application deployments using AWS OpsWorks.</li>
+              </ul>
+            </div>
+          </div>
         </div>
       </article>
 
@@ -1129,22 +1462,42 @@
       <article class="entry" data-tags="prod">
         <div class="year">2012 — 2014</div>
         <div class="body">
-          <h3><span class="org">Tata Consultancy Services</span><span class="sep">/</span><span class="role">Software Engineer</span></h3>
+          <h3><span class="org">TCS Innovations Lab, Tata Research</span><span class="sep">/</span><span class="role">Solutions Developer</span></h3>
           <div class="where">
-            <span>Bangalore, India</span>
+            <span>Chennai, India</span>
             <span>·</span>
-            <span>Aug 2012 — Aug 2014</span>
+            <span>Jan 2013 — Aug 2014</span>
+            <span>·</span>
+            <span>Re-imagination of Workplaces initiative</span>
           </div>
-          <div class="tagrow"><span class="tag">Java</span><span class="tag">Performance</span></div>
-          <p class="summary">First professional role. Developed modules for the Knome enterprise social-networking platform; led performance optimization and client deployments.</p>
+          <div class="tagrow"><span class="tag">Java</span><span class="tag">Ruby</span><span class="tag">PostgreSQL</span><span class="tag">ElasticSearch</span><span class="tag">Enterprise Social</span></div>
+          <p class="summary">Solutions developer in TCS Innovations Lab on an enterprise social-networking platform for the Re-imagination of Workplaces initiative, spanning Java/Ruby services, PostgreSQL persistence, and ElasticSearch-backed discovery.</p>
+
+          <ul class="entry-snap">
+            <li><b>Enterprise social networking platform</b> — Java/Ruby services with PostgreSQL persistence for the Re-imagination of Workplaces initiative.</li>
+            <li><b>ElasticSearch-backed discovery</b> — built search and content-surfacing features for workplace collaboration at scale.</li>
+          </ul>
+
+          <div class="inline-metrics">
+            <div class="im"><div class="im-n">ESN</div><div class="im-l">Enterprise social platform</div></div>
+            <div class="im"><div class="im-n">Search</div><div class="im-l">ElasticSearch-backed</div></div>
+            <div class="im"><div class="im-n">R&D</div><div class="im-l">Innovations Lab</div></div>
+          </div>
+
+          <div class="details">
+            <div>
+              <ul>
+                <li><b>Enterprise social networking platform</b> — built Java and Ruby services with PostgreSQL persistence for the Re-imagination of Workplaces initiative.</li>
+                <li><b>ElasticSearch-backed discovery</b> — implemented search and content-surfacing features for workplace collaboration at enterprise scale.</li>
+              </ul>
+            </div>
+          </div>
         </div>
       </article>
 
     </div>
   </div>
 </section>
-
-<!-- Pullquote removed -->
 
 <a id="recognition"></a>
 <section class="block">
@@ -1310,9 +1663,8 @@
           <h5>3D Graphics &amp; Synthetic Data</h5>
         </div>
         <div class="skill-chips">
-          <span>Unity (expert)</span><span>PyTorch3D</span>
-          <span>Procedural Generation</span><span>Realistic Rendering</span>
-          <span>Avatar Systems</span><span>FACS-based Pipelines</span>
+          <span>Unity</span><span>PyTorch3D</span>
+          <span>Procedural Generation</span>          <span>Avatar Systems</span><span>FACS-based Pipelines</span>
           <span>Unity Perception</span><span>3D MoCap Datasets</span>
         </div>
       </div>
@@ -1330,14 +1682,31 @@
         </div>
       </div>
 
+    </div>
+  </div>
+</section>
+
+<a id="education"></a>
+<section class="block">
+  <div class="wrap">
+    <div class="sec-head">
+      <div class="sec-num"><span class="n">06</span></div>
+      <div>
+        <h2 class="sec-title">Education</h2>
+      </div>
+    </div>
+
+    <div class="recog-list">
+      <div class="row"><span class="yr mono">2018</span><span class="ttl"><span class="role">M.S. Computer Science</span><span class="at">@</span>Stony Brook University<small>GPA 3.73 · Graduate Research Assistant · Human Interaction Lab</small></span></div>
+      <div class="row"><span class="yr mono">2012</span><span class="ttl"><span class="role">B.Tech. Information Technology</span><span class="at">@</span>Techno India, Kolkata<small>West Bengal University of Technology</small></span></div>
+    </div>
+
+    <div class="skills-wrap" style="margin-top: 36px;">
       <div class="skill-block">
         <div>
-          <span class="domain">Education</span>
-          <h5>Degrees &amp; Certifications</h5>
+          <h5>Certifications &amp; Coursework</h5>
         </div>
         <div class="skill-chips">
-          <span>M.S. Computer Science · Stony Brook · 3.88</span>
-          <span>B.Tech. IT · Techno India, Kolkata</span>
           <span>AI Generated Media · MIT Media Lab</span>
           <span>Robotics: Perception · UPenn / Coursera</span>
           <span>MITx 6.86x · ML with Python</span>
@@ -1371,7 +1740,7 @@
 
   // Filters
   const chips = document.querySelectorAll('#filters .chip');
-  const entries = document.querySelectorAll('#timeline .entry');
+  const entries = document.querySelectorAll('#timeline-list .entry');
 
   // tag counts
   const counts = { all: entries.length };
@@ -1383,7 +1752,7 @@
     const f = c.dataset.filter;
     if (counts[f]) {
       const s = document.createElement('span');
-      s.className = 'count'; s.textContent = counts[f];
+      s.className = 'count'; s.textContent = ` ${counts[f]}`;
       c.appendChild(s);
     }
   });
@@ -1397,15 +1766,6 @@
         const match = f === 'all' || tags.includes(f);
         e.classList.toggle('fade', !match);
       });
-    });
-  });
-
-  // Expand / collapse
-  document.querySelectorAll('.expander').forEach(btn => {
-    btn.addEventListener('click', () => {
-      const entry = btn.closest('.entry');
-      entry.classList.toggle('open');
-      btn.setAttribute('aria-expanded', entry.classList.contains('open'));
     });
   });
 </script>
