@@ -5,7 +5,7 @@
 import os
 import queue
 import threading
-from http.server import BaseHTTPRequestHandler, HTTPServer
+from http.server import BaseHTTPRequestHandler, ThreadingHTTPServer
 from pathlib import Path
 
 from watchdog.events import FileSystemEventHandler
@@ -127,12 +127,17 @@ class Watcher(FileSystemEventHandler):
         broadcast()
 
 
+class ReuseServer(ThreadingHTTPServer):
+    allow_reuse_address = True
+    daemon_threads = True
+
+
 if __name__ == "__main__":
     obs = Observer()
     obs.schedule(Watcher(), str(ROOT), recursive=True)
     obs.start()
 
-    httpd = HTTPServer(("127.0.0.1", PORT), Handler)
+    httpd = ReuseServer(("127.0.0.1", PORT), Handler)
     print(f"Serving http://localhost:{PORT}  (watching {ROOT})")
     try:
         httpd.serve_forever()
