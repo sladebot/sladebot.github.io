@@ -108,8 +108,16 @@
     letter-spacing: 0.14em;
     color: var(--ink-3);
     display: inline-flex; align-items: center; gap: 9px;
-    margin-bottom: 14px;
+    margin-top: 14px;
   }
+  .mh-summary {
+    margin: 16px 0 0;
+    font-size: 15.5px;
+    line-height: 1.55;
+    color: var(--ink-2);
+    max-width: 64ch;
+  }
+  .mh-summary b { color: var(--ink); font-weight: 600; }
   .mh-eyebrow .pulse {
     width: 6px; height: 6px; border-radius: 50%;
     background: #2c8a55;
@@ -238,7 +246,19 @@
     display: grid; grid-template-columns: 220px 1fr; gap: 64px;
     margin-bottom: 36px;
   }
-  .sec-num { font-family: var(--mono); font-size: 12px; color: var(--ink-3); }
+  .sec-num {
+    display: grid; gap: 6px;
+    align-content: start;
+    font-family: var(--mono); font-size: 11px; color: var(--ink-3);
+  }
+  .sec-num .n {
+    font-family: var(--sans); font-weight: 500;
+    font-size: 28px; letter-spacing: -0.02em;
+    color: var(--ink); line-height: 1;
+  }
+  .sec-num .l {
+    text-transform: uppercase; letter-spacing: 0.12em;
+  }
   .sec-title {
     font-family: var(--sans); font-weight: 500;
     font-size: clamp(32px, 3.4vw, 44px);
@@ -446,6 +466,46 @@
   /* ── Lists / cards (recognition, talks etc) ─────────────── */
   .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 0; padding-left: 220px; }
   body[data-layout="spine"] .grid-2 { padding-left: 0; max-width: 960px; margin-left: auto; margin-right: auto; }
+  .recog-list {
+    position: relative;
+    padding-left: 220px;
+  }
+  .recog-list::before {
+    content: "";
+    position: absolute;
+    left: 313px; top: 6px; bottom: 0;
+    width: 1px; background: var(--rule);
+  }
+  body[data-layout="spine"] .recog-list { padding-left: 0; max-width: 960px; margin-left: auto; margin-right: auto; }
+  body[data-layout="spine"] .recog-list::before { display: none; }
+  .recog-list .row {
+    position: relative;
+    grid-template-columns: 80px 1fr;
+    align-items: baseline;
+  }
+  .recog-list .row .yr { grid-column: 1; padding-top: 4px; }
+  .recog-list .row .ttl { grid-column: 2; }
+  .recog-list .row .ttl .role {
+    font-weight: 600;
+    color: var(--accent);
+  }
+  .recog-list .row .ttl .at {
+    color: var(--ink-3);
+    margin: 0 6px;
+    font-weight: 300;
+  }
+  .recog-list .row::after {
+    content: "";
+    position: absolute;
+    left: 93px;
+    top: 24px;
+    width: 7px; height: 7px;
+    background: var(--bg);
+    border: 1.5px solid var(--ink-3);
+    border-radius: 50%;
+    transform: translateX(-50%);
+    z-index: 1;
+  }
 
   .row {
     display: grid; grid-template-columns: 80px 1fr auto; gap: 20px;
@@ -641,7 +701,8 @@
     .stat:nth-child(2) { border-right: 0; }
     .stat:nth-child(1), .stat:nth-child(2) { border-bottom: 1px solid var(--rule-2); }
     .sec-head { grid-template-columns: 1fr; gap: 12px; }
-    .filters, .timeline, .grid-2, .skills-wrap, .pub-feat-wrap { padding-left: 0; }
+    .filters, .timeline, .grid-2, .skills-wrap, .pub-feat-wrap, .recog-list { padding-left: 0; }
+    .recog-list::before, .recog-list .row::after { display: none; }
     .pub-feat { grid-template-columns: 64px 1fr; gap: 16px; }
     .pub-feat .pub-cites { grid-column: 2; text-align: left; justify-items: start; padding-top: 4px; flex-direction: row; align-items: baseline; }
     .pub-feat .pub-cites .n { font-size: 18px; display: inline; margin-right: 6px; }
@@ -706,7 +767,8 @@
 
     /* Masthead — tighter, role wraps onto its own line cleanly */
     .masthead { padding: 24px 0 20px; }
-    .mh-eyebrow { font-size: 10.5px; gap: 8px; margin-bottom: 12px; }
+    .mh-eyebrow { font-size: 10.5px; gap: 8px; margin-top: 12px; }
+    .mh-summary { font-size: 14.5px; margin-top: 14px; }
     .mh-line { font-size: clamp(22px, 6.4vw, 30px); gap: 4px 12px; }
     .mh-line .sep { display: none; }
     .mh-line .role { display: block; flex-basis: 100%; font-size: 0.78em; line-height: 1.25; }
@@ -720,6 +782,12 @@
 
     /* Featured publications at phone scale */
     .pub-feat .pub-title { font-size: 17px; }
+
+    /* Recognition rows stack: year+badge on one line, title below */
+    .recog-list .row { grid-template-columns: 70px 1fr; row-gap: 6px; }
+    .recog-list .row .yr { grid-column: 1; }
+    .recog-list .row .badge { grid-column: 2; justify-self: start; }
+    .recog-list .row .ttl { grid-column: 1 / -1; }
     .pub-feat .pub-authors { font-size: 12px; }
     .pub-feat .pub-venue { font-size: 11px; }
 
@@ -805,15 +873,9 @@
 <header class="masthead">
   <div class="wrap mh-grid">
     <div class="mh-l">
-      <div class="mh-eyebrow"><span class="pulse"></span><span>ML Engineer · Meta Reality Labs · Burlingame</span></div>
-      <h1 class="mh-line">
-        <span class="name">Souranil&nbsp;Sen</span>
-        <span class="sep">—</span>
-        <span class="role">generative systems for vision, 3D &amp; avatars.</span>
-      </h1>
-    </div>
-    <div class="mh-r">
-      <a href="#timeline" class="mh-jump">Experience ↓</a>
+      <h1 class="mh-line">Souranil&nbsp;Sen</h1>
+      <div class="mh-eyebrow"><span class="pulse"></span><span>Senior ML Engineer · Meta Reality Labs · Burlingame, CA</span></div>
+      <p class="mh-summary">Building foundational <b>generative AI</b>, <b>computer vision</b>, and <b>3D</b> systems for platform-scale consumer products — facial perception, synthetic data infrastructure, and text-to-3D animation.</p>
     </div>
   </div>
 </header>
@@ -824,10 +886,9 @@
 <section class="block">
   <div class="wrap">
     <div class="sec-head">
-      <div class="sec-num">01 — Timeline</div>
+      <div class="sec-num"><span class="n">01</span><span class="l">Timeline</span></div>
       <div>
         <h2 class="sec-title">Professional experience</h2>
-        <p class="sec-lede">Reverse-chronological. Each entry summarises scope, individual contribution, and outcomes; click any role to expand the full record.</p>
       </div>
     </div>
 
@@ -846,7 +907,7 @@
       <article class="entry now open" data-tags="ml cv graphics prod">
         <div class="year">2022 — Now</div>
         <div class="body">
-          <h3><span class="org">Meta</span><span class="sep">/</span><span class="role">Machine Learning Engineer · Reality Labs</span></h3>
+          <h3><span class="org">Meta</span><span class="sep">/</span><span class="role">Senior Machine Learning Engineer · Reality Labs</span></h3>
           <div class="where">
             <span>Burlingame, CA</span>
             <span>·</span>
@@ -855,6 +916,7 @@
           <div class="tagrow">
             <span class="tag accent">Generative AI</span>
             <span class="tag">Synthetic Data</span>
+            <span class="tag">Sim-to-Real</span>
             <span class="tag">3D Reconstruction</span>
             <span class="tag">Diffusion Models</span>
             <span class="tag">DECA</span>
@@ -881,7 +943,8 @@
                 <li><b>Modeling lead on a diffusion model for generating 3D character animations from natural language.</b> Established the continuous-evaluation infrastructure (golden datasets, daily quality dashboards) used across the broader generative animation effort.</li>
                 <li><b>FACS-based synthetic expression generation pipeline</b> — facial expression synthesis with HyperNet domain transfer across a diverse identity space; adopted as training infrastructure for downstream generative animation models.</li>
                 <li><b>Production ownership at billion-user scale</b> — led incident review for a high-priority production incident (23,000 affected requests); multiple oncall shifts 2023–2025.</li>
-                <li><b>Lead engineer on multiple high-visibility product releases and executive-level technical demonstrations, including Board-of-Directors presentations.</b></li>
+                <li><b>Cross-team and cross-org collaboration at Meta scale</b> — partnered with research, product, design, and infrastructure teams across Reality Labs and adjacent organisations to bring foundational models from prototype to consumer-product deployment.</li>
+                <li><b>Lead engineer on multiple high-visibility product releases and executive-level technical demonstrations.</b></li>
               </ul>
             </div>
           </div>
@@ -938,14 +1001,14 @@
         <div class="body">
           <h3><span class="org">MIT Fluid Interfaces Lab</span><span class="sep">/</span><span class="role">Technical Mentor — "AI Generated Media"</span></h3>
           <div class="where">
-            <span>MIT Media Lab · Cambridge, MA</span>
+            <span>MIT Media Lab · Remote</span>
             <span>·</span>
             <span>Sep — Nov 2021</span>
             <span>·</span>
             <span>~20 graduate students</span>
           </div>
           <div class="tagrow"><span class="tag">Mentorship</span><span class="tag">GenAI</span></div>
-          <p class="summary">Invited by Prof. Roy Shilkrot to mentor the AI Generated Media graduate course at the MIT Media Lab — providing technical guidance on deep-fakes, generative AI, and content authenticity to a cohort of approximately 20 graduate students.</p>
+          <p class="summary">Technical mentor for the AI Generated Media graduate course at the MIT Media Lab — provided guidance to a cohort of ~20 graduate students on deep-fakes, generative AI, and content authenticity, including project-level review of student work on generative-media systems.</p>
         </div>
       </article>
 
@@ -966,7 +1029,7 @@
             <span class="tag">VR</span>
             <span class="tag">React Native</span>
           </div>
-          <p class="summary">Graduate research under <b>Prof. Roy Shilkrot</b> on dark-pattern detection in user interfaces using computer vision; parallel work under <b>Prof. Rong Zhao</b> on a VR application and ML-assisted clustering framework for schizophrenia patient research. Designed and deployed the multi-tenant NYSTAR conference app (React Native) to Google Play and the App Store with full CI/CD.</p>
+          <p class="summary">Graduate research under Prof. Roy Shilkrot on dark-pattern detection in user interfaces using computer vision; parallel work under Prof. Rong Zhao on a VR application and ML-assisted clustering framework for schizophrenia patient research. Designed and deployed the multi-tenant NYSTAR conference app (React Native) to Google Play and the App Store with full CI/CD.</p>
 
           <div class="details">
             <div>
@@ -985,7 +1048,7 @@
       <article class="entry" data-tags="prod">
         <div class="year">2016</div>
         <div class="body">
-          <h3><span class="org">Quintype</span><span class="sep">/</span><span class="role">Senior Software Engineer · Backend Platform</span></h3>
+          <h3><span class="org">Quintype</span><span class="sep">/</span><span class="role">Senior Software Engineer</span></h3>
           <div class="where">
             <span>Bangalore, India</span>
             <span>·</span>
@@ -1000,7 +1063,7 @@
       <article class="entry" data-tags="prod">
         <div class="year">2014 — 2015</div>
         <div class="body">
-          <h3><span class="org">ThoughtWorks</span><span class="sep">/</span><span class="role">Software Engineer</span></h3>
+          <h3><span class="org">ThoughtWorks</span><span class="sep">/</span><span class="role">Senior Software Engineer</span></h3>
           <div class="where">
             <span>Bangalore, India</span>
             <span>·</span>
@@ -1017,9 +1080,9 @@
       <article class="entry" data-tags="prod">
         <div class="year">2012 — 2014</div>
         <div class="body">
-          <h3><span class="org">Tata Consultancy Services</span><span class="sep">/</span><span class="role">Software Engineer · Knome platform</span></h3>
+          <h3><span class="org">Tata Consultancy Services</span><span class="sep">/</span><span class="role">Software Engineer</span></h3>
           <div class="where">
-            <span>Kolkata · Mumbai, India</span>
+            <span>Bangalore, India</span>
             <span>·</span>
             <span>Aug 2012 — Aug 2014</span>
           </div>
@@ -1038,27 +1101,20 @@
 <section class="block">
   <div class="wrap">
     <div class="sec-head">
-      <div class="sec-num">02 — Recognition</div>
+      <div class="sec-num"><span class="n">02</span><span class="l">Recognition</span></div>
       <div>
-        <h2 class="sec-title">Selected awards, talks, judging, and <em>mentorship.</em></h2>
-        <p class="sec-lede">External signals of expertise — invitations, memberships, and named recognition that sit outside the day-job.</p>
+        <h2 class="sec-title">Recognition</h2>
       </div>
     </div>
 
-    <div class="grid-2">
-      <div class="col">
-        <h4>Awards & Memberships</h4>
-        <div class="row"><span class="yr mono">2025</span><span class="ttl">IEEE Senior Member<small>Top ~10% of IEEE membership · approval by admissions committee</small></span></div>
-        <div class="row"><span class="yr mono">2017</span><span class="ttl">Hack@CEWIT — Most Original<small>Workout-detection armband · IoT &amp; Microservices Hackathon</small></span></div>
-      </div>
-      <div class="col">
-        <h4>Speaking · Judging · Mentorship</h4>
-        <div class="row"><span class="yr mono">2025</span><span class="ttl">Meta Horizon Creator Competition<small>Mobile Genre Showdown · Invited Judge</small></span></div>
-        <div class="row"><span class="yr mono">2025</span><span class="ttl">MIT Reality Hack 2025<small>Invited Mentor · XR/VR/AR · Boston</small></span></div>
-        <div class="row"><span class="yr mono">2025</span><span class="ttl">Mohawk College — AI &amp; Gaming Panel<small>School of Creative Industries · Invited Panelist</small></span></div>
-        <div class="row"><span class="yr mono">2021</span><span class="ttl">Unity AI Summit 2021<small>Invited keynote · synthetic data &amp; sim-to-real for CV</small></span></div>
-        <div class="row"><span class="yr mono">2021</span><span class="ttl">MIT Fluid Interfaces Lab<small>Technical Mentor · ~20 graduate students · AI Generated Media</small></span></div>
-      </div>
+    <div class="recog-list">
+      <div class="row"><span class="yr mono">2025</span><span class="ttl"><span class="role">Senior Member</span><span class="at">@</span>IEEE<small>Top ~10% of IEEE membership · approval by admissions committee</small></span></div>
+      <div class="row"><span class="yr mono">2025</span><span class="ttl"><span class="role">Judge</span><span class="at">@</span>Meta Horizon Creator Competition<small>Mobile Genre Showdown · Invited Judge</small></span></div>
+      <div class="row"><span class="yr mono">2025</span><span class="ttl"><span class="role">Mentorship</span><span class="at">@</span>MIT Reality Hack 2025<small>Invited Mentor · XR/VR/AR · Boston</small></span></div>
+      <div class="row"><span class="yr mono">2025</span><span class="ttl"><span class="role">Speaking</span><span class="at">@</span>Mohawk College — AI &amp; Gaming Panel<small>School of Creative Industries · Invited Panelist</small></span></div>
+      <div class="row"><span class="yr mono">2021</span><span class="ttl"><span class="role">Speaking</span><span class="at">@</span>Unity AI Summit 2021<small>Invited keynote · synthetic data &amp; sim-to-real for CV</small></span></div>
+      <div class="row"><span class="yr mono">2021</span><span class="ttl"><span class="role">Mentorship</span><span class="at">@</span>MIT Fluid Interfaces Lab<small>Technical Mentor · ~20 graduate students · AI Generated Media</small></span></div>
+      <div class="row"><span class="yr mono">2017</span><span class="ttl"><span class="role">Award</span><span class="at">@</span>Hack@CEWIT — Most Original<small>Workout-detection armband · IoT &amp; Microservices Hackathon</small></span></div>
     </div>
   </div>
 </section>
@@ -1067,9 +1123,9 @@
 <section class="block">
   <div class="wrap">
     <div class="sec-head">
-      <div class="sec-num">03 — Open Source</div>
+      <div class="sec-num"><span class="n">03</span><span class="l">Open Source</span></div>
       <div>
-        <h2 class="sec-title">Open source <em>contributions.</em></h2>
+        <h2 class="sec-title">Open source contributions</h2>
         <p class="sec-lede">Active on <a class="mono" href="https://github.com/sladebot" target="_blank" rel="noopener">github.com/sladebot</a>. Most current work is <a class="mono" href="https://github.com/sladebot/orb" target="_blank" rel="noopener">orb</a> — a graph-based agentic harness exploring memory research for LLM agents.</p>
       </div>
     </div>
@@ -1127,9 +1183,9 @@
 <section class="block">
   <div class="wrap">
     <div class="sec-head">
-      <div class="sec-num">04 — Publications & Press</div>
+      <div class="sec-num"><span class="n">04</span><span class="l">Publications &amp; Press</span></div>
       <div>
-        <h2 class="sec-title">Peer-reviewed work and <em>industry features.</em></h2>
+        <h2 class="sec-title">Publications &amp; press</h2>
         <p class="sec-lede">Two peer-reviewed publications and a featured-author byline on Unity Technologies' engineering blog — the public record of sustained, original technical work.</p>
       </div>
     </div>
@@ -1210,9 +1266,9 @@
 <section class="block">
   <div class="wrap">
     <div class="sec-head">
-      <div class="sec-num">05 — Skills</div>
+      <div class="sec-num"><span class="n">05</span><span class="l">Skills</span></div>
       <div>
-        <h2 class="sec-title">A cross-domain stack &mdash; <em>ML × vision × graphics.</em></h2>
+        <h2 class="sec-title">Skills</h2>
         <p class="sec-lede">The distinctive combination is the bridge: classical ML and deep learning, applied computer vision and 3D, on top of a real graphics + simulation engineering foundation. That bridge is what enabled the Style 2 / Autogen synthetic-data pipeline at Meta.</p>
       </div>
     </div>
