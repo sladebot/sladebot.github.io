@@ -1,0 +1,1354 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Souranil Sen — Portfolio</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Geist:wght@300;400;500;600;700&family=Geist+Mono:wght@400;500;600&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;1,6..72,400&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: oklch(0.985 0.004 95);
+    --bg-2: oklch(0.965 0.006 90);
+    --ink: oklch(0.18 0.012 60);
+    --ink-2: oklch(0.32 0.012 60);
+    --ink-3: oklch(0.52 0.010 60);
+    --rule: oklch(0.88 0.008 80);
+    --rule-2: oklch(0.93 0.006 80);
+    --accent: oklch(0.52 0.13 35);     /* terracotta */
+    --accent-soft: oklch(0.94 0.04 40);
+    --tag-bg: oklch(0.95 0.008 80);
+    --max: 1240px;
+    --sans: "Geist", ui-sans-serif, system-ui, -apple-system, "Helvetica Neue", Arial, sans-serif;
+    --mono: "Geist Mono", ui-monospace, "JetBrains Mono", Menlo, Consolas, monospace;
+    --serif: "Newsreader", Georgia, "Times New Roman", serif;
+  }
+
+  * { box-sizing: border-box; }
+  html, body { margin: 0; padding: 0; }
+  body {
+    background: var(--bg);
+    color: var(--ink);
+    font-family: var(--sans);
+    font-feature-settings: "ss01", "cv11";
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    font-size: 16px;
+    line-height: 1.5;
+  }
+  a { color: inherit; text-decoration: none; }
+  ::selection { background: var(--accent-soft); }
+
+  .mono { font-family: var(--mono); font-feature-settings: "ss01"; letter-spacing: -0.005em; }
+  .serif { font-family: var(--serif); }
+  .eyebrow {
+    font-family: var(--mono);
+    text-transform: uppercase;
+    font-size: 11px;
+    letter-spacing: 0.08em;
+    color: var(--ink-3);
+  }
+
+  .wrap { max-width: var(--max); margin: 0 auto; padding: 0 32px; }
+
+  /* ── Top bar ─────────────────────────────────────────────── */
+  .topbar {
+    position: sticky; top: 0; z-index: 50;
+    backdrop-filter: saturate(120%) blur(10px);
+    background: color-mix(in oklch, var(--bg) 86%, transparent);
+    border-bottom: 1px solid var(--rule-2);
+  }
+  .topbar-inner {
+    display: flex; align-items: center; gap: 24px;
+    padding: 14px 32px;
+    max-width: var(--max); margin: 0 auto;
+  }
+  .brand {
+    display: flex; align-items: center; gap: 10px;
+    font-weight: 600; letter-spacing: -0.01em;
+  }
+  .brand-mark {
+    width: 22px; height: 22px;
+    border: 1.5px solid var(--ink);
+    display: inline-grid; place-items: center;
+    font-family: var(--mono); font-size: 11px; font-weight: 600;
+  }
+  .topnav { display: flex; gap: 22px; margin-left: auto; }
+  .topnav a {
+    font-family: var(--mono); font-size: 12px; color: var(--ink-2);
+    padding: 6px 0; border-bottom: 1px solid transparent;
+  }
+  .topnav a:hover { color: var(--ink); border-bottom-color: var(--ink); }
+  .layout-toggle {
+    display: inline-flex; align-items: center;
+    border: 1px solid var(--rule); border-radius: 999px;
+    overflow: hidden; background: var(--bg);
+  }
+  .layout-toggle button {
+    font-family: var(--mono); font-size: 11px;
+    padding: 7px 12px; background: transparent; color: var(--ink-3);
+    border: 0; cursor: pointer; letter-spacing: 0.04em;
+    text-transform: uppercase;
+  }
+  .layout-toggle button.on { background: var(--ink); color: var(--bg); }
+
+  /* ── Masthead ───────────────────────────────────────────── */
+  .masthead { padding: 36px 0 26px; border-bottom: 1px solid var(--rule); }
+  .mh-grid {
+    display: grid;
+    grid-template-columns: minmax(0,1fr) auto;
+    align-items: end;
+    gap: 24px 48px;
+  }
+  .mh-eyebrow {
+    font-family: var(--mono);
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 0.14em;
+    color: var(--ink-3);
+    display: inline-flex; align-items: center; gap: 9px;
+    margin-bottom: 14px;
+  }
+  .mh-eyebrow .pulse {
+    width: 6px; height: 6px; border-radius: 50%;
+    background: #2c8a55;
+    box-shadow: 0 0 0 0 rgba(44,138,85,0.55);
+    animation: mh-pulse 2.2s infinite;
+  }
+  @keyframes mh-pulse {
+    0% { box-shadow: 0 0 0 0 rgba(44,138,85,0.55); }
+    70% { box-shadow: 0 0 0 7px rgba(44,138,85,0); }
+    100% { box-shadow: 0 0 0 0 rgba(44,138,85,0); }
+  }
+  .mh-line {
+    display: flex; align-items: baseline; flex-wrap: wrap;
+    gap: 8px 18px;
+    margin: 0;
+    font-family: var(--sans);
+    font-weight: 500;
+    font-size: clamp(26px, 3.2vw, 40px);
+    letter-spacing: -0.025em;
+    line-height: 1.1;
+    color: var(--ink);
+  }
+  .mh-line .sep { color: var(--ink-3); font-weight: 300; }
+  .mh-line .role {
+    font-family: var(--serif);
+    font-style: italic;
+    font-weight: 400;
+    color: var(--ink-2);
+    letter-spacing: -0.012em;
+  }
+  .mh-strip {
+    margin-top: 18px;
+    display: flex; gap: 28px; flex-wrap: wrap;
+    padding-top: 14px;
+    border-top: 1px dashed var(--rule);
+    font-family: var(--mono);
+    font-size: 12px;
+    color: var(--ink-3);
+  }
+  .mh-strip b {
+    color: var(--ink); font-weight: 600;
+    font-family: var(--sans); letter-spacing: -0.01em; font-size: 13px;
+    margin-right: 6px;
+  }
+  .mh-r { display: flex; align-items: end; }
+  .mh-jump {
+    display: inline-flex; align-items: center; gap: 8px;
+    font-family: var(--mono);
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: var(--ink-2);
+    padding: 6px 0;
+    border-bottom: 1px solid var(--ink-2);
+  }
+  .mh-jump:hover { color: #c25a32; border-color: #c25a32; }
+  .brand-meta { font-size: 11.5px; color: var(--ink-3); letter-spacing: 0.02em; }
+  .brand-sep { opacity: 0.5; margin: 0 4px; }
+
+  @media (max-width: 760px) {
+    .mh-grid { grid-template-columns: 1fr; }
+    .brand-meta { display: none; }
+  }
+
+  /* ── Hero (legacy / unused) ─────────────────────────────── */
+  .hero { padding: 96px 0 64px; border-bottom: 1px solid var(--rule-2); }
+  .hero-grid {
+    display: grid; grid-template-columns: 1.4fr 1fr; gap: 64px; align-items: end;
+  }
+  .hero h1 {
+    font-family: var(--sans);
+    font-weight: 500;
+    font-size: clamp(48px, 6.2vw, 92px);
+    letter-spacing: -0.035em;
+    line-height: 0.96;
+    margin: 18px 0 28px;
+  }
+  .hero h1 em { font-family: var(--serif); font-style: italic; font-weight: 400; }
+  .hero-lede {
+    font-size: 18px; line-height: 1.5; color: var(--ink-2);
+    max-width: 48ch;
+  }
+  .meta-row {
+    display: flex; gap: 18px; flex-wrap: wrap;
+    margin-top: 28px;
+    font-family: var(--mono); font-size: 12px; color: var(--ink-3);
+  }
+  .meta-row a:hover { color: var(--ink); }
+  .meta-row .dot { color: var(--rule); }
+  .hero-side {
+    border-left: 1px solid var(--rule);
+    padding-left: 32px;
+    display: grid; gap: 18px;
+  }
+  .role-card {
+    display: grid; gap: 4px;
+    font-family: var(--mono); font-size: 12px; color: var(--ink-3);
+  }
+  .role-card b { color: var(--ink); font-weight: 500; }
+
+  /* ── Hero stats ─────────────────────────────────────────── */
+  .stats {
+    display: grid; grid-template-columns: repeat(4, 1fr);
+    border-top: 1px solid var(--rule-2);
+    border-bottom: 1px solid var(--rule-2);
+  }
+  .stat {
+    padding: 36px 28px;
+    border-right: 1px solid var(--rule-2);
+    display: grid; gap: 8px; align-content: start;
+  }
+  .stat:last-child { border-right: 0; }
+  .stat-n {
+    font-family: var(--sans);
+    font-weight: 500;
+    font-size: 56px;
+    letter-spacing: -0.04em;
+    line-height: 1;
+  }
+  .stat-l { font-family: var(--mono); font-size: 11.5px; color: var(--ink-3); line-height: 1.45; max-width: 28ch; text-transform: uppercase; letter-spacing: 0.04em;}
+  .stat .accent { color: var(--accent); }
+
+  /* ── Section header ─────────────────────────────────────── */
+  section.block { padding: 64px 0 80px; border-bottom: 1px solid var(--rule-2); }
+  .sec-head {
+    display: grid; grid-template-columns: 220px 1fr; gap: 64px;
+    margin-bottom: 36px;
+  }
+  .sec-num { font-family: var(--mono); font-size: 12px; color: var(--ink-3); }
+  .sec-title {
+    font-family: var(--sans); font-weight: 500;
+    font-size: clamp(32px, 3.4vw, 44px);
+    letter-spacing: -0.025em; line-height: 1.05; margin: 0 0 14px;
+  }
+  .sec-title em { font-family: var(--serif); font-style: italic; font-weight: 400; }
+  .sec-lede { color: var(--ink-2); max-width: 62ch; font-size: 16px; }
+
+  /* ── Filters ─────────────────────────────────────────────── */
+  .filters {
+    display: flex; gap: 8px; flex-wrap: wrap;
+    margin: 0 0 24px;
+    padding-left: 284px;
+  }
+  .chip {
+    font-family: var(--mono); font-size: 11px; text-transform: uppercase;
+    letter-spacing: 0.04em;
+    padding: 7px 12px; border-radius: 999px;
+    border: 1px solid var(--rule);
+    background: var(--bg);
+    color: var(--ink-2); cursor: pointer;
+  }
+  .chip:hover { border-color: var(--ink); color: var(--ink); }
+  .chip.on { background: var(--ink); color: var(--bg); border-color: var(--ink); }
+  .chip .count { color: var(--ink-3); margin-left: 6px; font-size: 10px; }
+  .chip.on .count { color: var(--bg); opacity: .6; }
+
+  /* ── Timeline (rail layout) ─────────────────────────────── */
+  .timeline {
+    position: relative;
+    padding-left: 220px;
+  }
+  .timeline::before {
+    content: "";
+    position: absolute;
+    left: 313px; top: 6px; bottom: 0;
+    width: 1px; background: var(--rule);
+  }
+  .entry {
+    position: relative;
+    display: grid; grid-template-columns: 60px 1fr; gap: 64px;
+    padding: 28px 0 28px 0;
+    border-bottom: 1px dashed var(--rule-2);
+    transition: opacity .25s ease;
+  }
+  .entry:last-child { border-bottom: 0; }
+  .entry[hidden] { display: none; }
+  .entry.fade { opacity: .22; pointer-events: none; }
+  .entry .year {
+    font-family: var(--mono); font-size: 12px; color: var(--ink-3);
+    padding-top: 4px;
+    position: relative;
+    white-space: nowrap;
+  }
+  .entry .year::after {
+    content: "";
+    position: absolute;
+    right: -38px; top: 9px;
+    width: 9px; height: 9px;
+    background: var(--bg);
+    border: 1.5px solid var(--ink);
+    border-radius: 50%;
+  }
+  .entry.now .year::after { background: var(--accent); border-color: var(--accent); }
+  .entry .body { display: grid; gap: 12px; }
+  .entry h3 {
+    font-family: var(--sans); font-weight: 500;
+    font-size: 26px; letter-spacing: -0.022em; line-height: 1.15;
+    margin: 0;
+  }
+  .entry h3 .org { color: var(--ink); }
+  .entry h3 .sep { color: var(--ink-3); margin: 0 8px; font-weight: 400; }
+  .entry h3 .role { color: var(--ink-2); font-weight: 400; }
+  .entry .where {
+    font-family: var(--mono); font-size: 12px; color: var(--ink-3);
+    display: flex; gap: 14px; flex-wrap: wrap;
+  }
+  .entry .summary {
+    font-size: 16.5px; color: var(--ink-2); max-width: 70ch; line-height: 1.55;
+  }
+  .entry .summary b { color: var(--ink); font-weight: 600; }
+
+  .tagrow { display: flex; gap: 6px; flex-wrap: wrap; }
+  .tag {
+    font-family: var(--mono); font-size: 10.5px; text-transform: uppercase;
+    letter-spacing: 0.04em;
+    padding: 3px 8px; border-radius: 4px;
+    background: var(--tag-bg); color: var(--ink-3);
+  }
+  .tag.accent { background: var(--accent-soft); color: var(--accent); }
+
+  /* Inline metrics */
+  .inline-metrics {
+    display: flex; gap: 28px; flex-wrap: wrap;
+    margin-top: 8px;
+    padding: 16px 20px;
+    background: var(--bg-2);
+    border-left: 2px solid var(--accent);
+  }
+  .im {
+    display: grid; gap: 2px;
+  }
+  .im-n {
+    font-family: var(--sans); font-weight: 500;
+    font-size: 22px; letter-spacing: -0.02em; line-height: 1;
+  }
+  .im-l { font-family: var(--mono); font-size: 10.5px; text-transform: uppercase; letter-spacing: 0.04em; color: var(--ink-3); }
+
+  /* Expand */
+  .expander {
+    display: inline-flex; align-items: center; gap: 8px;
+    font-family: var(--mono); font-size: 11px; text-transform: uppercase;
+    letter-spacing: 0.06em;
+    color: var(--ink-3); cursor: pointer;
+    border: 0; background: transparent; padding: 8px 0 0;
+  }
+  .expander:hover { color: var(--ink); }
+  .expander .caret {
+    display: inline-block; width: 10px; height: 10px;
+    border-right: 1.5px solid currentColor; border-bottom: 1.5px solid currentColor;
+    transform: rotate(45deg) translate(-2px, -2px);
+    transition: transform .25s ease;
+  }
+  .entry.open .expander .caret { transform: rotate(-135deg) translate(-1px, -1px); }
+  .details {
+    display: grid;
+    grid-template-rows: 0fr;
+    transition: grid-template-rows .35s ease;
+    margin-top: 0;
+  }
+  .entry.open .details {
+    grid-template-rows: 1fr;
+    margin-top: 8px;
+  }
+  .details > div { overflow: hidden; }
+  .details ul {
+    list-style: none; padding: 0; margin: 8px 0 0;
+    display: grid; gap: 10px;
+    max-width: 72ch;
+  }
+  .details li {
+    position: relative; padding-left: 22px;
+    font-size: 15.5px; color: var(--ink-2); line-height: 1.55;
+  }
+  .details li::before {
+    content: ""; position: absolute;
+    left: 0; top: 11px; width: 12px; height: 1px;
+    background: var(--ink-3);
+  }
+  .details li b { color: var(--ink); font-weight: 600; }
+
+  /* ── Spine layout overrides ─────────────────────────────── */
+  body[data-layout="spine"] .timeline {
+    padding-left: 0;
+  }
+  body[data-layout="spine"] .filters { padding-left: 0; }
+  body[data-layout="spine"] .sec-head { grid-template-columns: 1fr; gap: 14px; max-width: 760px; margin-left: auto; margin-right: auto; text-align: center; }
+  body[data-layout="spine"] .timeline::before {
+    left: 50%; top: 0;
+    transform: translateX(-0.5px);
+  }
+  body[data-layout="spine"] .entry {
+    grid-template-columns: 1fr 80px 1fr;
+    gap: 0;
+    align-items: start;
+    border-bottom: 0;
+    padding: 32px 0;
+  }
+  body[data-layout="spine"] .entry .year {
+    grid-column: 2;
+    justify-self: center;
+    padding-top: 0;
+  }
+  body[data-layout="spine"] .entry .year::after {
+    right: auto; left: 50%; top: -2px;
+    transform: translateX(-50%);
+  }
+  body[data-layout="spine"] .entry .body {
+    grid-column: 3;
+    padding-left: 40px;
+    border-left: 1px dashed transparent;
+  }
+  body[data-layout="spine"] .entry:nth-child(even) .body {
+    grid-column: 1; grid-row: 1;
+    padding-left: 0;
+    padding-right: 40px;
+    text-align: right;
+  }
+  body[data-layout="spine"] .entry:nth-child(even) .year { grid-row: 1; }
+  body[data-layout="spine"] .entry:nth-child(even) .where { justify-content: flex-end; }
+  body[data-layout="spine"] .entry:nth-child(even) .tagrow { justify-content: flex-end; }
+  body[data-layout="spine"] .entry:nth-child(even) .inline-metrics { justify-content: flex-end; border-left: 0; border-right: 2px solid var(--accent); }
+  body[data-layout="spine"] .entry:nth-child(even) .details ul { padding-right: 0; }
+  body[data-layout="spine"] .entry:nth-child(even) .details li {
+    padding-left: 0; padding-right: 22px; text-align: right;
+  }
+  body[data-layout="spine"] .entry:nth-child(even) .details li::before {
+    left: auto; right: 0;
+  }
+  body[data-layout="spine"] .entry:nth-child(even) .expander {
+    justify-self: flex-end;
+    flex-direction: row-reverse;
+  }
+
+  /* ── Lists / cards (recognition, talks etc) ─────────────── */
+  .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 0; padding-left: 220px; }
+  body[data-layout="spine"] .grid-2 { padding-left: 0; max-width: 960px; margin-left: auto; margin-right: auto; }
+
+  .row {
+    display: grid; grid-template-columns: 80px 1fr auto; gap: 20px;
+    padding: 18px 0;
+    border-bottom: 1px solid var(--rule-2);
+    align-items: baseline;
+  }
+  .row .yr { font-family: var(--mono); font-size: 12px; color: var(--ink-3); }
+  .row .ttl { font-size: 16px; color: var(--ink); }
+  .row .ttl small { display:block; font-family: var(--mono); font-size: 11.5px; color: var(--ink-3); margin-top: 4px; text-transform: none; letter-spacing: 0; }
+  .row .badge {
+    font-family: var(--mono); font-size: 10.5px; text-transform: uppercase;
+    letter-spacing: 0.04em; color: var(--ink-3);
+  }
+
+  .col {
+    padding: 0 32px;
+    border-left: 1px solid var(--rule-2);
+  }
+  .col:first-child { border-left: 0; padding-left: 0; }
+  .col h4 {
+    font-family: var(--mono); font-size: 11px; text-transform: uppercase;
+    letter-spacing: 0.08em; color: var(--ink-3);
+    margin: 0 0 12px;
+  }
+  .col .row { grid-template-columns: 56px 1fr; }
+  .col .row .badge { display: none; }
+
+  /* ── Featured publications ───────────────────────────────── */
+  .pub-feat-wrap {
+    padding-left: 220px;
+    display: grid; gap: 0;
+    margin-bottom: 40px;
+    border-top: 1px solid var(--rule);
+  }
+  body[data-layout="spine"] .pub-feat-wrap { padding-left: 0; max-width: 960px; margin-left: auto; margin-right: auto; }
+  .pub-feat {
+    display: grid;
+    grid-template-columns: 80px 1fr auto;
+    gap: 28px;
+    padding: 24px 0;
+    border-bottom: 1px solid var(--rule-2);
+    align-items: start;
+  }
+  .pub-feat:last-child { border-bottom: 0; }
+  .pub-feat .yr { font-family: var(--mono); font-size: 12px; color: var(--ink-3); padding-top: 8px; }
+  .pub-feat .pub-body { display: grid; gap: 8px; }
+  .pub-feat .pub-title-row {
+    display: flex; flex-direction: column; align-items: flex-start;
+    gap: 10px;
+  }
+  .pub-feat .pub-title {
+    font-family: var(--sans); font-weight: 500;
+    font-size: 21px; letter-spacing: -0.018em; line-height: 1.25;
+    color: var(--ink);
+  }
+  .pub-type {
+    display: inline-flex; align-items: center;
+    font-family: var(--mono); font-weight: 600;
+    font-size: 10.5px; text-transform: uppercase; letter-spacing: 0.1em;
+    padding: 5px 11px;
+    border-radius: 999px;
+    white-space: nowrap;
+    flex-shrink: 0;
+  }
+  .pub-type--paper { background: var(--ink); color: var(--bg); }
+  .pub-type--poster { background: var(--accent); color: var(--bg); }
+  .pub-feat .pub-authors {
+    font-family: var(--mono); font-size: 12.5px; color: var(--ink-2);
+    line-height: 1.5;
+  }
+  .pub-feat .pub-authors b { color: var(--accent); font-weight: 600; }
+  .pub-feat .pub-venue {
+    font-family: var(--mono); font-size: 11.5px; color: var(--ink-3);
+    letter-spacing: 0.01em;
+  }
+  .pub-feat .pub-cites {
+    text-align: right;
+    padding-top: 6px;
+    display: grid; gap: 2px;
+    justify-items: end;
+    white-space: nowrap;
+  }
+  .pub-feat .pub-cites .n {
+    font-family: var(--sans); font-weight: 500;
+    font-size: 24px; letter-spacing: -0.02em; line-height: 1;
+    color: var(--ink);
+  }
+  .pub-feat .pub-cites .l {
+    font-family: var(--mono); font-size: 10.5px; color: var(--ink-3);
+    text-transform: uppercase; letter-spacing: 0.06em;
+  }
+
+  /* ── Skills ──────────────────────────────────────────────── */
+  .skills-wrap { padding-left: 220px; display: grid; gap: 36px; }
+  body[data-layout="spine"] .skills-wrap { padding-left: 0; max-width: 880px; margin-left: auto; margin-right: auto; }
+  .skill-block { display: grid; grid-template-columns: 200px 1fr; gap: 40px; padding-bottom: 28px; border-bottom: 1px solid var(--rule-2); }
+  .skill-block:last-child { border-bottom: 0; }
+  .skill-block h5 {
+    margin: 0;
+    font-family: var(--sans); font-weight: 500; font-size: 18px;
+    letter-spacing: -0.015em;
+  }
+  .skill-block .domain {
+    font-family: var(--mono); font-size: 11px; color: var(--ink-3);
+    text-transform: uppercase; letter-spacing: 0.08em;
+    margin-bottom: 4px; display: block;
+  }
+  .skill-chips { display: flex; flex-wrap: wrap; gap: 6px; }
+  .skill-chips span {
+    font-family: var(--mono); font-size: 12px;
+    padding: 5px 10px; border-radius: 4px;
+    background: var(--tag-bg); color: var(--ink-2);
+  }
+
+  /* ── Open source grid ───────────────────────────────────── */
+  .oss-grid {
+    padding-left: 220px;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 0;
+    border-top: 1px solid var(--rule-2);
+    border-left: 1px solid var(--rule-2);
+  }
+  body[data-layout="spine"] .oss-grid { padding-left: 0; max-width: 1100px; margin: 0 auto; }
+  .oss-card {
+    display: grid; gap: 12px;
+    padding: 24px 24px 26px;
+    border-right: 1px solid var(--rule-2);
+    border-bottom: 1px solid var(--rule-2);
+    background: var(--bg);
+    transition: background .2s ease;
+    align-content: start;
+  }
+  .oss-card:hover { background: var(--bg-2); }
+  .oss-head {
+    display: flex; justify-content: space-between; align-items: baseline; gap: 12px;
+  }
+  .oss-name { font-size: 15px; color: var(--ink); font-weight: 500; }
+  .oss-lang { font-size: 11px; color: var(--ink-3); text-transform: uppercase; letter-spacing: 0.04em; }
+  .oss-desc { font-size: 14.5px; color: var(--ink-2); line-height: 1.5; }
+  .oss-tags { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 4px; }
+  .oss-card--meta { background: var(--bg-2); grid-column: span 2; }
+  .oss-card--meta:hover { background: var(--tag-bg); }
+  @media (max-width: 900px) {
+    .oss-grid { grid-template-columns: 1fr; padding-left: 0; }
+  }
+
+  /* ── Pullquote ──────────────────────────────────────────── */
+  .pullquote {
+    padding: 96px 0;
+    border-bottom: 1px solid var(--rule-2);
+    background: var(--bg-2);
+  }
+  .pullquote blockquote {
+    margin: 0 auto;
+    max-width: 920px;
+    font-family: var(--serif);
+    font-size: clamp(28px, 3vw, 40px);
+    line-height: 1.25;
+    letter-spacing: -0.015em;
+    color: var(--ink);
+    text-wrap: pretty;
+  }
+  .pullquote .openq {
+    font-family: var(--serif);
+    font-size: 80px; line-height: 0;
+    color: var(--accent);
+    vertical-align: -16px;
+    margin-right: 6px;
+  }
+  .pullquote cite {
+    display: block; margin-top: 28px;
+    font-family: var(--mono); font-size: 12px; color: var(--ink-3);
+    font-style: normal; letter-spacing: 0.03em;
+  }
+  .pullquote cite b { color: var(--ink); font-weight: 500; }
+
+  /* ── Footer ─────────────────────────────────────────────── */
+  footer {
+    padding: 64px 0 80px;
+    color: var(--ink-3);
+    font-family: var(--mono); font-size: 12px;
+  }
+  footer .wrap { display: flex; justify-content: space-between; flex-wrap: wrap; gap: 18px; }
+  footer a:hover { color: var(--ink); }
+
+  /* ── Responsive ─────────────────────────────────────────── */
+  @media (max-width: 900px) {
+    .hero-grid { grid-template-columns: 1fr; gap: 32px; }
+    .hero-side { border-left: 0; padding-left: 0; border-top: 1px solid var(--rule); padding-top: 24px;}
+    .stats { grid-template-columns: 1fr 1fr; }
+    .stat:nth-child(2) { border-right: 0; }
+    .stat:nth-child(1), .stat:nth-child(2) { border-bottom: 1px solid var(--rule-2); }
+    .sec-head { grid-template-columns: 1fr; gap: 12px; }
+    .filters, .timeline, .grid-2, .skills-wrap, .pub-feat-wrap { padding-left: 0; }
+    .pub-feat { grid-template-columns: 64px 1fr; gap: 16px; }
+    .pub-feat .pub-cites { grid-column: 2; text-align: left; justify-items: start; padding-top: 4px; flex-direction: row; align-items: baseline; }
+    .pub-feat .pub-cites .n { font-size: 18px; display: inline; margin-right: 6px; }
+    .pub-feat .pub-cites .l { display: inline; }
+    .entry { grid-template-columns: 1fr; gap: 8px; }
+    .entry .year::after { display: none; }
+    .timeline::before { display: none; }
+    .skill-block { grid-template-columns: 1fr; gap: 14px; }
+    .grid-2 { grid-template-columns: 1fr; }
+    .col { padding-left: 0; border-left: 0; }
+    body[data-layout="spine"] .entry { grid-template-columns: 1fr; }
+    body[data-layout="spine"] .entry .body { grid-column: 1 !important; grid-row: auto !important; padding: 0 !important; text-align: left !important; }
+    body[data-layout="spine"] .entry:nth-child(even) .where,
+    body[data-layout="spine"] .entry:nth-child(even) .tagrow,
+    body[data-layout="spine"] .entry:nth-child(even) .inline-metrics,
+    body[data-layout="spine"] .entry:nth-child(even) .details li { text-align: left !important; justify-content: flex-start !important; padding-left: 22px !important; padding-right: 0 !important; border-left: 2px solid var(--accent); border-right: 0; }
+    body[data-layout="spine"] .entry:nth-child(even) .details li::before { left: 0 !important; right: auto !important; }
+    body[data-layout="spine"] .timeline::before { display: none; }
+  }
+
+  /* ── Tablet refinements (layered over the base 900px rules) ─ */
+  @media (max-width: 900px) {
+    /* Topbar — wrap nav onto its own row so nothing crowds out */
+    .topbar-inner { flex-wrap: wrap; gap: 12px 18px; padding: 12px 24px; }
+    .topnav { gap: 16px; margin-left: 0; order: 3; flex-basis: 100%;
+              overflow-x: auto; -webkit-overflow-scrolling: touch; scrollbar-width: none; }
+    .topnav::-webkit-scrollbar { display: none; }
+    .topnav a { white-space: nowrap; }
+    .layout-toggle { margin-left: auto; }
+
+    /* Wrap container & section padding */
+    .wrap { padding-left: 24px; padding-right: 24px; }
+    section.block { padding: 48px 0 56px; }
+
+    /* Masthead (new compact layout) */
+    .mh-r { justify-content: flex-start; }
+    .mh-strip { gap: 18px 24px; }
+
+    /* Entry typography scales down */
+    .entry h3 { font-size: 22px; }
+    .entry .summary { font-size: 15.5px; }
+    .entry .where { gap: 10px; }
+
+    /* OSS grid → 2 columns at tablet (instead of dropping straight to 1) */
+    .oss-grid { grid-template-columns: 1fr 1fr; }
+
+    /* Recognition / publications rows: drop the badge column, allow wrap */
+    .row { grid-template-columns: 70px 1fr; gap: 14px; }
+    .row .badge { grid-column: 2; padding-top: 4px; justify-self: start; }
+
+    /* Inline metrics — denser */
+    .inline-metrics { gap: 20px; padding: 14px 16px; }
+    .im-n { font-size: 20px; }
+  }
+
+  /* ── Small phones ───────────────────────────────────────────── */
+  @media (max-width: 600px) {
+    .wrap { padding-left: 18px; padding-right: 18px; }
+    .topbar-inner { padding: 10px 18px; gap: 10px 14px; }
+    .topnav { font-size: 11px; gap: 14px; }
+    .layout-toggle button { padding: 6px 10px; font-size: 10.5px; }
+
+    /* Masthead — tighter, role wraps onto its own line cleanly */
+    .masthead { padding: 24px 0 20px; }
+    .mh-eyebrow { font-size: 10.5px; gap: 8px; margin-bottom: 12px; }
+    .mh-line { font-size: clamp(22px, 6.4vw, 30px); gap: 4px 12px; }
+    .mh-line .sep { display: none; }
+    .mh-line .role { display: block; flex-basis: 100%; font-size: 0.78em; line-height: 1.25; }
+    .mh-strip { gap: 12px 22px; padding-top: 12px; margin-top: 14px; font-size: 11.5px; }
+    .mh-strip b { font-size: 12.5px; }
+    .mh-jump { font-size: 10.5px; padding: 4px 0; }
+
+    /* OSS grid collapses to single column */
+    .oss-grid { grid-template-columns: 1fr; }
+    .oss-card--meta { grid-column: auto; }
+
+    /* Featured publications at phone scale */
+    .pub-feat .pub-title { font-size: 17px; }
+    .pub-feat .pub-authors { font-size: 12px; }
+    .pub-feat .pub-venue { font-size: 11px; }
+
+    /* Section heads */
+    section.block { padding: 36px 0 44px; }
+    .sec-head { margin-bottom: 22px; }
+    .sec-title { font-size: 26px; line-height: 1.1; }
+    .sec-lede { font-size: 15px; }
+
+    /* Filters: comfortable tap targets */
+    .filters { gap: 6px; }
+    .chip { padding: 6px 10px; font-size: 10.5px; }
+
+    /* Timeline entries */
+    .entry { padding: 22px 0; }
+    .entry h3 { font-size: 20px; line-height: 1.2; }
+    .entry .where { font-size: 11.5px; gap: 10px; }
+    .entry .summary { font-size: 15px; }
+    .details li { font-size: 14.5px; padding-left: 18px; }
+    .details li::before { top: 10px; width: 10px; }
+
+    /* Inline metrics */
+    .inline-metrics { gap: 14px; padding: 12px 14px; }
+    .im-n { font-size: 18px; }
+    .im-l { font-size: 10px; }
+
+    /* Recognition / publications */
+    .col h4 { margin-bottom: 8px; }
+    .row { padding: 14px 0; }
+    .row .ttl { font-size: 15px; }
+    .row .ttl small { font-size: 11px; }
+
+    /* OSS cards */
+    .oss-card { padding: 20px 20px 22px; }
+    .oss-name { font-size: 14px; }
+    .oss-desc { font-size: 14px; }
+
+    /* Skills */
+    .skill-block { padding-bottom: 22px; }
+    .skill-chips span { font-size: 11.5px; padding: 4px 9px; }
+
+    /* Footer stacks vertically */
+    footer { padding: 40px 0 56px; }
+    footer .wrap { flex-direction: column; align-items: flex-start; gap: 10px; }
+  }
+
+  /* ── Extra-narrow safety net (small phones, foldables) ──────── */
+  @media (max-width: 380px) {
+    .wrap { padding-left: 14px; padding-right: 14px; }
+    .topbar-inner { padding-left: 14px; padding-right: 14px; }
+    .topnav a { font-size: 11px; }
+    .mh-line { font-size: clamp(20px, 7vw, 26px); }
+    .mh-strip { gap: 10px 18px; }
+    .sec-title { font-size: 24px; }
+    .entry h3 { font-size: 19px; }
+    .inline-metrics { gap: 12px; }
+  }
+</style>
+</head>
+<body data-layout="rail" style="background-color: rgb(250, 250, 250);">
+
+<div class="topbar">
+  <div class="topbar-inner">
+    <a class="brand" href="#top" aria-label="Top">
+      <span class="brand-mark mono">S</span>
+      <span class="brand-meta mono">Souranil&nbsp;Sen <span class="brand-sep">/</span> Portfolio</span>
+    </a>
+    <nav class="topnav">
+      <a href="#timeline">Experience</a>
+      <a href="#recognition">Recognition</a>
+      <a href="#oss">Open Source</a>
+      <a href="#publications">Publications</a>
+      <a href="#skills">Skills</a>
+    </nav>
+    <div class="layout-toggle" role="tablist" aria-label="Layout">
+      <button class="on" data-layout-set="rail">Rail</button>
+      <button data-layout-set="spine">Spine</button>
+    </div>
+  </div>
+</div>
+
+<a id="top"></a>
+<header class="masthead">
+  <div class="wrap mh-grid">
+    <div class="mh-l">
+      <div class="mh-eyebrow"><span class="pulse"></span><span>ML Engineer · Meta Reality Labs · Burlingame</span></div>
+      <h1 class="mh-line">
+        <span class="name">Souranil&nbsp;Sen</span>
+        <span class="sep">—</span>
+        <span class="role">generative systems for vision, 3D &amp; avatars.</span>
+      </h1>
+    </div>
+    <div class="mh-r">
+      <a href="#timeline" class="mh-jump">Experience ↓</a>
+    </div>
+  </div>
+</header>
+
+<a id="impact"></a>
+
+<a id="timeline"></a>
+<section class="block">
+  <div class="wrap">
+    <div class="sec-head">
+      <div class="sec-num">01 — Timeline</div>
+      <div>
+        <h2 class="sec-title">Professional experience</h2>
+        <p class="sec-lede">Reverse-chronological. Each entry summarises scope, individual contribution, and outcomes; click any role to expand the full record.</p>
+      </div>
+    </div>
+
+    <div class="filters" id="filters">
+      <button class="chip on" data-filter="all">All</button>
+      <button class="chip" data-filter="ml">Machine Learning</button>
+      <button class="chip" data-filter="cv">Computer Vision</button>
+      <button class="chip" data-filter="graphics">3D / Graphics</button>
+      <button class="chip" data-filter="prod">Production Systems</button>
+      <button class="chip" data-filter="research">Research</button>
+    </div>
+
+    <div class="timeline" id="timeline">
+
+      <!-- META — current -->
+      <article class="entry now open" data-tags="ml cv graphics prod">
+        <div class="year">2022 — Now</div>
+        <div class="body">
+          <h3><span class="org">Meta</span><span class="sep">/</span><span class="role">Machine Learning Engineer · Reality Labs</span></h3>
+          <div class="where">
+            <span>Burlingame, CA</span>
+            <span>·</span>
+            <span>Generative AI · Computer Vision · 3D</span>
+          </div>
+          <div class="tagrow">
+            <span class="tag accent">Generative AI</span>
+            <span class="tag">Synthetic Data</span>
+            <span class="tag">3D Reconstruction</span>
+            <span class="tag">Diffusion Models</span>
+            <span class="tag">DECA</span>
+            <span class="tag">PyTorch3D</span>
+            <span class="tag">Unity</span>
+            <span class="tag">Production ML</span>
+          </div>
+          <p class="summary">Engineering lead on foundational <b>generative AI</b> and <b>computer vision</b> systems deployed at consumer scale — including a production multi-frame facial perception model, a Unity-based synthetic data generation infrastructure, and a diffusion-based model for generating 3D character animations from natural language. Systems deployed to <b>1.6 billion+ users</b> across Facebook, Instagram, WhatsApp, and Horizon.</p>
+
+          <div class="inline-metrics">
+            <div class="im"><div class="im-n">1.6B+</div><div class="im-l">Users · 4 platforms</div></div>
+            <div class="im"><div class="im-n">+33%</div><div class="im-l">L1 on multi-pose set</div></div>
+            <div class="im"><div class="im-n">−4%</div><div class="im-l">Pipeline rejections</div></div>
+            <div class="im"><div class="im-n">12×</div><div class="im-l">Real-time inference speedup</div></div>
+          </div>
+
+          <div class="details">
+            <div>
+              <ul>
+                <li><b>Designed and shipped a production multi-frame facial perception model.</b> Finetuned the DECA encoder as feature extractor and designed a novel per-frame aggregator over shape/pose parameters; outperformed the prior production system on <b>all 92 blendshapes</b>. Drove <b>+33% L1</b> on the multi-pose benchmark and +1.3% global completion — translating to <b>1.5M+ additional successful generations per year</b> and a −4% reduction in pipeline rejections; ~7× the previous model's lift.</li>
+                <li><b>Designed and built the Unity-based synthetic data generation pipeline</b> used to train large-scale facial perception models — <b>15M+ labeled images</b> via procedural face generation with controlled variation across lighting, pose, and expression. Adopted as reusable training infrastructure across multiple downstream generative models.</li>
+                <li><b>12× latency speedup on a production deep-learning facial expression model serving 1.5B+ users</b> — reduced inference from 10.0s → 0.8s for a 300-frame sequence (~92% latency removed on the critical path).</li>
+                <li><b>Shipped a parametric facial reconstruction model end-to-end</b> — owned training, evaluation, internal testing, A/B experimentation, release, post-launch telemetry, and fine-tuning.</li>
+                <li><b>Modeling lead on a diffusion model for generating 3D character animations from natural language.</b> Established the continuous-evaluation infrastructure (golden datasets, daily quality dashboards) used across the broader generative animation effort.</li>
+                <li><b>FACS-based synthetic expression generation pipeline</b> — facial expression synthesis with HyperNet domain transfer across a diverse identity space; adopted as training infrastructure for downstream generative animation models.</li>
+                <li><b>Production ownership at billion-user scale</b> — led incident review for a high-priority production incident (23,000 affected requests); multiple oncall shifts 2023–2025.</li>
+                <li><b>Lead engineer on multiple high-visibility product releases and executive-level technical demonstrations, including Board-of-Directors presentations.</b></li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </article>
+
+      <!-- UNITY -->
+      <article class="entry open" data-tags="ml cv graphics research">
+        <div class="year">2018 — 2022</div>
+        <div class="body">
+          <h3><span class="org">Unity Technologies</span><span class="sep">/</span><span class="role">Machine Learning Engineer · AI Computer Vision</span></h3>
+          <div class="where">
+            <span>San Francisco, CA</span>
+            <span>·</span>
+            <span>~4 years</span>
+            <span>·</span>
+            <span>Synthetic data · sim-to-real · robotics</span>
+          </div>
+          <div class="tagrow">
+            <span class="tag accent">Synthetic Data</span>
+            <span class="tag">Sim-to-Real</span>
+            <span class="tag">Unity</span>
+            <span class="tag">Detectron2</span>
+            <span class="tag">Robotics</span>
+            <span class="tag">SDK</span>
+          </div>
+          <p class="summary">Led synthetic-data research in AI computer vision — designing the data and tooling that bridged Unity simulation environments with ML training pipelines for robotics and autonomous-vehicle customers. Established the <b>sim-to-real transfer effectiveness</b> result for object detection that validated the synthetic-data thesis at production scale, and was lead author on the team's peer-reviewed and industry-blog output.</p>
+
+          <div class="inline-metrics">
+            <div class="im"><div class="im-n">IROS</div><div class="im-l">2021 · peer-reviewed</div></div>
+            <div class="im"><div class="im-n">Summit</div><div class="im-l">Unity AI · keynote 2021</div></div>
+            <div class="im"><div class="im-n">SDK</div><div class="im-l">unity-vision · shipped</div></div>
+          </div>
+
+          <div class="details">
+            <div>
+              <ul>
+                <li><b>unity-vision SDK.</b> Designed and shipped the SDK bridging Unity-generated synthetic datasets and ML training pipelines, used internally and by Unity's robotics / AV customers.</li>
+                <li><b>Sim-to-real transfer for object detection.</b> Validated the synthetic-data approach end-to-end: showed Unity-rendered training data delivers benchmark-beating object-detection performance with transfer learning — the result Unity used externally to anchor its data-centric-AI positioning.</li>
+                <li><b>IEEE/RSJ IROS 2021 — Drone Pose Estimation Using Synthetic Data in Unity.</b> Co-authored, presented as poster at the International Conference on Intelligent Robots and Systems.</li>
+                <li><b>Unity AI Summit 2021 — invited keynote / workshop.</b> Delivered the synthetic-data-for-computer-vision workshop with measurable end-to-end benchmarks.</li>
+                <li><b>Unity Technologies blog — featured author.</b> Published "Data-Centric AI with Unity Computer Vision Datasets" on the official corporate engineering blog.</li>
+                <li><b>Cloud simulation services.</b> Designed core cloud services for running Unity simulations at scale with hyperparameter tuning; collaborated with a major game studio on automated playtesting optimization.</li>
+                <li><b>Open-source — Indoor Pet Detection.</b> Authored the canonical Unity-Perception synthetic-data sample for large-scale indoor dog detection with Faster R-CNN + transfer learning.</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </article>
+
+      <!-- MIT mentor -->
+      <article class="entry" data-tags="research">
+        <div class="year">2021</div>
+        <div class="body">
+          <h3><span class="org">MIT Fluid Interfaces Lab</span><span class="sep">/</span><span class="role">Technical Mentor — "AI Generated Media"</span></h3>
+          <div class="where">
+            <span>MIT Media Lab · Cambridge, MA</span>
+            <span>·</span>
+            <span>Sep — Nov 2021</span>
+            <span>·</span>
+            <span>~20 graduate students</span>
+          </div>
+          <div class="tagrow"><span class="tag">Mentorship</span><span class="tag">GenAI</span></div>
+          <p class="summary">Invited by Prof. Roy Shilkrot to mentor the AI Generated Media graduate course at the MIT Media Lab — providing technical guidance on deep-fakes, generative AI, and content authenticity to a cohort of approximately 20 graduate students.</p>
+        </div>
+      </article>
+
+      <!-- Stony Brook -->
+      <article class="entry open" data-tags="research cv">
+        <div class="year">2017 — 2018</div>
+        <div class="body">
+          <h3><span class="org">Stony Brook University</span><span class="sep">/</span><span class="role">Graduate Research Assistant · M.S. Computer Science</span></h3>
+          <div class="where">
+            <span>Stony Brook, NY</span>
+            <span>·</span>
+            <span>GPA 3.88</span>
+            <span>·</span>
+            <span>Human Interaction Lab</span>
+          </div>
+          <div class="tagrow">
+            <span class="tag">Computer Vision</span>
+            <span class="tag">VR</span>
+            <span class="tag">React Native</span>
+          </div>
+          <p class="summary">Graduate research under <b>Prof. Roy Shilkrot</b> on dark-pattern detection in user interfaces using computer vision; parallel work under <b>Prof. Rong Zhao</b> on a VR application and ML-assisted clustering framework for schizophrenia patient research. Designed and deployed the multi-tenant NYSTAR conference app (React Native) to Google Play and the App Store with full CI/CD.</p>
+
+          <div class="details">
+            <div>
+              <ul>
+                <li><b>Computer-vision research</b> on detecting dark patterns in user-facing UI surfaces — foundation for the later applied-CV trajectory.</li>
+                <li><b>VR + ML clustering for schizophrenia research</b> — VR application paired with a clustering framework supporting clinical analysis (Prof. Rong Zhao).</li>
+                <li><b>NYSTAR conference application</b> — multi-tenant React Native app deployed to Google Play and App Store with CI/CD automation.</li>
+                <li><b>Hack@CEWIT 2017 — Most Original</b>. Workout-detection armband with 3D-printed enclosure, gyroscope, and DTW-based motion-quality classification.</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </article>
+
+      <!-- Quintype -->
+      <article class="entry" data-tags="prod">
+        <div class="year">2016</div>
+        <div class="body">
+          <h3><span class="org">Quintype</span><span class="sep">/</span><span class="role">Senior Software Engineer · Backend Platform</span></h3>
+          <div class="where">
+            <span>Bangalore, India</span>
+            <span>·</span>
+            <span>May 2016 — Dec 2016</span>
+          </div>
+          <div class="tagrow"><span class="tag">Clojure</span><span class="tag">Real-time</span><span class="tag">Platform</span></div>
+          <p class="summary">Led backend platform engineering for Bloomberg Quint India — architecting the real-time stock-data streaming infrastructure that powered the launch product.</p>
+        </div>
+      </article>
+
+      <!-- ThoughtWorks -->
+      <article class="entry" data-tags="prod">
+        <div class="year">2014 — 2015</div>
+        <div class="body">
+          <h3><span class="org">ThoughtWorks</span><span class="sep">/</span><span class="role">Software Engineer</span></h3>
+          <div class="where">
+            <span>Bangalore, India</span>
+            <span>·</span>
+            <span>Aug 2014 — Jun 2015</span>
+            <span>·</span>
+            <span>Enterprise data + DevOps</span>
+          </div>
+          <div class="tagrow"><span class="tag">Java</span><span class="tag">CI/CD</span><span class="tag">Enterprise</span></div>
+          <p class="summary">Built enterprise data-driven solutions and automated deployment pipelines for external clients — an early grounding in the production-systems discipline that later supported oncall ownership at Meta-scale.</p>
+        </div>
+      </article>
+
+      <!-- TCS -->
+      <article class="entry" data-tags="prod">
+        <div class="year">2012 — 2014</div>
+        <div class="body">
+          <h3><span class="org">Tata Consultancy Services</span><span class="sep">/</span><span class="role">Software Engineer · Knome platform</span></h3>
+          <div class="where">
+            <span>Kolkata · Mumbai, India</span>
+            <span>·</span>
+            <span>Aug 2012 — Aug 2014</span>
+          </div>
+          <div class="tagrow"><span class="tag">Java</span><span class="tag">Performance</span></div>
+          <p class="summary">First professional role. Developed modules for the Knome enterprise social-networking platform; led performance optimization and client deployments.</p>
+        </div>
+      </article>
+
+    </div>
+  </div>
+</section>
+
+<!-- Pullquote removed -->
+
+<a id="recognition"></a>
+<section class="block">
+  <div class="wrap">
+    <div class="sec-head">
+      <div class="sec-num">02 — Recognition</div>
+      <div>
+        <h2 class="sec-title">Selected awards, talks, judging, and <em>mentorship.</em></h2>
+        <p class="sec-lede">External signals of expertise — invitations, memberships, and named recognition that sit outside the day-job.</p>
+      </div>
+    </div>
+
+    <div class="grid-2">
+      <div class="col">
+        <h4>Awards & Memberships</h4>
+        <div class="row"><span class="yr mono">2025</span><span class="ttl">IEEE Senior Member<small>Top ~10% of IEEE membership · approval by admissions committee</small></span></div>
+        <div class="row"><span class="yr mono">2017</span><span class="ttl">Hack@CEWIT — Most Original<small>Workout-detection armband · IoT &amp; Microservices Hackathon</small></span></div>
+      </div>
+      <div class="col">
+        <h4>Speaking · Judging · Mentorship</h4>
+        <div class="row"><span class="yr mono">2025</span><span class="ttl">Meta Horizon Creator Competition<small>Mobile Genre Showdown · Invited Judge</small></span></div>
+        <div class="row"><span class="yr mono">2025</span><span class="ttl">MIT Reality Hack 2025<small>Invited Mentor · XR/VR/AR · Boston</small></span></div>
+        <div class="row"><span class="yr mono">2025</span><span class="ttl">Mohawk College — AI &amp; Gaming Panel<small>School of Creative Industries · Invited Panelist</small></span></div>
+        <div class="row"><span class="yr mono">2021</span><span class="ttl">Unity AI Summit 2021<small>Invited keynote · synthetic data &amp; sim-to-real for CV</small></span></div>
+        <div class="row"><span class="yr mono">2021</span><span class="ttl">MIT Fluid Interfaces Lab<small>Technical Mentor · ~20 graduate students · AI Generated Media</small></span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<a id="oss"></a>
+<section class="block">
+  <div class="wrap">
+    <div class="sec-head">
+      <div class="sec-num">03 — Open Source</div>
+      <div>
+        <h2 class="sec-title">Open source <em>contributions.</em></h2>
+        <p class="sec-lede">Active on <a class="mono" href="https://github.com/sladebot" target="_blank" rel="noopener">github.com/sladebot</a>. Most current work is <a class="mono" href="https://github.com/sladebot/orb" target="_blank" rel="noopener">orb</a> — a graph-based agentic harness exploring memory research for LLM agents.</p>
+      </div>
+    </div>
+
+    <div class="oss-grid">
+      <a class="oss-card" href="https://github.com/sladebot/orb" target="_blank" rel="noopener">
+        <div class="oss-head">
+          <span class="oss-name mono">orb</span>
+          <span class="oss-lang mono">Python</span>
+        </div>
+        <div class="oss-desc">Graph-based agentic harness exploring memory research for LLM agents — most active project.</div>
+        <div class="oss-tags"><span class="tag">Agentic</span><span class="tag">Memory</span><span class="tag">LLM</span></div>
+      </a>
+
+      <a class="oss-card" href="https://github.com/sladebot/turboquant-mlx" target="_blank" rel="noopener">
+        <div class="oss-head">
+          <span class="oss-name mono">turboquant-mlx</span>
+          <span class="oss-lang mono">Python</span>
+        </div>
+        <div class="oss-desc">Quantization &amp; inference experiments on Apple's MLX framework for on-device ML — pinned.</div>
+        <div class="oss-tags"><span class="tag">MLX</span><span class="tag">Quantization</span><span class="tag">On-device</span></div>
+      </a>
+
+      <a class="oss-card" href="https://github.com/sladebot/swe2ml" target="_blank" rel="noopener">
+        <div class="oss-head">
+          <span class="oss-name mono">swe2ml</span>
+          <span class="oss-lang mono">Jupyter</span>
+        </div>
+        <div class="oss-desc">Notebook-based curriculum and reference implementations bridging software engineering and applied ML — pinned.</div>
+        <div class="oss-tags"><span class="tag">Curriculum</span><span class="tag">Applied ML</span></div>
+      </a>
+
+      <a class="oss-card" href="https://github.com/sladebot/deepvo" target="_blank" rel="noopener">
+        <div class="oss-head">
+          <span class="oss-name mono">deepvo</span>
+          <span class="oss-lang mono">PyTorch · TF</span>
+        </div>
+        <div class="oss-desc">First open-source TensorFlow implementation of DeepVO for monocular visual odometry — deep RCNN for camera ego-motion estimation from optical flow, tested on KITTI.</div>
+        <div class="oss-tags"><span class="tag">Visual Odometry</span><span class="tag">KITTI</span><span class="tag">Deep RCNN</span></div>
+      </a>
+
+      <a class="oss-card oss-card--meta" href="https://github.com/sladebot" target="_blank" rel="noopener">
+        <div class="oss-head">
+          <span class="oss-name mono">+ 45 more</span>
+          <span class="oss-lang mono">↗</span>
+        </div>
+        <div class="oss-desc">49 public repositories total across CV, ML, robotics, and infra. IEEE Senior Member · Arctic Code Vault contributor.</div>
+        <div class="oss-tags"><span class="tag">github.com/sladebot</span></div>
+      </a>
+    </div>
+  </div>
+</section>
+
+<a id="publications"></a>
+<section class="block">
+  <div class="wrap">
+    <div class="sec-head">
+      <div class="sec-num">04 — Publications & Press</div>
+      <div>
+        <h2 class="sec-title">Peer-reviewed work and <em>industry features.</em></h2>
+        <p class="sec-lede">Two peer-reviewed publications and a featured-author byline on Unity Technologies' engineering blog — the public record of sustained, original technical work.</p>
+      </div>
+    </div>
+
+    <div class="pub-feat-wrap">
+      <article class="pub-feat">
+        <div class="yr mono">2021</div>
+        <div class="pub-body">
+          <div class="pub-title-row">
+            <span class="pub-type pub-type--poster">Poster</span>
+            <div class="pub-title">Drone Pose Estimation Using Synthetic Data in Unity</div>
+          </div>
+          <div class="pub-authors"><b>Sen, S.</b><!-- AUTHORS_IROS: full author list pending --></div>
+          <div class="pub-venue">IEEE/RSJ IROS 2021 · Intl. Conf. on Intelligent Robots and Systems</div>
+        </div>
+        <div class="pub-cites">
+          <span class="n">—</span>
+          <span class="l">Citations · Scholar</span>
+        </div>
+      </article>
+      <article class="pub-feat">
+        <div class="yr mono">2018</div>
+        <div class="pub-body">
+          <div class="pub-title-row">
+            <span class="pub-type pub-type--paper">Paper</span>
+            <div class="pub-title">A Highly Resilient and Scalable Broker Architecture for IoT Applications</div>
+          </div>
+          <div class="pub-authors"><b>Sen, S.</b> (first author) · Balasubramanian, A.</div>
+          <div class="pub-venue">IEEE COMSNETS 2018 · pp. 336–341</div>
+        </div>
+        <div class="pub-cites">
+          <span class="n">~33</span>
+          <span class="l">Citations · Scholar</span>
+        </div>
+      </article>
+    </div>
+
+    <div class="grid-2">
+      <div class="col">
+        <h4>Press & Featured Writing</h4>
+        <div class="row">
+          <span class="yr mono">2024+</span>
+          <span class="ttl">Substack — souranil.substack.com
+            <small>Practitioner-audience series on the SWE → ML engineering transition</small>
+          </span>
+          <span class="badge">Authored</span>
+        </div>
+        <div class="row">
+          <span class="yr mono">2021</span>
+          <span class="ttl">Data-Centric AI with Unity Computer Vision Datasets
+            <small>Unity Technologies engineering blog · featured author</small>
+          </span>
+          <span class="badge">Industry</span>
+        </div>
+        <div class="row">
+          <span class="yr mono">2021</span>
+          <span class="ttl">Unity News Feature — synthetic-data research
+            <small>Corporate news coverage of synthetic-data research</small>
+          </span>
+          <span class="badge">Press</span>
+        </div>
+      </div>
+      <div class="col">
+        <h4>Peer Review &amp; Service</h4>
+        <div class="row">
+          <span class="yr mono">2026</span>
+          <span class="ttl">Peer Reviewer — Precision Conference (PCS)
+            <small>4 reviews on time · CHI 2026 Papers (#3332 — BlocksDeFix: debugging hints in block-based programming) · CHI 2026 Posters (#5398 social-metadata in video previews, #5630 ALLEF agency assessment in AI textbooks) · CUI 2026 Short Papers (#6465 conversational pedagogy in AI-supported art viewing)</small>
+          </span>
+          <span class="badge">Service</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<a id="skills"></a>
+<section class="block">
+  <div class="wrap">
+    <div class="sec-head">
+      <div class="sec-num">05 — Skills</div>
+      <div>
+        <h2 class="sec-title">A cross-domain stack &mdash; <em>ML × vision × graphics.</em></h2>
+        <p class="sec-lede">The distinctive combination is the bridge: classical ML and deep learning, applied computer vision and 3D, on top of a real graphics + simulation engineering foundation. That bridge is what enabled the Style 2 / Autogen synthetic-data pipeline at Meta.</p>
+      </div>
+    </div>
+
+    <div class="skills-wrap">
+      <div class="skill-block">
+        <div>
+          <span class="domain">Domain 01</span>
+          <h5>Machine Learning &amp; Deep Learning</h5>
+        </div>
+        <div class="skill-chips">
+          <span>PyTorch</span><span>TensorFlow</span><span>Scikit-learn</span><span>Detectron2</span>
+          <span>DECA</span><span>Multi-task Learning</span><span>Transfer Learning</span>
+          <span>Neural Rendering</span><span>Diffusion Models</span><span>HyperNet</span>
+          <span>Bayesian HP Optimization</span><span>Continuous Evaluation</span>
+        </div>
+      </div>
+
+      <div class="skill-block">
+        <div>
+          <span class="domain">Domain 02</span>
+          <h5>Computer Vision &amp; Spatial AI</h5>
+        </div>
+        <div class="skill-chips">
+          <span>3D Reconstruction</span><span>Facial Feature Extraction</span>
+          <span>Pose Estimation</span><span>Visual Odometry</span>
+          <span>Blendshape Mapping</span><span>Sim-to-Real Transfer</span>
+          <span>Domain Randomization</span>
+        </div>
+      </div>
+
+      <div class="skill-block">
+        <div>
+          <span class="domain">Domain 03</span>
+          <h5>3D Graphics &amp; Synthetic Data</h5>
+        </div>
+        <div class="skill-chips">
+          <span>Unity (expert)</span><span>PyTorch3D</span>
+          <span>Procedural Generation</span><span>Realistic Rendering</span>
+          <span>Avatar Systems</span><span>FACS-based Pipelines</span>
+          <span>Unity Perception</span><span>3D MoCap Datasets</span>
+        </div>
+      </div>
+
+      <div class="skill-block">
+        <div>
+          <span class="domain">Foundations</span>
+          <h5>Languages &amp; Infrastructure</h5>
+        </div>
+        <div class="skill-chips">
+          <span>Python</span><span>C++</span><span>Scala</span><span>Java</span>
+          <span>JavaScript</span><span>SQL</span><span>Clojure</span>
+          <span>GCP</span><span>AWS</span><span>Kubernetes</span><span>Docker</span>
+          <span>GitLab CI/CD</span><span>Jenkins</span>
+        </div>
+      </div>
+
+      <div class="skill-block">
+        <div>
+          <span class="domain">Education</span>
+          <h5>Degrees &amp; Certifications</h5>
+        </div>
+        <div class="skill-chips">
+          <span>M.S. Computer Science · Stony Brook · 3.88</span>
+          <span>B.Tech. IT · Techno India, Kolkata</span>
+          <span>AI Generated Media · MIT Media Lab</span>
+          <span>Robotics: Perception · UPenn / Coursera</span>
+          <span>MITx 6.86x · ML with Python</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <div>Souranil Sen · Portfolio · Compiled May 2026</div>
+    <div>
+      <a href="https://linkedin.com/in/souranil" target="_blank" rel="noopener">linkedin.com/in/souranil</a>
+      &nbsp;·&nbsp;
+      <a href="https://github.com/sladebot" target="_blank" rel="noopener">github.com/sladebot</a>
+    </div>
+  </div>
+</footer>
+
+<script>
+  // Layout toggle
+  const body = document.body;
+  document.querySelectorAll('[data-layout-set]').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const v = btn.dataset.layoutSet;
+      body.dataset.layout = v;
+      document.querySelectorAll('[data-layout-set]').forEach(b => b.classList.toggle('on', b === btn));
+    });
+  });
+
+  // Filters
+  const chips = document.querySelectorAll('#filters .chip');
+  const entries = document.querySelectorAll('#timeline .entry');
+
+  // tag counts
+  const counts = { all: entries.length };
+  entries.forEach(e => (e.dataset.tags || '').split(/\s+/).forEach(t => {
+    if (!t) return;
+    counts[t] = (counts[t] || 0) + 1;
+  }));
+  chips.forEach(c => {
+    const f = c.dataset.filter;
+    if (counts[f]) {
+      const s = document.createElement('span');
+      s.className = 'count'; s.textContent = counts[f];
+      c.appendChild(s);
+    }
+  });
+
+  chips.forEach(chip => {
+    chip.addEventListener('click', () => {
+      chips.forEach(c => c.classList.toggle('on', c === chip));
+      const f = chip.dataset.filter;
+      entries.forEach(e => {
+        const tags = (e.dataset.tags || '').split(/\s+/);
+        const match = f === 'all' || tags.includes(f);
+        e.classList.toggle('fade', !match);
+      });
+    });
+  });
+
+  // Expand / collapse
+  document.querySelectorAll('.expander').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const entry = btn.closest('.entry');
+      entry.classList.toggle('open');
+      btn.setAttribute('aria-expanded', entry.classList.contains('open'));
+    });
+  });
+</script>
+
+</body>
+</html>
