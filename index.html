@@ -1724,10 +1724,10 @@
           </div>
 
           <ul class="entry-snap">
-            <li><b>Tech lead</b> on diffusion model generating 3D character animations from natural language — owned eval framework, training infra, and end-to-end pipeline.</li>
-            <li><b>Shipped production multi-frame facial perception model</b> outperforming prior system on all 92 blendshapes — +33% L1, +1.3% global completion, 1.5M+ additional successful generations/yr.</li>
-            <li><b>12× inference speedup</b> on facial expression model serving 1.5B+ users — 10.0s → 0.8s for a 300-frame sequence.</li>
-            <li><b>Built Unity synthetic data pipeline</b> — 15M+ labeled images; reused as foundational training infrastructure across downstream generative models.</li>
+            <li><b>Word-to-Animation (2026, current)</b> — tech lead on diffusion-based model generating 3D character animations from natural language; owned eval framework, training infra, and end-to-end pipeline.</li>
+            <li><b>Autogen (2023 — 2025)</b> — multi-phase generative facial perception initiative for Parametric Avatar: Multi-Task Model → 3D reconstruction for parametric faces → Multi-frame Autogen. Outperformed prior production system on all 92 blendshapes — <b>+33% L1</b>, +1.3% global completion, 1.5M+ additional successful generations/yr.</li>
+            <li><b>12× inference speedup</b> on production facial expression model serving 1.5B+ users — 10.0s → 0.8s for a 300-frame sequence.</li>
+            <li><b>Synthetic data pipeline</b> — Unity-based procedural face generation; <b>15M+ labeled images</b>. Foundational training infrastructure that powered every phase of Autogen and downstream generative models.</li>
             <li><b>Primary oncall at billion-user scale</b> across 2023–2025; led incident review for outage affecting 23,000 user requests.</li>
           </ul>
 
@@ -1741,7 +1741,7 @@
               <div class="pipeline">
                 <div class="pipe-step">Synthetic data infrastructure</div>
                 <div class="pipe-step">DECA feature extraction</div>
-                <div class="pipe-step">Multi-frame aggregation</div>
+                <div class="pipe-step">Multi-frame 3D reconstruction</div>
                 <div class="pipe-step">Production release + telemetry</div>
               </div>
             </div>
@@ -1759,12 +1759,12 @@
           <div class="details">
             <div>
               <ul>
-                <li><b>Tech lead for modeling</b> on a diffusion-based product generating <b>3D character animations from natural language</b>. Established the automated-evaluation framework, training infrastructure, and end-to-end multi-model pipeline.</li>
+                <li><b>Word-to-Animation (2026, current) — Tech lead for modeling</b> on a diffusion-based product generating <b>3D character animations from natural language</b>. Established the automated-evaluation framework, training infrastructure, and end-to-end multi-model pipeline.</li>
+                <li><b>Autogen (2023 — 2025) — multi-phase generative facial perception initiative for Parametric Avatar.</b> Took it through three phases: <b>Multi-Task Model</b> → <b>3D reconstruction for parametric faces</b> → <b>Multi-frame Autogen for parametric avatar</b>. Finetuned the DECA encoder as feature extractor and designed a novel per-frame aggregator over shape/pose parameters; outperformed the prior production system on <b>all 92 blendshapes</b>. Drove <b>+33% L1</b> on the multi-pose benchmark and +1.3% global completion — delivering <b>1.5M+ additional successful generations per year</b> and a −4% reduction in pipeline rejections, ~7× the previous model's lift.</li>
+                <li><b>Synthetic data pipeline — foundation for all Autogen work.</b> Designed and built the Unity-based synthetic data generation pipeline for training large-scale facial perception models — <b>15M+ labeled images</b> via procedural face generation with controlled variation across lighting, pose, and expression. <b>Every phase of Autogen depended on this infrastructure</b>, and it was reused across downstream generative models.</li>
                 <li><b>FACS-based synthetic expression generation pipeline</b> with learned domain transfer across a diverse identity space — adopted as training infrastructure for downstream generative animation models.</li>
                 <li><b>12× inference speedup on a production facial expression model serving 1.5B+ users</b> — <b>10.0s → 0.8s</b> for a 300-frame sequence, removing ~92% of critical-path latency.</li>
-                <li><b>Designed and shipped a production multi-frame facial perception model.</b> Finetuned the DECA encoder as feature extractor and designed a novel per-frame aggregator over shape/pose parameters; outperformed the prior production system on <b>all 92 blendshapes</b>. Drove <b>+33% L1</b> on the multi-pose benchmark and +1.3% global completion — delivering <b>1.5M+ additional successful generations per year</b> and a −4% reduction in pipeline rejections, ~7× the previous model's lift.</li>
-                <li><b>Shipped a parametric facial reconstruction model end-to-end</b> — owned the full lifecycle: training, evaluation, internal testing, A/B experimentation, release, fine-tuning, and post-launch telemetry.</li>
-                <li><b>Designed and built the Unity-based synthetic data generation pipeline</b> for training large-scale facial perception models — <b>15M+ labeled images</b> via procedural face generation with controlled variation across lighting, pose, and expression. Reused as foundational training infrastructure across multiple downstream generative models.</li>
+                <li><b>Shipped end-to-end model lifecycle</b> for parametric facial reconstruction — owned training, evaluation, internal testing, A/B experimentation, release, fine-tuning, and post-launch telemetry.</li>
                 <li><b>Production ownership at billion-user scale</b> — primary oncall across 2023–2025; led incident review for a high-priority production incident affecting <b>23,000 user requests</b>.</li>
                 <li class="theme"><b>Cross-functional collaboration at Meta scale</b> — partnered with Technical Artists, Product Engineers, Production Engineers, and other MLEs across Reality Labs and adjacent organisations to take foundational models from prototype to consumer-product deployment.</li>
                 <li class="theme"><b>Lead engineer on multiple high-visibility product releases and executive-level technical demonstrations.</b></li>
@@ -2418,22 +2418,23 @@
                 <span class="pill tech">Continuous eval</span>
               </div>
             </div></div>
-            <div class="b-row ship-row"><div class="yr">2025</div><div class="b">
-              <div class="org">Multi-frame Autogen</div>
-              <div class="meta">production · facial perception</div>
-              <div class="desc">Drives personalized 3D avatar generation. Designed the per-frame aggregator over shape &amp; pose parameters; A/B test drove the ship decision.</div>
+            <div class="b-row ship-row"><div class="yr">2023 — 25</div><div class="b">
+              <div class="org">Autogen <span class="meta">(Parametric Avatar)</span></div>
+              <div class="meta">production · facial perception · three phases</div>
+              <div class="desc">Multi-year, multi-phase generative facial perception initiative for parametric avatars: Multi-Task Model → 3D reconstruction for parametric faces → Multi-frame Autogen. Designed the per-frame aggregator over shape &amp; pose parameters; A/B-validated ship.</div>
               <div class="pills">
                 <span class="pill good">+33% L1 multi-pose</span>
                 <span class="pill good">+1.3% completion</span>
                 <span class="pill good">−4% deletions</span>
                 <span class="pill tech">DECA</span>
                 <span class="pill tech">PyTorch3D</span>
+                <span class="pill tech">Multi-task</span>
               </div>
             </div></div>
             <div class="b-row ship-row"><div class="yr">2023 — 25</div><div class="b">
               <div class="org">Synthetic-data pipeline</div>
-              <div class="meta">infrastructure</div>
-              <div class="desc">Unity-based procedural face generation with controlled lighting, pose &amp; expression variation; unblocked the Style&nbsp;2 launch.</div>
+              <div class="meta">infrastructure · foundation for all Autogen work</div>
+              <div class="desc">Unity-based procedural face generation with controlled lighting, pose &amp; expression variation. Foundational training infrastructure that powered every phase of Autogen and downstream generative models.</div>
               <div class="pills">
                 <span class="pill">15M+ images</span>
                 <span class="pill">92 blendshapes</span>
