@@ -38,6 +38,31 @@
     line-height: 1.5;
   }
   a { color: inherit; text-decoration: none; }
+  a.ext-link {
+    color: var(--accent);
+    border-bottom: 1px solid color-mix(in oklch, var(--accent) 35%, transparent);
+    transition: border-color .2s ease;
+  }
+  a.ext-link:hover { border-bottom-color: var(--accent); }
+
+  .review-row {
+    display: block;
+    font-family: var(--mono);
+    font-size: 11.5px;
+    line-height: 1.55;
+    color: var(--ink-3);
+    margin-top: 6px;
+    padding-left: 14px;
+    position: relative;
+  }
+  .review-row::before {
+    content: "·";
+    position: absolute;
+    left: 2px;
+    color: var(--ink-3);
+  }
+  .review-row b { color: var(--ink-2); font-weight: 600; }
+  .review-row em { font-style: italic; color: var(--ink-3); }
   ::selection { background: var(--accent-soft); }
 
   .mono { font-family: var(--mono); font-feature-settings: "ss01"; letter-spacing: -0.005em; }
@@ -411,6 +436,12 @@
     background: var(--ink-3);
   }
   .details li b { color: var(--ink); font-weight: 600; }
+  .details li.theme { color: var(--ink-3); }
+  .details li.theme:first-of-type {
+    margin-top: 18px;
+    padding-top: 18px;
+    border-top: 1px dashed var(--rule-2);
+  }
 
   /* ── Spine layout overrides ─────────────────────────────── */
   body[data-layout="spine"] .timeline {
@@ -555,6 +586,20 @@
   .pub-feat:last-child { border-bottom: 0; }
   .pub-feat .yr { font-family: var(--mono); font-size: 12px; color: var(--ink-3); padding-top: 8px; }
   .pub-feat .pub-body { display: grid; gap: 8px; }
+  .pub-feat .pub-citation {
+    font-family: var(--sans);
+    font-size: 15.5px;
+    line-height: 1.65;
+    color: var(--ink-2);
+    margin: 12px 0 0;
+    max-width: 76ch;
+  }
+  .pub-feat .pub-citation b { color: var(--accent); font-weight: 600; }
+  .pub-feat .pub-citation em { font-style: italic; color: var(--ink-2); }
+  .pub-feat .pub-citation .pub-title-inline {
+    font-weight: 600;
+    color: var(--ink);
+  }
   .pub-feat .pub-title-row {
     display: flex; flex-direction: column; align-items: flex-start;
     gap: 10px;
@@ -565,16 +610,18 @@
     color: var(--ink);
   }
   .pub-type {
-    display: inline-flex; align-items: center;
-    font-family: var(--mono); font-weight: 600;
-    font-size: 10.5px; text-transform: uppercase; letter-spacing: 0.1em;
-    padding: 5px 11px;
-    border-radius: 999px;
+    display: inline-block;
+    justify-self: start;
+    font-family: var(--mono);
+    font-size: 10.5px;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    padding: 3px 8px;
+    border-radius: 4px;
     white-space: nowrap;
-    flex-shrink: 0;
   }
-  .pub-type--paper { background: var(--ink); color: var(--bg); }
-  .pub-type--poster { background: var(--accent); color: var(--bg); }
+  .pub-type--paper { background: var(--tag-bg); color: var(--ink-3); }
+  .pub-type--poster { background: var(--accent-soft); color: var(--accent); }
   .pub-feat .pub-authors {
     font-family: var(--mono); font-size: 12.5px; color: var(--ink-2);
     line-height: 1.5;
@@ -627,7 +674,7 @@
   .oss-grid {
     padding-left: 220px;
     display: grid;
-    grid-template-columns: repeat(3, 1fr);
+    grid-template-columns: repeat(2, 1fr);
     gap: 0;
     border-top: 1px solid var(--rule-2);
     border-left: 1px solid var(--rule-2);
@@ -938,15 +985,15 @@
           <div class="details">
             <div>
               <ul>
-                <li><b>Designed and shipped a production multi-frame facial perception model.</b> Finetuned the DECA encoder as feature extractor and designed a novel per-frame aggregator over shape/pose parameters; outperformed the prior production system on <b>all 92 blendshapes</b>. Drove <b>+33% L1</b> on the multi-pose benchmark and +1.3% global completion — translating to <b>1.5M+ additional successful generations per year</b> and a −4% reduction in pipeline rejections; ~7× the previous model's lift.</li>
-                <li><b>Designed and built the Unity-based synthetic data generation pipeline</b> used to train large-scale facial perception models — <b>15M+ labeled images</b> via procedural face generation with controlled variation across lighting, pose, and expression. Adopted as reusable training infrastructure across multiple downstream generative models.</li>
-                <li><b>12× latency speedup on a production deep-learning facial expression model serving 1.5B+ users</b> — reduced inference from 10.0s → 0.8s for a 300-frame sequence (~92% latency removed on the critical path).</li>
-                <li><b>Shipped a parametric facial reconstruction model end-to-end</b> — owned training, evaluation, internal testing, A/B experimentation, release, post-launch telemetry, and fine-tuning.</li>
-                <li><b>Modeling lead on a diffusion model for generating 3D character animations from natural language.</b> Established the continuous-evaluation infrastructure (golden datasets, daily quality dashboards) used across the broader generative animation effort.</li>
-                <li><b>FACS-based synthetic expression generation pipeline</b> — facial expression synthesis with HyperNet domain transfer across a diverse identity space; adopted as training infrastructure for downstream generative animation models.</li>
-                <li><b>Production ownership at billion-user scale</b> — led incident review for a high-priority production incident (23,000 affected requests); multiple oncall shifts 2023–2025.</li>
-                <li><b>Cross-team and cross-org collaboration at Meta scale</b> — partnered with research, product, design, and infrastructure teams across Reality Labs and adjacent organisations to bring foundational models from prototype to consumer-product deployment.</li>
-                <li><b>Lead engineer on multiple high-visibility product releases and executive-level technical demonstrations.</b></li>
+                <li><b>Tech lead for modeling</b> on a diffusion-based product generating <b>3D character animations from natural language</b>. Established the automated-evaluation framework, training infrastructure, and end-to-end multi-model pipeline.</li>
+                <li><b>FACS-based synthetic expression generation pipeline</b> with learned domain transfer across a diverse identity space — adopted as training infrastructure for downstream generative animation models.</li>
+                <li><b>12× inference speedup on a production facial expression model serving 1.5B+ users</b> — <b>10.0s → 0.8s</b> for a 300-frame sequence, removing ~92% of critical-path latency.</li>
+                <li><b>Designed and shipped a production multi-frame facial perception model.</b> Finetuned the DECA encoder as feature extractor and designed a novel per-frame aggregator over shape/pose parameters; outperformed the prior production system on <b>all 92 blendshapes</b>. Drove <b>+33% L1</b> on the multi-pose benchmark and +1.3% global completion — delivering <b>1.5M+ additional successful generations per year</b> and a −4% reduction in pipeline rejections, ~7× the previous model's lift.</li>
+                <li><b>Shipped a parametric facial reconstruction model end-to-end</b> — owned the full lifecycle: training, evaluation, internal testing, A/B experimentation, release, fine-tuning, and post-launch telemetry.</li>
+                <li><b>Designed and built the Unity-based synthetic data generation pipeline</b> for training large-scale facial perception models — <b>15M+ labeled images</b> via procedural face generation with controlled variation across lighting, pose, and expression. Reused as foundational training infrastructure across multiple downstream generative models.</li>
+                <li><b>Production ownership at billion-user scale</b> — primary oncall across 2023–2025; led incident review for a high-priority production incident affecting <b>23,000 user requests</b>.</li>
+                <li class="theme"><b>Cross-functional collaboration at Meta scale</b> — partnered with Technical Artists, Product Engineers, Production Engineers, and other MLEs across Reality Labs and adjacent organisations to take foundational models from prototype to consumer-product deployment.</li>
+                <li class="theme"><b>Lead engineer on multiple high-visibility product releases and executive-level technical demonstrations.</b></li>
               </ul>
             </div>
           </div>
@@ -1113,8 +1160,8 @@
       <div class="row"><span class="yr mono">2025</span><span class="ttl"><span class="role">Senior Member</span><span class="at">@</span>IEEE<small>Top ~10% of IEEE membership · approval by admissions committee</small></span></div>
       <div class="row"><span class="yr mono">2025</span><span class="ttl"><span class="role">Judge</span><span class="at">@</span>Meta Horizon Creator Competition<small>Mobile Genre Showdown · Invited Judge</small></span></div>
       <div class="row"><span class="yr mono">2025</span><span class="ttl"><span class="role">Mentorship</span><span class="at">@</span>MIT Reality Hack 2025<small>Invited Mentor · XR/VR/AR · Boston</small></span></div>
-      <div class="row"><span class="yr mono">2025</span><span class="ttl"><span class="role">Speaking</span><span class="at">@</span>Mohawk College — AI &amp; Gaming Panel<small>School of Creative Industries · Invited Panelist</small></span></div>
-      <div class="row"><span class="yr mono">2021</span><span class="ttl"><span class="role">Speaking</span><span class="at">@</span>Unity AI Summit 2021<small>Invited keynote · synthetic data &amp; sim-to-real for CV</small></span></div>
+      <div class="row"><span class="yr mono">2025</span><span class="ttl"><span class="role">Speaker</span><span class="at">@</span>Mohawk College — AI &amp; Gaming Panel<small>School of Creative Industries · Invited Panelist</small></span></div>
+      <div class="row"><span class="yr mono">2021</span><span class="ttl"><span class="role">Speaker</span><span class="at">@</span><a class="ext-link" href="https://unityaisummit2021.splashthat.com/" target="_blank" rel="noopener">Unity AI Summit 2021&nbsp;↗</a><small>Invited keynote · synthetic data &amp; sim-to-real for CV</small></span></div>
       <div class="row"><span class="yr mono">2021</span><span class="ttl"><span class="role">Mentorship</span><span class="at">@</span>MIT Fluid Interfaces Lab<small>Technical Mentor · ~20 graduate students · AI Generated Media</small></span></div>
       <div class="row"><span class="yr mono">2017</span><span class="ttl"><span class="role">Award</span><span class="at">@</span>Hack@CEWIT — Most Original<small>Workout-detection armband · IoT &amp; Microservices Hackathon</small></span></div>
     </div>
@@ -1132,51 +1179,12 @@
       </div>
     </div>
 
-    <div class="oss-grid">
-      <a class="oss-card" href="https://github.com/sladebot/orb" target="_blank" rel="noopener">
-        <div class="oss-head">
-          <span class="oss-name mono">orb</span>
-          <span class="oss-lang mono">Python</span>
-        </div>
-        <div class="oss-desc">Graph-based agentic harness exploring memory research for LLM agents — most active project.</div>
-        <div class="oss-tags"><span class="tag">Agentic</span><span class="tag">Memory</span><span class="tag">LLM</span></div>
-      </a>
-
-      <a class="oss-card" href="https://github.com/sladebot/turboquant-mlx" target="_blank" rel="noopener">
-        <div class="oss-head">
-          <span class="oss-name mono">turboquant-mlx</span>
-          <span class="oss-lang mono">Python</span>
-        </div>
-        <div class="oss-desc">Quantization &amp; inference experiments on Apple's MLX framework for on-device ML — pinned.</div>
-        <div class="oss-tags"><span class="tag">MLX</span><span class="tag">Quantization</span><span class="tag">On-device</span></div>
-      </a>
-
-      <a class="oss-card" href="https://github.com/sladebot/swe2ml" target="_blank" rel="noopener">
-        <div class="oss-head">
-          <span class="oss-name mono">swe2ml</span>
-          <span class="oss-lang mono">Jupyter</span>
-        </div>
-        <div class="oss-desc">Notebook-based curriculum and reference implementations bridging software engineering and applied ML — pinned.</div>
-        <div class="oss-tags"><span class="tag">Curriculum</span><span class="tag">Applied ML</span></div>
-      </a>
-
-      <a class="oss-card" href="https://github.com/sladebot/deepvo" target="_blank" rel="noopener">
-        <div class="oss-head">
-          <span class="oss-name mono">deepvo</span>
-          <span class="oss-lang mono">PyTorch · TF</span>
-        </div>
-        <div class="oss-desc">First open-source TensorFlow implementation of DeepVO for monocular visual odometry — deep RCNN for camera ego-motion estimation from optical flow, tested on KITTI.</div>
-        <div class="oss-tags"><span class="tag">Visual Odometry</span><span class="tag">KITTI</span><span class="tag">Deep RCNN</span></div>
-      </a>
-
-      <a class="oss-card oss-card--meta" href="https://github.com/sladebot" target="_blank" rel="noopener">
-        <div class="oss-head">
-          <span class="oss-name mono">+ 45 more</span>
-          <span class="oss-lang mono">↗</span>
-        </div>
-        <div class="oss-desc">49 public repositories total across CV, ML, robotics, and infra. IEEE Senior Member · Arctic Code Vault contributor.</div>
-        <div class="oss-tags"><span class="tag">github.com/sladebot</span></div>
-      </a>
+    <div class="recog-list">
+      <div class="row"><span class="yr mono">2024+</span><span class="ttl"><a class="role" href="https://github.com/sladebot/orb" target="_blank" rel="noopener">orb</a><span class="at">·</span>Python<small>Graph-based agentic harness exploring memory research for LLM agents — most active project</small></span></div>
+      <div class="row"><span class="yr mono">2024+</span><span class="ttl"><a class="role" href="https://github.com/sladebot/turboquant-mlx" target="_blank" rel="noopener">turboquant-mlx</a><span class="at">·</span>Python<small>Quantization &amp; inference experiments on Apple's MLX framework for on-device ML</small></span></div>
+      <div class="row"><span class="yr mono">2023+</span><span class="ttl"><a class="role" href="https://github.com/sladebot/swe2ml" target="_blank" rel="noopener">swe2ml</a><span class="at">·</span>Jupyter<small>Notebook-based curriculum and reference implementations bridging software engineering and applied ML</small></span></div>
+      <div class="row"><span class="yr mono">2018</span><span class="ttl"><a class="role" href="https://github.com/sladebot/deepvo" target="_blank" rel="noopener">deepvo</a><span class="at">·</span>PyTorch · TF<small>First open-source TensorFlow implementation of DeepVO for monocular visual odometry — deep RCNN for camera ego-motion estimation from optical flow, tested on KITTI</small></span></div>
+      <div class="row"><span class="yr mono">↗</span><span class="ttl"><a class="role" href="https://github.com/sladebot" target="_blank" rel="noopener">+ 45 more</a><span class="at">·</span>github.com/sladebot<small>49 public repositories total across CV, ML, robotics, and infra · IEEE Senior Member · Arctic Code Vault contributor</small></span></div>
     </div>
   </div>
 </section>
@@ -1188,7 +1196,6 @@
       <div class="sec-num"><span class="n">04</span></div>
       <div>
         <h2 class="sec-title">Publications &amp; press</h2>
-        <p class="sec-lede">Two peer-reviewed publications and a featured-author byline on Unity Technologies' engineering blog — the public record of sustained, original technical work.</p>
       </div>
     </div>
 
@@ -1196,12 +1203,8 @@
       <article class="pub-feat">
         <div class="yr mono">2021</div>
         <div class="pub-body">
-          <div class="pub-title-row">
-            <span class="pub-type pub-type--poster">Poster</span>
-            <div class="pub-title">Drone Pose Estimation Using Synthetic Data in Unity</div>
-          </div>
-          <div class="pub-authors"><b>Sen, S.</b><!-- AUTHORS_IROS: full author list pending --></div>
-          <div class="pub-venue">IEEE/RSJ IROS 2021 · Intl. Conf. on Intelligent Robots and Systems</div>
+          <span class="pub-type pub-type--poster">Poster</span>
+          <p class="pub-citation">S. Erfanian Ebadi, <b>S. Sen</b>, J. Leban, and P. Wani, &ldquo;<span class="pub-title-inline">Drone Pose Estimation with Unity Simulation</span>,&rdquo; presented at the <em>IEEE/RSJ International Conference on Intelligent Robots and Systems (IROS)</em>, 2021. [Poster session].</p>
         </div>
         <div class="pub-cites">
           <span class="n">—</span>
@@ -1211,12 +1214,8 @@
       <article class="pub-feat">
         <div class="yr mono">2018</div>
         <div class="pub-body">
-          <div class="pub-title-row">
-            <span class="pub-type pub-type--paper">Paper</span>
-            <div class="pub-title">A Highly Resilient and Scalable Broker Architecture for IoT Applications</div>
-          </div>
-          <div class="pub-authors"><b>Sen, S.</b> (first author) · Balasubramanian, A.</div>
-          <div class="pub-venue">IEEE COMSNETS 2018 · pp. 336–341</div>
+          <span class="pub-type pub-type--paper">Paper</span>
+          <p class="pub-citation"><b>S. Sen</b> and A. Balasubramanian, &ldquo;<span class="pub-title-inline">A highly resilient and scalable broker architecture for IoT applications</span>,&rdquo; <em>2018 10th International Conference on Communication Systems &amp; Networks (COMSNETS)</em>, Bengaluru, India, 2018, pp. 336&ndash;341, doi: <a href="https://doi.org/10.1109/COMSNETS.2018.8328216" target="_blank" rel="noopener">10.1109/COMSNETS.2018.8328216</a>.</p>
         </div>
         <div class="pub-cites">
           <span class="n">~33</span>
@@ -1227,10 +1226,10 @@
 
     <div class="grid-2">
       <div class="col">
-        <h4>Press & Featured Writing</h4>
+        <h4>Press &amp; Featured Writing</h4>
         <div class="row">
           <span class="yr mono">2024+</span>
-          <span class="ttl">Substack — <a href="https://souranil.substack.com" target="_blank" rel="noopener">souranil.substack.com</a>
+          <span class="ttl">Substack — <a class="ext-link" href="https://souranil.substack.com" target="_blank" rel="noopener">souranil.substack.com&nbsp;↗</a>
             <small>Practitioner-audience series on the SWE → ML engineering transition</small>
           </span>
           <span class="badge">Authored</span>
@@ -1255,11 +1254,10 @@
         <div class="row">
           <span class="yr mono">2026</span>
           <span class="ttl">Peer Reviewer — Precision Conference (PCS)
-            <small>4 reviews on time · CHI 2026 &amp; CUI 2026</small>
-            <small>CHI 2026 Papers · #3332 — BlocksDeFix (debugging hints in block-based programming)</small>
-            <small>CHI 2026 Posters · #5398 — social-metadata in video previews</small>
-            <small>CHI 2026 Posters · #5630 — ALLEF (agency assessment in AI textbooks)</small>
-            <small>CUI 2026 Short Papers · #6465 — conversational pedagogy in AI-supported art viewing</small>
+            <span class="review-row"><b>CHI 2026 Papers</b> — BlocksDeFix <em>· debugging hints in block-based programming</em></span>
+            <span class="review-row"><b>CHI 2026 Posters</b> — Social-metadata in video previews</span>
+            <span class="review-row"><b>CHI 2026 Posters</b> — ALLEF <em>· agency assessment in AI textbooks</em></span>
+            <span class="review-row"><b>CUI 2026 Short Papers</b> — Conversational pedagogy <em>· in AI-supported art viewing</em></span>
           </span>
           <span class="badge">Service</span>
         </div>
