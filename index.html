@@ -137,21 +137,51 @@
     display: inline-flex; align-items: center; gap: 9px;
     margin-top: 14px;
   }
+  .mh-sub {
+    margin-top: 6px;
+    font-family: var(--mono);
+    font-size: 11.5px;
+    color: var(--ink-3);
+    letter-spacing: 0.02em;
+  }
   .mh-summary {
-    margin: 16px 0 0;
+    margin: 18px 0 0;
     font-size: 15.5px;
     line-height: 1.55;
     color: var(--ink-2);
-    max-width: 64ch;
+    max-width: 68ch;
   }
   .mh-summary b { color: var(--ink); font-weight: 600; }
   .mh-chips {
-    display: none;
+    display: flex;
     gap: 6px;
     flex-wrap: wrap;
-    margin-top: 14px;
+    margin-top: 16px;
     max-width: 760px;
   }
+  .mh-cta {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+    margin-top: 22px;
+  }
+  .mh-cta-btn {
+    font-family: var(--mono);
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    padding: 8px 14px;
+    border: 1px solid var(--rule);
+    border-radius: 999px;
+    color: var(--ink-2);
+    background: var(--bg);
+    transition: border-color .15s ease, color .15s ease, background .15s ease;
+  }
+  .mh-cta-btn:hover { border-color: var(--ink); color: var(--ink); }
+  .mh-cta-btn--primary {
+    background: var(--ink); color: var(--bg); border-color: var(--ink);
+  }
+  .mh-cta-btn--primary:hover { background: var(--accent); border-color: var(--accent); color: var(--bg); }
   .mh-eyebrow .pulse {
     width: 6px; height: 6px; border-radius: 50%;
     background: #2c8a55;
@@ -245,6 +275,80 @@
   .sec-title em { font-family: var(--serif); font-style: italic; font-weight: 400; text-transform: none; }
   .sec-lede { color: var(--ink-2); max-width: 62ch; font-size: 16px; }
 
+
+
+  /* ── Skills technical depth (Phase 7) ─────────────────── */
+  .skills-section-h {
+    margin: 0 0 16px 140px;
+    padding-bottom: 8px;
+    border-bottom: 1px solid var(--rule-2);
+    font-family: var(--mono);
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: var(--accent);
+    font-weight: 600;
+  }
+  .skills-section-h--sub { margin-top: 32px; color: var(--ink-3); }
+  .depth-grid {
+    margin: 0 0 28px 140px;
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 14px;
+  }
+  .depth-card {
+    padding: 16px 18px;
+    background: var(--bg);
+    border: 1px solid var(--rule-2);
+    border-radius: 4px;
+    display: grid; gap: 6px;
+    align-content: start;
+  }
+  .depth-kicker {
+    font-family: var(--mono);
+    font-size: 10px;
+    color: var(--accent);
+    font-weight: 600;
+    letter-spacing: 0.1em;
+  }
+  .depth-title {
+    margin: 0;
+    font-family: var(--sans);
+    font-weight: 500;
+    font-size: 15px;
+    letter-spacing: -0.012em;
+    line-height: 1.3;
+    color: var(--ink);
+  }
+  .depth-body {
+    margin: 0;
+    font-size: 13px;
+    line-height: 1.55;
+    color: var(--ink-2);
+  }
+  @media (max-width: 900px) {
+    .skills-section-h, .depth-grid { margin-left: 0; }
+    .depth-grid { grid-template-columns: 1fr; }
+  }
+
+  /* ── Recognition groups (Phase 6) ─────────────────────── */
+  .recog-groups { display: grid; gap: 28px; }
+  .recog-group-h {
+    margin: 0 0 4px 220px;
+    padding-bottom: 8px;
+    border-bottom: 1px solid var(--rule-2);
+    font-family: var(--mono);
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: var(--accent);
+    font-weight: 600;
+  }
+  @media (max-width: 900px) {
+    .recog-group-h { margin-left: 0; }
+  }
+
+
   /* ── Filters ─────────────────────────────────────────────── */
   .filters {
     display: flex; gap: 8px; flex-wrap: wrap;
@@ -327,6 +431,7 @@
     background: var(--tag-bg); color: var(--ink-3);
   }
   .tag.accent { background: var(--accent-soft); color: var(--accent); }
+
 
   /* Inline metrics */
   .inline-metrics {
@@ -551,9 +656,6 @@
   }
   body[data-layout="summary"] .mh-eyebrow {
     margin-top: 10px;
-  }
-  body[data-layout="summary"] .mh-summary {
-    display: none;
   }
   body[data-layout="summary"] .mh-chips {
     display: flex;
@@ -1101,6 +1203,7 @@
     text-transform: uppercase; letter-spacing: 0.06em;
   }
 
+
   /* ── Skills ──────────────────────────────────────────────── */
   .skills-wrap { padding-left: 140px; display: grid; gap: 36px; }
   .skill-block { display: grid; grid-template-columns: 200px 1fr; gap: 40px; padding-bottom: 28px; border-bottom: 1px solid var(--rule-2); }
@@ -1645,6 +1748,7 @@
       <a href="#publications">Publications</a>
       <a href="#skills">Skills</a>
       <a href="#education">Education</a>
+      <a href="references.html">Reference packet ↗</a>
     </nav>
     <button id="summarize-btn" class="summarize-btn" aria-label="Open one-page summary">Summarize</button>
   </div>
@@ -1655,16 +1759,23 @@
   <div class="wrap mh-grid">
     <div class="mh-l">
       <h1 class="mh-line">Souranil&nbsp;Sen</h1>
-      <div class="mh-eyebrow"><span class="pulse"></span><span>Senior ML Engineer · Meta Reality Labs · Burlingame, California</span></div>
-      <p class="mh-summary">Building foundational <b>generative AI</b>, <b>computer vision</b>, and <b>3D</b> systems for platform-scale consumer products — facial perception, synthetic data infrastructure, and text-to-3D animation.</p>
+      <div class="mh-eyebrow"><span class="pulse"></span><span>Generative systems for vision, 3D avatars, synthetic data &amp; agentic AI</span></div>
+      <div class="mh-sub">Senior ML Engineer · Meta Reality Labs · Burlingame, California</div>
+      <p class="mh-summary">My work builds generative and perception systems where labeled real-world data is scarce, expensive, or structurally limited. Across Unity and Meta Reality Labs I&apos;ve built <b>synthetic-data pipelines</b>, <b>3D facial reconstruction</b> systems, and <b>avatar-generation infrastructure</b> that translate research ideas into deployed systems at large scale. Current independent work extends this into <b>graph-based multi-agent LLM runtimes</b> and memory-aware agent evaluation.</p>
       <div class="mh-chips" aria-label="Profile snapshot">
-        <span class="tag accent">Generative AI</span>
+        <span class="tag accent">Synthetic Data</span>
+        <span class="tag accent">3D Avatars</span>
+        <span class="tag">Generative AI</span>
         <span class="tag">Computer Vision</span>
-        <span class="tag">3D / Graphics</span>
-        <span class="tag">Synthetic Data</span>
+        <span class="tag">Sim-to-Real</span>
+        <span class="tag">Agentic AI</span>
         <span class="tag">Production ML</span>
-        <span class="tag">Billion-user systems</span>
-        <span class="tag">Meta Reality Labs</span>
+      </div>
+      <div class="mh-cta" aria-label="Quick links">
+        <a class="mh-cta-btn mh-cta-btn--primary" href="references.html">For reference writers →</a>
+        <a class="mh-cta-btn" href="#publications">Publications</a>
+        <a class="mh-cta-btn" href="https://github.com/sladebot" target="_blank" rel="noopener">GitHub</a>
+        <a class="mh-cta-btn" href="https://linkedin.com/in/souranil" target="_blank" rel="noopener">LinkedIn</a>
       </div>
     </div>
   </div>
@@ -1714,14 +1825,7 @@
             <span class="tag">Unity</span>
             <span class="tag">Production ML</span>
           </div>
-          <p class="summary">Engineering lead on foundational <b>generative AI</b> and <b>computer vision</b> systems deployed at consumer scale — including a production multi-frame facial perception model, a Unity-based synthetic data generation infrastructure, and a diffusion-based model for generating 3D character animations from natural language. Systems deployed to <b>1.6 billion+ users</b> across Facebook, Instagram, WhatsApp, and Horizon.</p>
-
-          <div class="inline-metrics">
-            <div class="im"><div class="im-n">1.6B+</div><div class="im-l">Facebook · Instagram · WhatsApp · Horizon</div></div>
-            <div class="im"><div class="im-n">+33%</div><div class="im-l">L1 on multi-pose set</div></div>
-            <div class="im"><div class="im-n">−4%</div><div class="im-l">Pipeline rejections</div></div>
-            <div class="im"><div class="im-n">12×</div><div class="im-l">Real-time inference speedup</div></div>
-          </div>
+          <p class="summary">Engineering lead on foundational <b>generative AI</b> and <b>computer vision</b> systems — including a production multi-frame facial perception model, a Unity-based synthetic data generation infrastructure, and a diffusion-based model for generating 3D character animations from natural language. Systems contributed to avatar-generation and facial-perception pipelines <b>deployed across Meta consumer surfaces reaching billion-user scale</b> (Facebook, Instagram, WhatsApp, Horizon).</p>
 
           <ul class="entry-snap">
             <li><b>Word-to-Animation (2026, current)</b> — tech lead on diffusion-based model generating 3D character animations from natural language; owned eval framework, training infra, and end-to-end pipeline.</li>
@@ -2053,14 +2157,34 @@
       </div>
     </div>
 
-    <div class="recog-list">
-      <div class="row"><span class="yr mono">2025</span><span class="ttl"><span class="role">Senior Member</span><span class="at">@</span>IEEE<small>Top ~10% of IEEE membership · approval by admissions committee</small></span></div>
-      <div class="row"><span class="yr mono">2025</span><span class="ttl"><span class="role">Judge</span><span class="at">@</span>Meta Horizon Creator Competition<small>Mobile Genre Showdown · Invited Judge</small></span></div>
-      <div class="row"><span class="yr mono">2025</span><span class="ttl"><span class="role">Mentorship</span><span class="at">@</span>MIT Reality Hack 2025<small>Invited Mentor · XR/VR/AR · Boston</small></span></div>
-      <div class="row"><span class="yr mono">2025</span><span class="ttl"><span class="role">Speaker</span><span class="at">@</span>Mohawk College — AI &amp; Gaming Panel<small>School of Creative Industries · Invited Panelist</small></span></div>
-      <div class="row"><span class="yr mono">2021</span><span class="ttl"><span class="role">Speaker</span><span class="at">@</span><a class="ext-link" href="https://unityaisummit2021.splashthat.com/" target="_blank" rel="noopener">Unity AI Summit 2021&nbsp;↗</a><small>Invited keynote · synthetic data &amp; sim-to-real for CV</small></span></div>
-      <div class="row"><span class="yr mono">2021</span><span class="ttl"><span class="role">Mentorship</span><span class="at">@</span>MIT Fluid Interfaces Lab<small>Technical Mentor · ~20 graduate students · AI Generated Media</small></span></div>
-      <div class="row"><span class="yr mono">2017</span><span class="ttl"><span class="role">Award</span><span class="at">@</span>Hack@CEWIT — Most Original<small>Workout-detection armband · IoT &amp; Microservices Hackathon</small></span></div>
+    <div class="recog-groups">
+      <div class="recog-group">
+        <h3 class="recog-group-h">Professional recognition</h3>
+        <div class="recog-list">
+          <div class="row"><span class="yr mono">2025</span><span class="ttl"><span class="role">Senior Member</span><span class="at">@</span>IEEE<small>Top ~10% of IEEE membership · approval by admissions committee</small></span></div>
+          <div class="row"><span class="yr mono">2026</span><span class="ttl"><span class="role">Peer Reviewer</span><span class="at">@</span>Precision Conference (PCS)<small>CHI 2026 Papers &amp; Posters · CUI 2026 Short Papers · ×4 venues</small></span></div>
+        </div>
+      </div>
+
+      <div class="recog-group">
+        <h3 class="recog-group-h">Invited expert roles</h3>
+        <div class="recog-list">
+          <div class="row"><span class="yr mono">2025</span><span class="ttl"><span class="role">Judge</span><span class="at">@</span>Meta Horizon Creator Competition<small>Mobile Genre Showdown · Invited Judge</small></span></div>
+          <div class="row"><span class="yr mono">2025</span><span class="ttl"><span class="role">Mentor</span><span class="at">@</span>MIT Reality Hack 2025<small>Invited Mentor · XR/VR/AR · Boston</small></span></div>
+          <div class="row"><span class="yr mono">2021</span><span class="ttl"><span class="role">Mentor</span><span class="at">@</span>MIT Fluid Interfaces Lab<small>Technical Mentor · ~20 graduate students · AI Generated Media</small></span></div>
+          <div class="row"><span class="yr mono">2017</span><span class="ttl"><span class="role">Award</span><span class="at">@</span>Hack@CEWIT — Most Original<small>Workout-detection armband · IoT &amp; Microservices Hackathon</small></span></div>
+        </div>
+      </div>
+
+      <div class="recog-group">
+        <h3 class="recog-group-h">Public technical communication</h3>
+        <div class="recog-list">
+          <div class="row"><span class="yr mono">2021</span><span class="ttl"><span class="role">Speaker</span><span class="at">@</span><a class="ext-link" href="https://unityaisummit2021.splashthat.com/" target="_blank" rel="noopener">Unity AI Summit 2021&nbsp;↗</a><small>Invited keynote · synthetic data &amp; sim-to-real for CV</small></span></div>
+          <div class="row"><span class="yr mono">2021</span><span class="ttl"><span class="role">Author</span><span class="at">@</span>Unity Engineering Blog<small>Data-Centric AI with Unity Computer Vision Datasets · featured author</small></span></div>
+          <div class="row"><span class="yr mono">2025</span><span class="ttl"><span class="role">Panelist</span><span class="at">@</span>Mohawk College — AI &amp; Gaming Panel<small>School of Creative Industries · Invited Panelist</small></span></div>
+          <div class="row"><span class="yr mono">2024+</span><span class="ttl"><span class="role">Author</span><span class="at">@</span><a class="ext-link" href="https://souranil.substack.com" target="_blank" rel="noopener">souranil.substack.com&nbsp;↗</a><small>Practitioner-audience series on the SWE → ML engineering transition</small></span></div>
+        </div>
+      </div>
     </div>
   </div>
 </section>
@@ -2072,12 +2196,12 @@
       <div class="sec-num"><span class="n">03</span></div>
       <div>
         <h2 class="sec-title">Open source contributions</h2>
-        <p class="sec-lede">Active on <a class="mono" href="https://github.com/sladebot" target="_blank" rel="noopener">github.com/sladebot</a>. Most current work is <a class="mono" href="https://github.com/sladebot/orb" target="_blank" rel="noopener">orb</a> — a graph-based agentic harness exploring memory research for LLM agents.</p>
+        <p class="sec-lede">Active on <a class="mono" href="https://github.com/sladebot" target="_blank" rel="noopener">github.com/sladebot</a>. Most current work is <a class="mono" href="https://github.com/sladebot/orb" target="_blank" rel="noopener">orb</a> — a graph-based agentic harness exploring memory research for LLM agents. See the <a class="mono" href="references.html">reference packet ↗</a> for the full research-direction framing.</p>
       </div>
     </div>
 
     <div class="recog-list">
-      <div class="row"><span class="yr mono">2024+</span><span class="ttl"><a class="role" href="https://github.com/sladebot/orb" target="_blank" rel="noopener">orb</a><span class="at">·</span>Python<small>Graph-based agentic harness exploring memory research for LLM agents — most active project</small></span></div>
+      <div class="row"><span class="yr mono">2024+</span><span class="ttl"><a class="role" href="https://github.com/sladebot/orb" target="_blank" rel="noopener">orb</a><span class="at">·</span>Python<small>Graph-based multi-agent LLM runtime — graph topology, per-node model allocation, memory persistence, evaluation traces. Working artifact for the research direction above.</small></span></div>
       <div class="row"><span class="yr mono">2024+</span><span class="ttl"><a class="role" href="https://github.com/sladebot/turboquant-mlx" target="_blank" rel="noopener">turboquant-mlx</a><span class="at">·</span>Python<small>Quantization &amp; inference experiments on Apple's MLX framework for on-device ML</small></span></div>
       <div class="row"><span class="yr mono">2023+</span><span class="ttl"><a class="role" href="https://github.com/sladebot/swe2ml" target="_blank" rel="noopener">swe2ml</a><span class="at">·</span>Jupyter<small>Notebook-based curriculum and reference implementations bridging software engineering and applied ML</small></span></div>
       <div class="row"><span class="yr mono">2018</span><span class="ttl"><a class="role" href="https://github.com/sladebot/deepvo" target="_blank" rel="noopener">deepvo</a><span class="at">·</span>PyTorch · TF<small>First open-source TensorFlow implementation of DeepVO for monocular visual odometry — deep RCNN for camera ego-motion estimation from optical flow, tested on KITTI</small></span></div>
@@ -2170,15 +2294,50 @@
       <div class="sec-num"><span class="n">05</span></div>
       <div>
         <h2 class="sec-title">Skills</h2>
-        <p class="sec-lede">The distinctive combination is the bridge: classical ML and deep learning, applied computer vision and 3D, on top of a real graphics + simulation engineering foundation. That bridge is what enabled the Style 2 / Autogen synthetic-data pipeline at Meta.</p>
+        <p class="sec-lede">Technical capabilities first — the substantive depth a reference writer can speak to. Tools and frameworks are listed underneath as supporting evidence.</p>
       </div>
     </div>
 
+    <h3 class="skills-section-h">Technical depth</h3>
+    <div class="depth-grid">
+      <div class="depth-card">
+        <div class="depth-kicker">01</div>
+        <h4 class="depth-title">Synthetic data generation &amp; domain randomization</h4>
+        <p class="depth-body">Procedural data pipelines (Unity-based and otherwise) with controlled variation across lighting, pose, expression, and identity. Includes FACS-driven facial variation, blendshape sampling, and labeled-dataset design for downstream perception models.</p>
+      </div>
+      <div class="depth-card">
+        <div class="depth-kicker">02</div>
+        <h4 class="depth-title">3D reconstruction &amp; facial parameter estimation</h4>
+        <p class="depth-body">Parametric face models, DECA-style encoders as feature extractors, per-frame aggregation over shape/pose parameters, multi-frame 3D reconstruction, and end-to-end facial reconstruction lifecycles.</p>
+      </div>
+      <div class="depth-card">
+        <div class="depth-kicker">03</div>
+        <h4 class="depth-title">FACS / blendshape-based facial modeling</h4>
+        <p class="depth-body">Generative pipelines built on FACS action units, 92-blendshape avatar systems, learned identity-space domain transfer, and expression generation conditioned on parametric structure.</p>
+      </div>
+      <div class="depth-card">
+        <div class="depth-kicker">04</div>
+        <h4 class="depth-title">Sim-to-real evaluation</h4>
+        <p class="depth-body">Designing experiments that compare synthetic-only, real-only, and mixed training regimes; quantifying transfer effectiveness at the benchmark level; using sim-to-real validation to make data-investment decisions.</p>
+      </div>
+      <div class="depth-card">
+        <div class="depth-kicker">05</div>
+        <h4 class="depth-title">Production ML evaluation &amp; telemetry</h4>
+        <p class="depth-body">Continuous-evaluation infrastructure for generative systems, A/B experimentation, release telemetry, fine-tuning loops, and incident review for ML systems at billion-user scale.</p>
+      </div>
+      <div class="depth-card">
+        <div class="depth-kicker">06</div>
+        <h4 class="depth-title">Multi-agent LLM runtime design</h4>
+        <p class="depth-body">Graph-structured multi-agent coordination, role-specialized model allocation, persisted execution traces, memory abstractions for long-running agents, and operator-grade tooling (TUI, dashboard, SDK) for inspectable evaluation.</p>
+      </div>
+    </div>
+
+    <h3 class="skills-section-h skills-section-h--sub">Tools &amp; frameworks</h3>
     <div class="skills-wrap">
       <div class="skill-block">
         <div>
           <span class="domain">Domain 01</span>
-          <h5>Machine Learning &amp; Deep Learning</h5>
+          <h5>ML &amp; Deep Learning</h5>
         </div>
         <div class="skill-chips">
           <span>PyTorch</span><span>TensorFlow</span><span>Scikit-learn</span><span>Detectron2</span>
@@ -2208,7 +2367,7 @@
         </div>
         <div class="skill-chips">
           <span>Unity</span><span>PyTorch3D</span>
-          <span>Procedural Generation</span>          <span>Avatar Systems</span><span>FACS-based Pipelines</span>
+          <span>Procedural Generation</span><span>Avatar Systems</span><span>FACS-based Pipelines</span>
           <span>Unity Perception</span><span>3D MoCap Datasets</span>
         </div>
       </div>
@@ -2259,7 +2418,6 @@
     </div>
   </div>
 </section>
-
 <footer>
   <div class="wrap">
     <div>Souranil Sen · Portfolio · Compiled May 2026</div>

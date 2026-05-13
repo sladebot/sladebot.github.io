@@ -1,0 +1,715 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Souranil Sen — For reference writers</title>
+<meta name="description" content="A reference-writer packet for Souranil Sen: contribution areas, public evidence, contribution summaries, and suggested letter themes.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Geist:wght@300;400;500;600;700&family=Geist+Mono:wght@400;500;600&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;1,6..72,400&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: oklch(0.985 0.004 95);
+    --bg-2: oklch(0.965 0.006 90);
+    --ink: oklch(0.18 0.012 60);
+    --ink-2: oklch(0.32 0.012 60);
+    --ink-3: oklch(0.52 0.010 60);
+    --rule: oklch(0.88 0.008 80);
+    --rule-2: oklch(0.93 0.006 80);
+    --accent: oklch(0.52 0.13 35);
+    --accent-soft: oklch(0.94 0.04 40);
+    --tag-bg: oklch(0.95 0.008 80);
+    --max: 1240px;
+    --sans: "Geist", ui-sans-serif, system-ui, -apple-system, "Helvetica Neue", Arial, sans-serif;
+    --mono: "Geist Mono", ui-monospace, "JetBrains Mono", Menlo, Consolas, monospace;
+    --serif: "Newsreader", Georgia, "Times New Roman", serif;
+  }
+  * { box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  html, body { margin: 0; padding: 0; }
+  body {
+    background: var(--bg);
+    color: var(--ink);
+    font-family: var(--sans);
+    font-feature-settings: "ss01", "cv11";
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    font-size: 16px;
+    line-height: 1.5;
+  }
+  a { color: inherit; text-decoration: none; }
+  a[id] { scroll-margin-top: 96px; }
+  a.ext-link {
+    color: var(--accent);
+    border-bottom: 1px solid color-mix(in oklch, var(--accent) 35%, transparent);
+    transition: border-color .2s ease;
+  }
+  a.ext-link:hover { border-bottom-color: var(--accent); }
+  .wrap { max-width: var(--max); margin: 0 auto; padding: 0 32px; }
+  .mono { font-family: var(--mono); font-feature-settings: "ss01"; letter-spacing: -0.005em; }
+
+  /* Top bar */
+  .topbar {
+    position: sticky; top: 0; z-index: 50;
+    backdrop-filter: saturate(120%) blur(10px);
+    background: color-mix(in oklch, var(--bg) 86%, transparent);
+    border-bottom: 1px solid var(--rule-2);
+  }
+  .topbar-inner {
+    display: flex; align-items: center; gap: 24px;
+    padding: 14px 32px;
+    max-width: var(--max); margin: 0 auto;
+  }
+  .brand { display: flex; align-items: center; gap: 10px; font-weight: 600; letter-spacing: -0.01em; }
+  .brand-mark { width: 22px; height: 22px; border: 1.5px solid var(--ink); display: inline-grid; place-items: center; font-family: var(--mono); font-size: 11px; font-weight: 600; }
+  .brand-meta { font-size: 11.5px; color: var(--ink-3); letter-spacing: 0.02em; }
+  .brand-sep { opacity: 0.5; margin: 0 4px; }
+  .topnav { display: flex; gap: 22px; margin-left: auto; }
+  .topnav a {
+    font-family: var(--mono); font-size: 12px; color: var(--ink-2);
+    padding: 6px 0; border-bottom: 1px solid transparent;
+  }
+  .topnav a:hover { color: var(--ink); border-bottom-color: var(--ink); }
+  .back-btn {
+    font-family: var(--mono); font-size: 11px;
+    text-transform: uppercase; letter-spacing: 0.06em;
+    padding: 7px 14px;
+    border: 1px solid var(--rule);
+    border-radius: 999px;
+    color: var(--ink-2);
+    background: var(--bg);
+    transition: border-color .15s ease, color .15s ease;
+  }
+  .back-btn:hover { border-color: var(--ink); color: var(--ink); }
+
+  /* Page head */
+  .page-head {
+    padding: 48px 0 32px;
+    border-bottom: 1px solid var(--rule);
+  }
+  .page-eyebrow {
+    font-family: var(--mono);
+    font-size: 10.5px;
+    text-transform: uppercase;
+    letter-spacing: 0.18em;
+    color: var(--accent);
+    margin-bottom: 18px;
+  }
+  .page-title {
+    margin: 0;
+    font-family: var(--sans); font-weight: 500;
+    font-size: clamp(32px, 4vw, 48px);
+    letter-spacing: -0.028em;
+    line-height: 1.05;
+    color: var(--ink);
+  }
+  .page-title em { font-family: var(--serif); font-style: italic; font-weight: 400; color: var(--ink-2); }
+  .page-lede {
+    margin: 16px 0 0;
+    font-size: 16px;
+    line-height: 1.55;
+    color: var(--ink-2);
+    max-width: 70ch;
+  }
+  .page-lede b { color: var(--ink); font-weight: 600; }
+  .page-meta {
+    margin-top: 22px;
+    padding-top: 16px;
+    border-top: 1px dashed var(--rule);
+    display: flex; gap: 22px; flex-wrap: wrap;
+    font-family: var(--mono);
+    font-size: 11.5px;
+    color: var(--ink-3);
+  }
+  .page-meta a { color: var(--ink-2); border-bottom: 1px solid var(--rule); }
+  .page-meta a:hover { color: var(--ink); border-bottom-color: var(--ink); }
+
+  /* Sections */
+  section.block { padding: 56px 0 64px; border-bottom: 1px solid var(--rule-2); }
+  .sec-head {
+    display: grid; grid-template-columns: 200px 1fr; gap: 64px;
+    margin-bottom: 32px;
+  }
+  .sec-num {
+    display: grid; gap: 6px;
+    align-content: start;
+    font-family: var(--mono); font-size: 11px; color: var(--ink-3);
+  }
+  .sec-num .n {
+    font-family: var(--sans); font-weight: 500;
+    font-size: 28px; letter-spacing: -0.02em;
+    color: var(--ink); line-height: 1;
+  }
+  .sec-num .l { text-transform: uppercase; letter-spacing: 0.12em; }
+  .sec-title {
+    font-family: var(--sans); font-weight: 500;
+    font-size: clamp(18px, 2vw, 22px);
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    line-height: 1.2; margin: 0 0 14px;
+  }
+  .sec-lede { color: var(--ink-2); max-width: 62ch; font-size: 16px; }
+
+  /* Contribution areas */
+  .contributions-block { background: color-mix(in oklch, var(--bg-2) 60%, var(--bg)); }
+  .contrib-grid {
+    margin-left: 200px;
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 18px;
+  }
+  .contrib-card {
+    padding: 22px 24px 20px;
+    background: var(--bg);
+    border: 1px solid var(--rule-2);
+    border-left: 3px solid var(--accent);
+    border-radius: 4px;
+    display: grid; gap: 10px;
+    align-content: start;
+  }
+  .contrib-kicker {
+    font-family: var(--mono); font-size: 10px;
+    text-transform: uppercase; letter-spacing: 0.12em;
+    color: var(--ink-3);
+  }
+  .contrib-title {
+    margin: 0;
+    font-family: var(--sans); font-weight: 500;
+    font-size: 18px; letter-spacing: -0.018em; line-height: 1.25;
+    color: var(--ink);
+  }
+  .contrib-body { margin: 0; font-size: 14px; line-height: 1.55; color: var(--ink-2); }
+  .contrib-body b { color: var(--ink); font-weight: 600; }
+  .contrib-anchors { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 4px; }
+  .contrib-tag {
+    font-family: var(--mono); font-size: 10.5px;
+    padding: 3px 8px; background: var(--tag-bg); color: var(--ink-3); border-radius: 3px;
+  }
+
+  /* Evidence */
+  .evidence-grid {
+    margin-left: 200px;
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 32px;
+  }
+  .evidence-col { display: grid; gap: 10px; align-content: start; }
+  .evidence-h {
+    margin: 0 0 4px;
+    font-family: var(--mono); font-size: 11px;
+    text-transform: uppercase; letter-spacing: 0.1em;
+    color: var(--ink-3); font-weight: 600;
+    padding-bottom: 8px; border-bottom: 1px solid var(--rule-2);
+  }
+  .evidence-list {
+    list-style: none; padding: 0; margin: 0;
+    display: grid; gap: 8px;
+  }
+  .evidence-list li {
+    font-size: 13px; line-height: 1.5;
+    color: var(--ink-2);
+    padding-left: 12px; position: relative;
+  }
+  .evidence-list li::before {
+    content: "·"; position: absolute; left: 0; color: var(--ink-3);
+  }
+  .evidence-list em { font-style: italic; color: var(--ink-2); }
+  .evidence-list .evidence-strong { color: var(--accent); font-weight: 600; }
+  .evidence-list .evidence-meta { color: var(--ink-3); font-family: var(--mono); font-size: 11px; }
+
+  /* Research direction */
+  .research-callout {
+    margin-left: 200px;
+    padding: 24px 28px;
+    background: color-mix(in oklch, var(--accent-soft) 50%, var(--bg));
+    border-left: 3px solid var(--accent);
+    border-radius: 0 4px 4px 0;
+    display: grid; gap: 10px;
+  }
+  .research-callout-kicker {
+    font-family: var(--mono); font-size: 10px;
+    text-transform: uppercase; letter-spacing: 0.14em;
+    color: var(--accent); font-weight: 600;
+  }
+  .research-callout-title {
+    margin: 0;
+    font-family: var(--sans); font-weight: 500;
+    font-size: 20px; letter-spacing: -0.018em; line-height: 1.25;
+    color: var(--ink);
+  }
+  .research-callout-body {
+    margin: 0; font-size: 14.5px; line-height: 1.6;
+    color: var(--ink-2); max-width: 78ch;
+  }
+  .research-callout-body b { color: var(--ink); font-weight: 600; }
+  .research-callout-questions {
+    display: grid; gap: 6px;
+    margin-top: 6px; padding-top: 12px;
+    border-top: 1px dashed color-mix(in oklch, var(--accent) 30%, transparent);
+  }
+  .research-q {
+    font-family: var(--mono); font-size: 11.5px;
+    color: var(--ink-3); line-height: 1.5;
+    padding-left: 14px; position: relative;
+  }
+  .research-q::before { content: "→"; position: absolute; left: 0; color: var(--accent); }
+  .research-q b { color: var(--ink-2); font-weight: 600; }
+
+  /* Publications with contribution panels */
+  .pub-wrap { margin-left: 200px; display: grid; gap: 28px; }
+  .pub-feat {
+    padding: 22px 26px;
+    background: var(--bg);
+    border: 1px solid var(--rule-2);
+    border-radius: 4px;
+    display: grid; gap: 12px;
+  }
+  .pub-head { display: flex; align-items: baseline; gap: 14px; flex-wrap: wrap; }
+  .pub-yr { font-family: var(--mono); font-size: 12px; color: var(--ink-3); }
+  .pub-type {
+    display: inline-block;
+    font-family: var(--mono); font-size: 10.5px;
+    text-transform: uppercase; letter-spacing: 0.04em;
+    padding: 3px 8px; border-radius: 4px;
+  }
+  .pub-type--paper { background: var(--tag-bg); color: var(--ink-3); }
+  .pub-type--poster { background: var(--accent-soft); color: var(--accent); }
+  .pub-cites { margin-left: auto; font-family: var(--mono); font-size: 11px; color: var(--ink-3); }
+  .pub-citation {
+    font-family: var(--sans); font-size: 15px; line-height: 1.6;
+    color: var(--ink-2); margin: 0; max-width: 78ch;
+  }
+  .pub-citation .pub-title-inline { font-weight: 600; color: var(--ink); }
+  .pub-citation em { font-style: italic; color: var(--ink-2); }
+  .pub-citation a { color: var(--accent); border-bottom: 1px solid color-mix(in oklch, var(--accent) 35%, transparent); }
+  .pub-contrib {
+    margin-top: 6px;
+    padding: 14px 16px;
+    background: var(--bg-2);
+    border-left: 2px solid var(--ink-3);
+    border-radius: 0 4px 4px 0;
+    display: grid; gap: 8px;
+    max-width: 78ch;
+  }
+  .pub-contrib-row {
+    display: grid; grid-template-columns: 110px 1fr; gap: 14px;
+    font-size: 13px; line-height: 1.55; color: var(--ink-2);
+    align-items: baseline;
+  }
+  .pub-contrib-label {
+    font-family: var(--mono); font-size: 10px;
+    text-transform: uppercase; letter-spacing: 0.1em;
+    color: var(--ink-3); font-weight: 600;
+  }
+
+  /* Brief packet */
+  .brief-block { background: color-mix(in oklch, var(--bg-2) 75%, var(--bg)); }
+  .brief-grid {
+    margin-left: 200px;
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 24px;
+  }
+  .brief-section {
+    padding: 22px 24px 20px;
+    background: var(--bg);
+    border: 1px solid var(--rule-2);
+    border-radius: 4px;
+    display: grid; gap: 10px; align-content: start;
+  }
+  .brief-section--wide { grid-column: 1 / -1; }
+  .brief-h {
+    margin: 0 0 4px;
+    font-family: var(--mono); font-size: 11px;
+    text-transform: uppercase; letter-spacing: 0.1em;
+    color: var(--ink-3); font-weight: 600;
+    padding-bottom: 8px; border-bottom: 1px solid var(--rule-2);
+  }
+  .brief-body { margin: 0; font-size: 14px; line-height: 1.55; color: var(--ink-2); }
+  .brief-body b { color: var(--ink); font-weight: 600; }
+  .brief-list, .brief-numlist { margin: 0; padding: 0; display: grid; gap: 6px; }
+  .brief-list { list-style: none; }
+  .brief-list li {
+    font-size: 13px; line-height: 1.5;
+    color: var(--ink-2); padding-left: 12px; position: relative;
+  }
+  .brief-list li::before { content: "·"; position: absolute; left: 0; color: var(--ink-3); }
+  .brief-list li b, .brief-numlist li b { color: var(--ink); font-weight: 600; }
+  .brief-numlist { padding-left: 20px; counter-reset: brief; list-style: none; }
+  .brief-numlist li {
+    font-size: 13.5px; line-height: 1.55; color: var(--ink-2);
+    counter-increment: brief;
+    position: relative; padding-left: 6px;
+  }
+  .brief-numlist li::before {
+    content: counter(brief, decimal-leading-zero);
+    position: absolute; left: -20px;
+    font-family: var(--mono); font-size: 10px;
+    color: var(--accent); top: 3px;
+  }
+  .brief-classes {
+    display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-top: 4px;
+  }
+  .brief-class {
+    padding: 12px 14px; border-radius: 4px;
+    border: 1px solid var(--rule-2); background: var(--bg-2);
+  }
+  .brief-class p {
+    margin: 6px 0 0; font-size: 12.5px; line-height: 1.5; color: var(--ink-2);
+  }
+  .brief-class-label {
+    display: inline-block; font-family: var(--mono); font-size: 9.5px;
+    text-transform: uppercase; letter-spacing: 0.1em;
+    padding: 3px 8px; border-radius: 3px; font-weight: 600;
+  }
+  .brief-class-label--public {
+    background: color-mix(in oklch, #2c8a55 14%, transparent); color: #1f6e44;
+  }
+  .brief-class-label--internal { background: var(--tag-bg); color: var(--ink-3); }
+  .brief-note { margin: 12px 0 0; font-size: 12px; line-height: 1.5; color: var(--ink-3); font-style: italic; }
+  .brief-contact {
+    display: flex; flex-wrap: wrap; gap: 10px 22px;
+    font-family: var(--mono); font-size: 12.5px;
+  }
+
+  /* Footer */
+  footer {
+    padding: 56px 0 72px;
+    color: var(--ink-3);
+    font-family: var(--mono); font-size: 12px;
+  }
+  footer .wrap { display: flex; justify-content: space-between; flex-wrap: wrap; gap: 18px; }
+  footer a:hover { color: var(--ink); }
+
+  /* Responsive */
+  @media (max-width: 900px) {
+    .topbar-inner { flex-wrap: wrap; gap: 12px 18px; padding: 12px 24px; }
+    .topnav { gap: 16px; margin-left: 0; order: 3; flex-basis: 100%; overflow-x: auto; }
+    .topnav::-webkit-scrollbar { display: none; }
+    .back-btn { margin-left: auto; }
+    .wrap { padding-left: 24px; padding-right: 24px; }
+    section.block { padding: 40px 0 48px; }
+    .sec-head { grid-template-columns: 1fr; gap: 12px; }
+    .contrib-grid, .evidence-grid, .pub-wrap, .brief-grid, .research-callout { margin-left: 0; }
+    .contrib-grid, .brief-grid { grid-template-columns: 1fr; gap: 14px; }
+    .evidence-grid { grid-template-columns: 1fr; gap: 22px; }
+    .brief-classes { grid-template-columns: 1fr; }
+    .pub-contrib-row { grid-template-columns: 1fr; gap: 2px; }
+  }
+  @media (max-width: 600px) {
+    footer .wrap { flex-direction: column; align-items: flex-start; gap: 10px; }
+  }
+
+  /* Print */
+  @media print {
+    .topbar, .back-btn, footer { display: none !important; }
+    body { background: white; font-size: 11px; }
+    section.block { padding: 24px 0 28px; break-inside: avoid; }
+    .contrib-card, .brief-section, .pub-feat, .research-callout { break-inside: avoid; }
+    @page { size: letter; margin: 0.5in; }
+  }
+</style>
+</head>
+<body>
+
+<div class="topbar">
+  <div class="topbar-inner">
+    <a class="brand" href="index.html" aria-label="Back to portfolio">
+      <span class="brand-mark mono">S</span>
+      <span class="brand-meta mono">Souranil&nbsp;Sen <span class="brand-sep">/</span> Portfolio</span>
+    </a>
+    <nav class="topnav">
+      <a href="#contributions">Contributions</a>
+      <a href="#evidence">Evidence</a>
+      <a href="#research-direction">Research</a>
+      <a href="#publications">Publications</a>
+      <a href="#brief">Brief</a>
+    </nav>
+    <a class="back-btn" href="index.html">← Portfolio</a>
+  </div>
+</div>
+
+<header class="page-head">
+  <div class="wrap">
+    <div class="page-eyebrow">For reference writers · Dossier</div>
+    <h1 class="page-title">Souranil <em>Sen</em> — research dossier</h1>
+    <p class="page-lede">A skim-readable packet for collaborators, referees, and independent researchers writing about my work. Designed to answer four questions quickly: <b>what is the original technical contribution</b>, <b>why does it matter beyond my employer</b>, <b>what public evidence can be cited</b>, and <b>what claims are safe to put in a letter</b>.</p>
+    <div class="page-meta">
+      <span><b style="color:var(--ink);">Compiled</b> May 2026</span>
+      <a href="index.html">← Back to full portfolio</a>
+      <a href="https://github.com/sladebot" target="_blank" rel="noopener">github.com/sladebot ↗</a>
+      <a href="https://linkedin.com/in/souranil" target="_blank" rel="noopener">linkedin.com/in/souranil ↗</a>
+    </div>
+  </div>
+</header>
+
+<a id="contributions"></a>
+<section class="block contributions-block">
+  <div class="wrap">
+    <div class="sec-head">
+      <div class="sec-num"><span class="n">01</span><span class="l">Overview</span></div>
+      <div>
+        <h2 class="sec-title">Contribution areas</h2>
+        <p class="sec-lede">Four through-lines across nine years of work — synthetic data, 3D avatars, production generative AI, and agentic AI infrastructure.</p>
+      </div>
+    </div>
+
+    <div class="contrib-grid">
+      <article class="contrib-card">
+        <div class="contrib-kicker">01 · Synthetic data for perception</div>
+        <h3 class="contrib-title">Synthetic-data pipelines for vision &amp; perception</h3>
+        <p class="contrib-body">Procedural generation, domain randomization, FACS-driven facial variation, and sim-to-real validation — used as foundation for downstream generative models at Unity and Meta. Public anchors: <a class="ext-link" href="#publications">IROS 2021</a>, Unity AI Summit, Unity engineering blog, Unity Perception samples.</p>
+        <div class="contrib-anchors">
+          <span class="contrib-tag">15M+ synthetic images</span>
+          <span class="contrib-tag">FACS · Domain randomization</span>
+          <span class="contrib-tag">Sim-to-real transfer</span>
+        </div>
+      </article>
+
+      <article class="contrib-card">
+        <div class="contrib-kicker">02 · 3D avatars &amp; facial reconstruction</div>
+        <h3 class="contrib-title">Parametric 3D facial reconstruction systems</h3>
+        <p class="contrib-body">Three-phase Autogen initiative for Meta&apos;s Parametric Avatar program: Multi-Task Model → 3D reconstruction for parametric faces → Multi-frame 3D reconstruction. Finetuned DECA encoder, designed per-frame aggregator over shape/pose parameters, validated end-to-end via A/B.</p>
+        <div class="contrib-anchors">
+          <span class="contrib-tag">DECA · PyTorch3D</span>
+          <span class="contrib-tag">92 blendshapes</span>
+          <span class="contrib-tag">Multi-frame aggregation</span>
+        </div>
+      </article>
+
+      <article class="contrib-card">
+        <div class="contrib-kicker">03 · Production generative AI</div>
+        <h3 class="contrib-title">Generative systems at consumer scale</h3>
+        <p class="contrib-body">Tech-lead role on Meta&apos;s Word-to-Animation diffusion model (natural-language → 3D character animation) with continuous-evaluation infrastructure. Earlier: production lifecycle ownership across training, evaluation, A/B, release, and post-launch telemetry for avatar pipelines reaching billion-user scale.</p>
+        <div class="contrib-anchors">
+          <span class="contrib-tag">Diffusion · Text → 3D</span>
+          <span class="contrib-tag">Continuous eval</span>
+          <span class="contrib-tag">Production lifecycle</span>
+        </div>
+      </article>
+
+      <article class="contrib-card">
+        <div class="contrib-kicker">04 · Agentic AI infrastructure</div>
+        <h3 class="contrib-title">Multi-agent LLM runtimes &amp; memory systems</h3>
+        <p class="contrib-body">Current independent research direction. <a class="ext-link" href="https://github.com/sladebot/orb" target="_blank" rel="noopener">Orb</a> investigates graph-structured multi-agent LLM runtimes, role-specialized model allocation, memory persistence, and evaluation traces for coding agents — making agentic systems inspectable, reproducible, and measurable rather than treating multi-agent coordination as only a prompting problem.</p>
+        <div class="contrib-anchors">
+          <span class="contrib-tag">Multi-agent runtime</span>
+          <span class="contrib-tag">Memory · Eval traces</span>
+          <span class="contrib-tag">Python SDK · TUI · Dashboard</span>
+        </div>
+      </article>
+    </div>
+  </div>
+</section>
+
+<a id="evidence"></a>
+<section class="block">
+  <div class="wrap">
+    <div class="sec-head">
+      <div class="sec-num"><span class="n">02</span><span class="l">Citeable</span></div>
+      <div>
+        <h2 class="sec-title">Public evidence</h2>
+        <p class="sec-lede">Artifacts an independent researcher or reference writer can verify and cite directly. Everything here is publicly anchored — peer-reviewed venues, public talks, public blog posts, public OSS, or recognition awarded outside any employer.</p>
+      </div>
+    </div>
+
+    <div class="evidence-grid">
+      <div class="evidence-col">
+        <h4 class="evidence-h">Peer-reviewed &amp; published</h4>
+        <ul class="evidence-list">
+          <li><a class="ext-link" href="#publications">IROS 2021</a> — <em>Drone Pose Estimation Using Synthetic Data in Unity</em> · IEEE/RSJ poster</li>
+          <li><a class="ext-link" href="#publications">COMSNETS 2018</a> — <em>A highly resilient and scalable broker architecture for IoT applications</em> · <span class="evidence-meta">~33 citations</span></li>
+          <li><a class="ext-link" href="https://unityaisummit2021.splashthat.com/" target="_blank" rel="noopener">Unity AI Summit 2021</a> — invited speaker, synthetic data &amp; sim-to-real for CV</li>
+          <li>Unity engineering blog — <em>Data-Centric AI with Unity Computer Vision Datasets</em> · featured author</li>
+        </ul>
+      </div>
+
+      <div class="evidence-col">
+        <h4 class="evidence-h">Professional recognition</h4>
+        <ul class="evidence-list">
+          <li><span class="evidence-strong">IEEE Senior Member</span> (2025) — top ~10% of IEEE membership</li>
+          <li>Peer reviewer — Precision Conference (PCS): CHI 2026 Papers, CHI 2026 Posters (×2), CUI 2026 Short Papers</li>
+          <li>Invited judge — <em>Meta Horizon Creator Competition 2025</em> · Mobile Genre Showdown</li>
+          <li>Invited mentor — MIT Reality Hack 2025 (XR/VR/AR); MIT Fluid Interfaces Lab 2021</li>
+          <li>Invited panelist — Mohawk College AI &amp; Gaming 2025</li>
+        </ul>
+      </div>
+
+      <div class="evidence-col">
+        <h4 class="evidence-h">Open-source artifacts</h4>
+        <ul class="evidence-list">
+          <li><a class="ext-link" href="https://github.com/sladebot/orb" target="_blank" rel="noopener">orb</a> — graph-based multi-agent LLM runtime (current research direction)</li>
+          <li><a class="ext-link" href="https://github.com/sladebot/turboquant-mlx" target="_blank" rel="noopener">turboquant-mlx</a> — quantization &amp; inference on Apple MLX</li>
+          <li><a class="ext-link" href="https://github.com/sladebot/swe2ml" target="_blank" rel="noopener">swe2ml</a> — SWE → applied ML reference implementations</li>
+          <li><a class="ext-link" href="https://github.com/sladebot/deepvo" target="_blank" rel="noopener">deepvo</a> — first OSS TF impl of DeepVO; monocular visual odometry on KITTI</li>
+          <li><a class="ext-link" href="https://github.com/sladebot" target="_blank" rel="noopener">github.com/sladebot</a> — 49 repos · Arctic Code Vault contributor</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<a id="research-direction"></a>
+<section class="block">
+  <div class="wrap">
+    <div class="sec-head">
+      <div class="sec-num"><span class="n">03</span><span class="l">Current</span></div>
+      <div>
+        <h2 class="sec-title">Independent research direction</h2>
+        <p class="sec-lede">Ongoing work outside any employer. The artifact is <a class="ext-link" href="https://github.com/sladebot/orb" target="_blank" rel="noopener">orb</a>; the research questions are below.</p>
+      </div>
+    </div>
+
+    <div class="research-callout">
+      <div class="research-callout-kicker">Current independent research direction</div>
+      <h3 class="research-callout-title">Graph-structured multi-agent LLM runtimes &amp; memory-aware evaluation</h3>
+      <p class="research-callout-body">My current independent work investigates how multi-agent LLM systems should <b>coordinate</b>, <b>allocate models</b> across roles, <b>persist memory</b> across runs, and <b>expose evaluation telemetry</b>. The goal is to make agentic systems inspectable, reproducible, and measurable — rather than treating multi-agent coordination as only a prompting problem. <a class="ext-link" href="https://github.com/sladebot/orb" target="_blank" rel="noopener">Orb</a> is the working artifact: a graph-based, multi-tenant, multi-agent coding runtime with daemon, TUI, dashboard, persisted traces, topology selection, per-node model allocation, and a Python SDK.</p>
+      <div class="research-callout-questions">
+        <span class="research-q">How should agent graphs preserve and query <b>memory</b> across long-running tasks?</span>
+        <span class="research-q">When is <b>role-specialized model allocation</b> better than monolithic agents?</span>
+        <span class="research-q">What does <b>reproducible evaluation</b> look like for multi-agent coding systems?</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<a id="publications"></a>
+<section class="block">
+  <div class="wrap">
+    <div class="sec-head">
+      <div class="sec-num"><span class="n">04</span><span class="l">Detail</span></div>
+      <div>
+        <h2 class="sec-title">Publications — contribution detail</h2>
+        <p class="sec-lede">For each publication: contribution, role, what made it original, and downstream influence. Usable as draft language in a letter.</p>
+      </div>
+    </div>
+
+    <div class="pub-wrap">
+      <article class="pub-feat">
+        <div class="pub-head">
+          <span class="pub-yr mono">2021</span>
+          <span class="pub-type pub-type--poster">Poster</span>
+          <span class="pub-cites">— citations</span>
+        </div>
+        <p class="pub-citation">S. Erfanian Ebadi, <b>S. Sen</b>, J. Leban, and P. Wani, &ldquo;<span class="pub-title-inline">Drone Pose Estimation with Unity Simulation</span>,&rdquo; presented at the <em>IEEE/RSJ International Conference on Intelligent Robots and Systems (IROS)</em>, 2021. [Poster session].</p>
+        <div class="pub-contrib">
+          <div class="pub-contrib-row"><span class="pub-contrib-label">Contribution</span><span>Synthetic-data pipeline for drone pose estimation using Unity-generated labeled data. Demonstrated that simulation-derived datasets can support real-world perception tasks with substantially reduced manual labeling burden.</span></div>
+          <div class="pub-contrib-row"><span class="pub-contrib-label">Role</span><span>Co-author · synthetic-data generation pipeline, dataset design, evaluation tooling.</span></div>
+          <div class="pub-contrib-row"><span class="pub-contrib-label">Why original</span><span>Established Unity-driven synthetic data as a practical primary training source for drone pose estimation rather than a real-data supplement.</span></div>
+          <div class="pub-contrib-row"><span class="pub-contrib-label">Influence</span><span>Part of the broader synthetic-data research direction later reflected in Unity&apos;s public Computer Vision Datasets, Perception package, and data-centric AI positioning.</span></div>
+        </div>
+      </article>
+
+      <article class="pub-feat">
+        <div class="pub-head">
+          <span class="pub-yr mono">2018</span>
+          <span class="pub-type pub-type--paper">Paper</span>
+          <span class="pub-cites">~33 citations · Scholar</span>
+        </div>
+        <p class="pub-citation"><b>S. Sen</b> and A. Balasubramanian, &ldquo;<span class="pub-title-inline">A highly resilient and scalable broker architecture for IoT applications</span>,&rdquo; <em>2018 10th International Conference on Communication Systems &amp; Networks (COMSNETS)</em>, Bengaluru, India, 2018, pp. 336&ndash;341, doi: <a href="https://doi.org/10.1109/COMSNETS.2018.8328216" target="_blank" rel="noopener">10.1109/COMSNETS.2018.8328216</a>.</p>
+        <div class="pub-contrib">
+          <div class="pub-contrib-row"><span class="pub-contrib-label">Contribution</span><span>Designed a fault-tolerant, horizontally scalable message-broker architecture for IoT workloads, with explicit failure-handling and replication semantics under unreliable network conditions.</span></div>
+          <div class="pub-contrib-row"><span class="pub-contrib-label">Role</span><span>First author · system design, prototype implementation, evaluation.</span></div>
+          <div class="pub-contrib-row"><span class="pub-contrib-label">Why original</span><span>Targeted the operational realities of IoT deployments (intermittent connectivity, heterogeneous devices) rather than treating the broker as a generic queue.</span></div>
+          <div class="pub-contrib-row"><span class="pub-contrib-label">Influence</span><span>~33 citations on Google Scholar; cited in subsequent work on IoT messaging, edge orchestration, and resilient broker design.</span></div>
+        </div>
+      </article>
+    </div>
+  </div>
+</section>
+
+<a id="brief"></a>
+<section class="block brief-block">
+  <div class="wrap">
+    <div class="sec-head">
+      <div class="sec-num"><span class="n">05</span><span class="l">Packet</span></div>
+      <div>
+        <h2 class="sec-title">Reference-writer brief</h2>
+        <p class="sec-lede">A one-screen synthesis: research profile, contribution areas, citeable evidence, suggested letter themes, and a clear split between publicly verifiable claims and employer-internal context.</p>
+      </div>
+    </div>
+
+    <div class="brief-grid">
+      <div class="brief-section">
+        <h3 class="brief-h">Research profile</h3>
+        <p class="brief-body">Souranil Sen is a machine learning engineer and independent researcher working at the intersection of <b>synthetic data</b>, <b>3D computer vision</b>, <b>generative avatar systems</b>, and <b>agentic AI infrastructure</b>. Public work spans Unity synthetic-data tooling, IEEE/RSJ IROS, and ongoing open-source research on multi-agent LLM runtimes; production work is at Meta Reality Labs.</p>
+      </div>
+
+      <div class="brief-section">
+        <h3 class="brief-h">Core contribution areas</h3>
+        <ol class="brief-numlist">
+          <li><b>Synthetic data for visual perception</b> — pipelines, domain randomization, sim-to-real validation. <a class="ext-link" href="#contributions">More ↑</a></li>
+          <li><b>3D avatars &amp; facial reconstruction</b> — parametric face models, multi-frame aggregation, DECA-based feature extraction. <a class="ext-link" href="#contributions">More ↑</a></li>
+          <li><b>Production-scale generative AI</b> — diffusion models, continuous evaluation, lifecycle ownership. <a class="ext-link" href="#contributions">More ↑</a></li>
+          <li><b>Agentic AI infrastructure</b> — graph-structured multi-agent LLM runtimes, memory persistence, evaluation traces. <a class="ext-link" href="https://github.com/sladebot/orb" target="_blank" rel="noopener">orb ↗</a></li>
+        </ol>
+      </div>
+
+      <div class="brief-section">
+        <h3 class="brief-h">Public evidence to cite</h3>
+        <ul class="brief-list">
+          <li><b>IROS 2021</b> — <em>Drone Pose Estimation Using Synthetic Data in Unity</em> (IEEE/RSJ poster)</li>
+          <li><b>COMSNETS 2018</b> — <em>A highly resilient and scalable broker architecture for IoT applications</em> · ~33 citations</li>
+          <li><b>Unity AI Summit 2021</b> — invited speaker</li>
+          <li><b>Unity engineering blog</b> — <em>Data-Centric AI with Unity Computer Vision Datasets</em></li>
+          <li><b>IEEE Senior Member</b> (2025)</li>
+          <li><b>Peer reviewer</b> — CHI 2026 &amp; CUI 2026 (×4 venues)</li>
+          <li><b>GitHub</b> — <a class="ext-link" href="https://github.com/sladebot/orb" target="_blank" rel="noopener">orb</a>, <a class="ext-link" href="https://github.com/sladebot/turboquant-mlx" target="_blank" rel="noopener">turboquant-mlx</a>, <a class="ext-link" href="https://github.com/sladebot/swe2ml" target="_blank" rel="noopener">swe2ml</a>, <a class="ext-link" href="https://github.com/sladebot/deepvo" target="_blank" rel="noopener">deepvo</a></li>
+        </ul>
+      </div>
+
+      <div class="brief-section">
+        <h3 class="brief-h">Suggested letter themes</h3>
+        <ul class="brief-list">
+          <li><b>Originality of synthetic-data systems</b> — publicly anchored via IROS, Unity AI Summit, Unity blog.</li>
+          <li><b>Bridge from research to deployed ML</b> — Unity synthetic-data thesis validated at production scale; Meta avatar systems shipped to consumer surfaces.</li>
+          <li><b>Rare combination</b> of applied ML, 3D graphics, computer vision, and production engineering.</li>
+          <li><b>External recognition</b> through IEEE Senior Member, peer review, invited talks, judging, and mentorship.</li>
+          <li><b>Continuing independent research</b> in agentic AI systems via <a class="ext-link" href="https://github.com/sladebot/orb" target="_blank" rel="noopener">orb</a>.</li>
+        </ul>
+      </div>
+
+      <div class="brief-section brief-section--wide">
+        <h3 class="brief-h">Claims by evidence class</h3>
+        <div class="brief-classes">
+          <div class="brief-class">
+            <span class="brief-class-label brief-class-label--public">Publicly verifiable</span>
+            <p>IROS 2021 poster · COMSNETS 2018 paper · Unity AI Summit talk · Unity engineering blog · unity-vision SDK · IEEE Senior Member · peer-review service · GitHub repos.</p>
+          </div>
+          <div class="brief-class">
+            <span class="brief-class-label brief-class-label--internal">Employer-internal context</span>
+            <p>Meta production deployment · internal evaluation metrics (+33% L1, +1.3% completion, 12× speedup, 15M+ synthetic images, 92 blendshapes) · billion-user product scale · executive-level demos.</p>
+          </div>
+        </div>
+        <p class="brief-note">For an independent letter, the publicly verifiable column is what can be cited directly. The internal column is best framed as <em>&ldquo;contributed to systems deployed at Meta consumer scale&rdquo;</em> rather than reproducing specific internal metrics.</p>
+      </div>
+
+      <div class="brief-section brief-section--wide">
+        <h3 class="brief-h">Contact</h3>
+        <div class="brief-contact">
+          <a class="ext-link" href="mailto:souranil@gmail.com">souranil@gmail.com</a>
+          <a class="ext-link" href="https://linkedin.com/in/souranil" target="_blank" rel="noopener">linkedin.com/in/souranil ↗</a>
+          <a class="ext-link" href="https://github.com/sladebot" target="_blank" rel="noopener">github.com/sladebot ↗</a>
+          <a class="ext-link" href="https://souranil.substack.com" target="_blank" rel="noopener">souranil.substack.com ↗</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <div>Souranil Sen · Reference-writer dossier · Compiled May 2026</div>
+    <div>
+      <a href="index.html">← Full portfolio</a>
+      &nbsp;·&nbsp;
+      <a href="https://linkedin.com/in/souranil" target="_blank" rel="noopener">linkedin.com/in/souranil</a>
+      &nbsp;·&nbsp;
+      <a href="https://github.com/sladebot" target="_blank" rel="noopener">github.com/sladebot</a>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>
