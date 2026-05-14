@@ -103,10 +103,12 @@
   }
   .topnav { display: flex; gap: 22px; margin-left: auto; }
   .topnav a {
-    font-family: var(--mono); font-size: 12px; color: var(--ink-2);
-    padding: 6px 0; border-bottom: 1px solid transparent;
+    font-family: var(--mono); font-size: 12.5px; color: var(--ink);
+    padding: 6px 0; border-bottom: 2px solid transparent;
+    transition: border-color .15s ease;
   }
-  .topnav a:hover { color: var(--ink); border-bottom-color: var(--ink); }
+  .topnav a:hover { border-bottom-color: var(--accent); }
+  .topnav a.active { border-bottom-color: var(--ink); }
   .layout-toggle {
     display: inline-flex; align-items: center;
     border: 1px solid var(--rule); border-radius: 999px;
@@ -1073,7 +1075,7 @@
     border-radius: 4px;
     white-space: nowrap;
   }
-  .pub-type--paper { background: var(--tag-bg); color: var(--ink-3); }
+  .pub-type--paper { background: var(--accent-soft); color: var(--accent); }
   .pub-type--poster { background: var(--accent-soft); color: var(--accent); }
   .pub-feat .pub-authors {
     font-family: var(--mono); font-size: 12.5px; color: var(--ink-2);
@@ -1116,7 +1118,7 @@
     margin-bottom: 4px; display: block;
   }
   .skill-chips { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; }
-  .skill-chips span {
+  .skill-chips span, .skill-chips a {
     font-family: var(--mono); font-size: 12px;
     padding: 6px 14px; border-radius: 4px;
     background: var(--tag-bg); color: var(--ink-2);
@@ -1628,6 +1630,36 @@
     .brief .b-row, .brief .b-list li, .brief .stack > div { padding: 5px 0; font-size: 9.5px; }
     a { color: inherit !important; }
   }
+
+  /* ── Scroll progress ───────────────────────────────────── */
+  #scroll-progress {
+    position: fixed; top: 0; left: 0; z-index: 100;
+    height: 2px; width: 0%;
+    background: var(--accent);
+    transition: width .05s linear;
+    pointer-events: none;
+  }
+
+  /* ── Back-to-top ───────────────────────────────────────── */
+  #back-to-top {
+    position: fixed; bottom: 32px; right: 32px; z-index: 49;
+    width: 38px; height: 38px;
+    background: var(--ink); color: var(--bg);
+    border: none; border-radius: 50%; cursor: pointer;
+    display: grid; place-items: center;
+    opacity: 0; pointer-events: none;
+    transition: opacity .2s ease, transform .2s ease, background .15s ease;
+    font-size: 16px; line-height: 1;
+  }
+  #back-to-top.visible { opacity: 1; pointer-events: auto; }
+  #back-to-top:hover { background: var(--accent); transform: translateY(-2px); }
+
+  /* ── OSS tag chips ─────────────────────────────────────── */
+  .oss-tags {
+    display: inline-flex; gap: 5px; flex-wrap: wrap;
+    vertical-align: middle; margin-left: 8px;
+  }
+  .oss-tags .tag { font-size: 10px; padding: 2px 7px; }
 </style>
 </head>
 <body data-layout="summary" style="background-color: rgb(250, 250, 250);">
@@ -1649,6 +1681,7 @@
     <button id="summarize-btn" class="summarize-btn" aria-label="Open one-page summary">Summarize</button>
   </div>
 </div>
+<div id="scroll-progress" aria-hidden="true"></div>
 
 <a id="top"></a>
 <header class="masthead">
@@ -2072,16 +2105,16 @@
       <div class="sec-num"><span class="n">03</span></div>
       <div>
         <h2 class="sec-title">Open source contributions</h2>
-        <p class="sec-lede">Active on <a class="mono" href="https://github.com/sladebot" target="_blank" rel="noopener">github.com/sladebot</a>. Most current work is <a class="mono" href="https://github.com/sladebot/orb" target="_blank" rel="noopener">orb</a> — a graph-based agentic harness exploring memory research for LLM agents.</p>
+        <p class="sec-lede">Active on <a class="mono" href="https://github.com/sladebot" target="_blank" rel="noopener">github.com/sladebot</a>. Most current work is <a class="mono" href="https://github.com/sladebot/orb" target="_blank" rel="noopener">orb</a> — a multi-tenant multi-agent coding runtime with 4 agent topologies, live TUI, browser dashboard, and Python SDK; published on PyPI as <span class="mono">orb-agents</span>.</p>
       </div>
     </div>
 
     <div class="recog-list">
-      <div class="row"><span class="yr mono">2024+</span><span class="ttl"><a class="role" href="https://github.com/sladebot/orb" target="_blank" rel="noopener">orb</a><span class="at">·</span>Python<small>Graph-based agentic harness exploring memory research for LLM agents — most active project</small></span></div>
-      <div class="row"><span class="yr mono">2024+</span><span class="ttl"><a class="role" href="https://github.com/sladebot/turboquant-mlx" target="_blank" rel="noopener">turboquant-mlx</a><span class="at">·</span>Python<small>Quantization &amp; inference experiments on Apple's MLX framework for on-device ML</small></span></div>
-      <div class="row"><span class="yr mono">2023+</span><span class="ttl"><a class="role" href="https://github.com/sladebot/swe2ml" target="_blank" rel="noopener">swe2ml</a><span class="at">·</span>Jupyter<small>Notebook-based curriculum and reference implementations bridging software engineering and applied ML</small></span></div>
-      <div class="row"><span class="yr mono">2018</span><span class="ttl"><a class="role" href="https://github.com/sladebot/deepvo" target="_blank" rel="noopener">deepvo</a><span class="at">·</span>PyTorch · TF<small>First open-source TensorFlow implementation of DeepVO for monocular visual odometry — deep RCNN for camera ego-motion estimation from optical flow, tested on KITTI</small></span></div>
-      <div class="row"><span class="yr mono">↗</span><span class="ttl"><a class="role" href="https://github.com/sladebot" target="_blank" rel="noopener">+ 45 more</a><span class="at">·</span>github.com/sladebot<small>49 public repositories total across CV, ML, robotics, and infra · IEEE Senior Member · Arctic Code Vault contributor</small></span></div>
+      <div class="row"><span class="yr mono">2024+</span><span class="ttl"><a class="role" href="https://github.com/sladebot/orb" target="_blank" rel="noopener">orb</a><span class="oss-tags"><span class="tag">Python</span><span class="tag">PyPI</span><span class="tag">Multi-agent</span></span><small>Multi-agent coding runtime — 4 topologies, per-node model allocation, TUI + browser dashboard</small></span></div>
+      <div class="row"><span class="yr mono">2024+</span><span class="ttl"><a class="role" href="https://github.com/sladebot/turboquant-mlx" target="_blank" rel="noopener">turboquant-mlx</a><span class="oss-tags"><span class="tag">Python</span><span class="tag">MLX</span><span class="tag">On-device</span></span><small>Quantization &amp; inference experiments on Apple's MLX framework for on-device ML</small></span></div>
+      <div class="row"><span class="yr mono">2023+</span><span class="ttl"><a class="role" href="https://github.com/sladebot/swe2ml" target="_blank" rel="noopener">swe2ml</a><span class="oss-tags"><span class="tag">Jupyter</span><span class="tag">ML</span><span class="tag">Education</span></span><small>Reference implementations and curriculum bridging software engineering and applied ML</small></span></div>
+      <div class="row"><span class="yr mono">2018</span><span class="ttl"><a class="role" href="https://github.com/sladebot/deepvo" target="_blank" rel="noopener">deepvo</a><span class="oss-tags"><span class="tag">PyTorch</span><span class="tag">TensorFlow</span><span class="tag">CV</span></span><small>Open-source DeepVO — RCNN for monocular ego-motion estimation from optical flow, tested on KITTI</small></span></div>
+      <div class="row"><span class="yr mono">↗</span><span class="ttl"><a class="role" href="https://github.com/sladebot" target="_blank" rel="noopener">+ 45 more</a><span class="at">·</span><a class="mono ext-link" href="https://github.com/sladebot" target="_blank" rel="noopener">github.com/sladebot</a><small>49 public repos across CV, ML, robotics, and infra · Arctic Code Vault contributor</small></span></div>
     </div>
   </div>
 </section>
@@ -2252,7 +2285,7 @@
         </div>
         <div class="skill-chips">
           <span>AI Generated Media · MIT Media Lab</span>
-          <span>Robotics: Perception · UPenn / Coursera</span>
+          <a class="ext-link" href="https://www.coursera.org/account/accomplishments/certificate/CWMXPLB4P7LY" target="_blank" rel="noopener">Robotics: Perception · UPenn / Coursera</a>
           <span>MITx 6.86x · ML with Python</span>
         </div>
       </div>
@@ -2271,7 +2304,33 @@
   </div>
 </footer>
 
+<button id="back-to-top" aria-label="Back to top">↑</button>
+
 <script>
+  // Scroll progress + back-to-top
+  const progressBar = document.getElementById('scroll-progress');
+  const backToTop = document.getElementById('back-to-top');
+  window.addEventListener('scroll', () => {
+    const scrolled = window.scrollY;
+    const total = document.documentElement.scrollHeight - window.innerHeight;
+    progressBar.style.width = (total > 0 ? (scrolled / total) * 100 : 0) + '%';
+    backToTop.classList.toggle('visible', scrolled > 400);
+  }, { passive: true });
+  backToTop.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
+
+  // Scroll-spy nav
+  const navLinks = document.querySelectorAll('.topnav a[href^="#"]');
+  const spyTargets = [...navLinks].map(a => document.querySelector(a.getAttribute('href')));
+  const onScroll = () => {
+    const mid = window.scrollY + window.innerHeight / 3;
+    let active = null;
+    spyTargets.forEach((el, i) => {
+      if (el && el.getBoundingClientRect().top + window.scrollY <= mid) active = i;
+    });
+    navLinks.forEach((a, i) => a.classList.toggle('active', i === active));
+  };
+  window.addEventListener('scroll', onScroll, { passive: true });
+
   // Layout toggle
   const body = document.body;
   document.querySelectorAll('[data-layout-set]').forEach(btn => {
